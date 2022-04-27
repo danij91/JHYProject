@@ -9,7 +9,7 @@ public enum EPoolingType
     Character,
     Effect,
     Sound,
-    CubeMap,
+    Map,
 }
 
 public class PoolingManager : Singleton<PoolingManager>

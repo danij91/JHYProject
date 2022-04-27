@@ -49,6 +49,6 @@ public class SceneBase : MonoBehaviour
     {
         UIManager.Instance.CloseAll();
         PoolingManager.Instance.RestoreAllByType(EPoolingType.Character);
-        PoolingManager.Instance.RestoreAllByType(EPoolingType.CubeMap);
+        PoolingManager.Instance.RestoreAllByType(EPoolingType.Map);
     }
 }

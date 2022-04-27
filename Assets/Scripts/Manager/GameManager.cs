@@ -15,4 +15,11 @@ public class GameManager : Singleton<GameManager>
         Player = PoolingManager.Instance.Create<Player>(EPoolingType.Character, "Player");
         Player.transform.position = MapManager.Instance.StartPos;
     }
+
+    public void OnPlayerJump()
+    {
+        GameCamera.transform.position += Player.CurrentTargetDistance;
+        MapManager.Instance.CreateMap();
+        MapManager.Instance.RemoveMap();
+    }
 }
