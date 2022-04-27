@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    private GameObject player;
-    public Transform startTr;
-    public void Initialize(Transform inStartTr)
+    [SerializeField] private GameCamera camera;
+
+    public GameCamera GameCamera => camera;
+    public Player Player { get; private set; }
+
+    public void Initialize()
     {
-        startTr = inStartTr;
-        var playerPrefab = ResourceManager.Instance.Load<GameObject>("Prefabs/Character/Player");
-        player = Instantiate(playerPrefab, startTr);
+        UIManager.Instance.Show<InGameUI>();
+        Player = PoolingManager.Instance.Create<Player>(EPoolingType.Character, "Player");
+        Player.transform.position = MapManager.Instance.StartPos;
     }
 }

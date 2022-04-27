@@ -42,5 +42,13 @@ public class SceneBase : MonoBehaviour
                 _hideObjects[i].SetActive(false);
             }
         }
+        Reset();
+    }
+
+    private void Reset()
+    {
+        UIManager.Instance.CloseAll();
+        PoolingManager.Instance.RestoreAllByType(EPoolingType.Character);
+        PoolingManager.Instance.RestoreAllByType(EPoolingType.CubeMap);
     }
 }
