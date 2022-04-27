@@ -3,14 +3,11 @@ using UnityEngine;
 
 public class InGameScene : SceneBase
 {
-    [SerializeField]
-    private Transform startTr;
-
     public override void OnStart()
     {
         base.OnStart();
-        GameManager.Instance.Initialize(startTr);
-
+        MapManager.Instance.Initialize();
+        GameManager.Instance.Initialize();
     }
 
     public override void OnClear()
