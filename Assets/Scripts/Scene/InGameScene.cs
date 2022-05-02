@@ -1,23 +1,17 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
-public class InGameScene : SceneBase
-{
-    public override void OnStart()
-    {
+public class InGameScene : SceneBase {
+    public override void OnStart() {
         if (TryLoadTitleScene()) return;
 
         base.OnStart();
-        MapManager.Instance.Initialize();
         GameManager.Instance.Initialize();
     }
 
-    public override void OnClear()
-    {
+    public override void OnClear() {
+        GameManager.Instance.GameEnd();
         base.OnClear();
     }
 
-    public override void UpdateScene()
-    {
-    }
+    public override void UpdateScene() { }
 }

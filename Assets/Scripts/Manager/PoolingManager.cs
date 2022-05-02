@@ -54,7 +54,7 @@ public class PoolingManager : Singleton<PoolingManager>
         var obj = Load<T>(type, resourceName);
         if (obj == null)
         {
-            Debug.LogError($"{resourceName}ÀÌ/°¡ ÇØ´ç °æ·Î¿¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù : {DEFAULT_PATH}/{type}/{resourceName}");
+            Debug.LogError($"{resourceName}ì´/ê°€ í•´ë‹¹ ê²½ë¡œì— ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤ : {DEFAULT_PATH}/{type}/{resourceName}");
             return null;
         }
 
