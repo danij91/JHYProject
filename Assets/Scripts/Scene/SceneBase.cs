@@ -42,13 +42,16 @@ public class SceneBase : MonoBehaviour
                 _hideObjects[i].SetActive(false);
             }
         }
-        Reset();
     }
 
-    private void Reset()
+    public bool TryLoadTitleScene(bool isForced = false)
     {
-        UIManager.Instance.CloseAll();
-        PoolingManager.Instance.RestoreAllByType(EPoolingType.Character);
-        PoolingManager.Instance.RestoreAllByType(EPoolingType.Map);
+        if (isForced || (!TitleScene.IS_TITLESCENE_LOADED && LocalDataConfig.Instance.IsStartTitleScene))
+        {
+            SceneLoader.Instance.ChangeScene(EScene.TITLE);
+            return true;
+        }
+
+        return false;
     }
 }

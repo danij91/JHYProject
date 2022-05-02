@@ -113,4 +113,20 @@ public class PoolingManager : Singleton<PoolingManager>
             }
         }
     }
+
+    public void RestoreAll()
+    {
+        foreach (var pair in _poolingList)
+        {
+            foreach (var item in pair.Value)
+            {
+                if (item.PoolingState == EPoolingState.Waiting && !item.isActiveAndEnabled)
+                    continue;
+                if (item != null)
+                {
+                    item.Restore();
+                }
+            }
+        }
+    }
 }
