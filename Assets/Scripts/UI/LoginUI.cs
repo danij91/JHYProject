@@ -27,7 +27,6 @@ public class LoginUI : UIBase
 
     public override void OnButtonEvent(Button inButton)
     {
-        Debug.Log("asdfasdf");
         switch (inButton.name)
         {
             case nameof(btn_login):

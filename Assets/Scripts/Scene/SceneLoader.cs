@@ -52,6 +52,7 @@ public class SceneLoader : Singleton<SceneLoader>
         currentSceneBase.OnClear();
 
         UIManager.Instance.CloseAll();
+        PoolingManager.Instance.RestoreAll();
 
         Scene scene = SceneManager.GetSceneByName(sceneType);
         if (scene.name.IsNullOrEmpty())
@@ -72,6 +73,7 @@ public class SceneLoader : Singleton<SceneLoader>
         currentSceneBase.OnClear();
 
         UIManager.Instance.CloseAll();
+        PoolingManager.Instance.RestoreAll();
 
         Scene scene = SceneManager.GetSceneByName(sceneType);
         if (scene.name.IsNullOrEmpty())

@@ -4,13 +4,14 @@ using UnityEngine.UI;
 
 public class TitleScene : SceneBase
 {
+    public static bool IS_TITLESCENE_LOADED = false;
+
     protected override async void Start()
     {
-        // Initialize할거 여기서 하면 됨
+        // ToDo Initialize 할 거 여기서 하면 됨 (보통은 AppStarter 만들어서 처리함)
         UIManager.Instance.Initialize();
-        SceneLoader.Instance.Initalize();
         UIManager.Instance.Show<LoginUI>();
-        //await SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY, true);
+        IS_TITLESCENE_LOADED = true;
     }
 
     public override void OnStart()

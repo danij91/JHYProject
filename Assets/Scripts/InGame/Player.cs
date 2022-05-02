@@ -25,7 +25,6 @@ public class Player : PoolingObject
         if(TryGetCorrectionPos(out Vector3 correctionPos))
         {
             CurrentTargetDistance = correctionPos;
-            Debug.LogWarning("보정들어감");
         }
         
         Vector3 targetPos = transform.position + CurrentTargetDistance;
