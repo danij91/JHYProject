@@ -8,24 +8,32 @@ public class InGameUI : UIBase
 {
     [SerializeField] private Button btn_back;
     [SerializeField] private Button btn_screen;
-    [SerializeField] private Text txt_count;
+    [SerializeField] private Text txt_currentcount;
+    [SerializeField] private Text txt_bestcount;
+
 
     private float elapsedTime;
     public bool IsScreenBtnDown { get; set; }
 
     protected override void PrevOpen(params object[] args)
     {
-        RefreshCount();
+        SetView();
     }
 
     protected override void PrevClose()
     {
     }
 
+    public void SetView()
+    {
+        txt_bestcount.text = LocalDataHelper.GetBestCount().ToString();
+        RefreshCount();
+    }
+
     public void RefreshCount()
     {
-        txt_count.text = GameManager.Instance.JumpCount.ToString();
-        txt_count.transform.DOPunchScale(Vector3.one * 2f, 0.5f).SetEase(Ease.InSine);
+        txt_currentcount.text = GameManager.Instance.JumpCount.ToString();
+        txt_currentcount.transform.DOPunchScale(Vector3.one * 2f, 0.5f).SetEase(Ease.InSine);
     }
 
     private void Update()
@@ -41,6 +49,7 @@ public class InGameUI : UIBase
         switch (inButton.name)
         {
             case nameof(btn_back):
+                LocalDataHelper.SaveBestCount(GameManager.Instance.JumpCount);
                 SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY, true);
                 break;
             case nameof(btn_screen):

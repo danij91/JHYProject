@@ -10,6 +10,7 @@ public class TitleScene : SceneBase
     {
         // ToDo Initialize 할 거 여기서 하면 됨 (보통은 AppStarter 만들어서 처리함)
         UIManager.Instance.Initialize();
+        LocalData.Instance.Initialize();
         UIManager.Instance.Show<LoginUI>();
         IS_TITLESCENE_LOADED = true;
     }
