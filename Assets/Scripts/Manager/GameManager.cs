@@ -8,17 +8,23 @@ public class GameManager : Singleton<GameManager>
 
     public GameCamera GameCamera => camera;
     public Player Player { get; private set; }
+    public int JumpCount { get; private set; }
+
+    private InGameUI inGameUI;
 
     public void Initialize()
     {
+        JumpCount = 0;
         UIManager.Instance.Show<InGameUI>();
+        inGameUI = UIManager.Instance.GetUI<InGameUI>();
         Player = PoolingManager.Instance.Create<Player>(EPoolingType.Character, "Player");
-        Player.transform.position = MapManager.Instance.StartPos;
+        GameCamera.Initialize();
     }
 
     public void OnPlayerJump()
     {
-        GameCamera.transform.position += Player.CurrentTargetDistance;
+        JumpCount++;
+        inGameUI.RefreshCount();
         MapManager.Instance.CreateMap();
         MapManager.Instance.RemoveMap();
     }

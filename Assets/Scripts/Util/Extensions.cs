@@ -6,6 +6,11 @@ using System.Linq;
 
 public static class Extensions
 {
+    public static Vector3 SetY(this Vector3 vector, float inValue)
+    {
+        return new Vector3(vector.x, inValue, vector.z);
+    }
+
     public static bool IsNullOrEmpty(this string inValue)
     {
         return string.IsNullOrEmpty(inValue);

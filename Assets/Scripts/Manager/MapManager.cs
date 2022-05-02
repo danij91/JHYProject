@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 public enum EDirection 
 {
@@ -11,12 +13,9 @@ public enum EDirection
 public class MapManager : Singleton<MapManager>
 {
     [SerializeField] private Transform startTr;
-    private Vector3 currentMapPos;
+    public Vector3 CurrentMapPos { get; private set; }
+
     private EDirection lastDirection;
-    private readonly Vector3 RIGHT = new Vector3(1,0,1);
-    private readonly Vector3 LEFT = new Vector3(-1, 0, 1);
-    private readonly float MIN_DISTANCE = 2;
-    private readonly float MAX_DISTANCE = 3f;
     private Queue<CubeMap> mapQueue = new Queue<CubeMap>();
 
     public Vector3 StartPos => startTr.position;
@@ -30,37 +29,43 @@ public class MapManager : Singleton<MapManager>
 
     public CubeMap CreateMap(bool isInit = false)
     {
-        CubeMap map = PoolingManager.Instance.Create<CubeMap>(EPoolingType.Map, "CubeMap");
-        mapQueue.Enqueue(map);
+        string mapName = GetMapType().ToString();
+        CubeMap map = PoolingManager.Instance.Create<CubeMap>(EPoolingType.Map, mapName);
 
         if (isInit)
         {
             map.transform.position = Vector3.zero;
-            currentMapPos = map.transform.position;
+            CurrentMapPos = map.transform.position;
         }
         else
         {
 
             Vector3 nextPos = GetNextPosition();
             map.transform.position = nextPos;
-            currentMapPos = nextPos;
+            CurrentMapPos = nextPos;
         }
 
+        mapQueue.Enqueue(map);
         return map;
+    }
+
+    private EMapType GetMapType()
+    {
+        return (EMapType)UnityEngine.Random.Range(0, Enum.GetValues(typeof(EMapType)).Length);
     }
 
     private Vector3 GetNextPosition()
     {
-        var dist = Random.Range(MIN_DISTANCE, MAX_DISTANCE);
-        lastDirection = (EDirection)Random.Range(0, 2);
+        var dist = UnityEngine.Random.Range(EConfig.Map.MIN_DISTANCE, EConfig.Map.MAX_DISTANCE);
+        lastDirection = (EDirection)UnityEngine.Random.Range(0, 2);
 
-        var nextPos = currentMapPos + GetLastDirection() * dist;
+        var nextPos = CurrentMapPos + GetLastDirection() * dist;
         return nextPos;
     }
 
     public Vector3 GetLastDirection()
     {
-        return lastDirection == EDirection.Right ? RIGHT : LEFT;
+        return lastDirection == EDirection.Right ? EConfig.System.RIGHT : EConfig.System.LEFT;
     }
 
     public void RemoveMap()
