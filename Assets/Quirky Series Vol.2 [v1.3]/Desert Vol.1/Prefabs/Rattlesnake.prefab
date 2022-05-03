@@ -1,0 +1,407 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8239059089667307066
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8239059089667307077}
+  - component: {fileID: 8239059089667307076}
+  - component: {fileID: 2190361812770836729}
+  m_Layer: 0
+  m_Name: Rattlesnake
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8239059089667307077
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8239059089667307066}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8239059087850522151}
+  - {fileID: 8239059087903697925}
+  - {fileID: 8239059089262566262}
+  - {fileID: 8239059089115095808}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &8239059089667307076
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8239059089667307066}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -0.000005364418, y: 0.86479807, z: -0.062126517}
+  m_Size: 3.6769462
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.95
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 8239059087839450893}
+  - screenRelativeHeight: 0.7
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 8239059087890005295}
+  - screenRelativeHeight: 0.35
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 8239059089249127004}
+  - screenRelativeHeight: 0.05
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 8239059089129189930}
+  m_Enabled: 1
+--- !u!136 &2190361812770836729
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8239059089667307066}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.38451824
+  m_Height: 1.919688
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.98566186, z: 0.45719472}
+--- !u!1001 &3499139072389012326
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8239059089667307077}
+    m_Modifications:
+    - target: {fileID: 4816728328161493345, guid: 53afb67da2054b14ba93c882c32a9bad,
+        type: 3}
+      propertyPath: m_Name
+      value: Rattlesnake_LOD0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4816728328161926465, guid: 53afb67da2054b14ba93c882c32a9bad,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4816728328161926465, guid: 53afb67da2054b14ba93c882c32a9bad,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4816728328161926465, guid: 53afb67da2054b14ba93c882c32a9bad,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4816728328161926465, guid: 53afb67da2054b14ba93c882c32a9bad,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4816728328161926465, guid: 53afb67da2054b14ba93c882c32a9bad,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4816728328161926465, guid: 53afb67da2054b14ba93c882c32a9bad,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4816728328161926465, guid: 53afb67da2054b14ba93c882c32a9bad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4816728328161926465, guid: 53afb67da2054b14ba93c882c32a9bad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4816728328161926465, guid: 53afb67da2054b14ba93c882c32a9bad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4816728328161926465, guid: 53afb67da2054b14ba93c882c32a9bad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4816728328161926465, guid: 53afb67da2054b14ba93c882c32a9bad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 53afb67da2054b14ba93c882c32a9bad, type: 3}
+--- !u!4 &8239059087850522151 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4816728328161926465, guid: 53afb67da2054b14ba93c882c32a9bad,
+    type: 3}
+  m_PrefabInstance: {fileID: 3499139072389012326}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8239059087839450893 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4816728328158317675, guid: 53afb67da2054b14ba93c882c32a9bad,
+    type: 3}
+  m_PrefabInstance: {fileID: 3499139072389012326}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8772303205698447638
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8239059089667307077}
+    m_Modifications:
+    - target: {fileID: 858639275734402323, guid: 9dec731d781485d46875abe46b092af0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 858639275734402323, guid: 9dec731d781485d46875abe46b092af0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 858639275734402323, guid: 9dec731d781485d46875abe46b092af0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 858639275734402323, guid: 9dec731d781485d46875abe46b092af0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 858639275734402323, guid: 9dec731d781485d46875abe46b092af0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 858639275734402323, guid: 9dec731d781485d46875abe46b092af0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 858639275734402323, guid: 9dec731d781485d46875abe46b092af0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 858639275734402323, guid: 9dec731d781485d46875abe46b092af0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 858639275734402323, guid: 9dec731d781485d46875abe46b092af0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 858639275734402323, guid: 9dec731d781485d46875abe46b092af0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 858639275734402323, guid: 9dec731d781485d46875abe46b092af0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 858639275734767923, guid: 9dec731d781485d46875abe46b092af0,
+        type: 3}
+      propertyPath: m_Name
+      value: Rattlesnake_LOD1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9dec731d781485d46875abe46b092af0, type: 3}
+--- !u!4 &8239059087903697925 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 858639275734402323, guid: 9dec731d781485d46875abe46b092af0,
+    type: 3}
+  m_PrefabInstance: {fileID: 8772303205698447638}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8239059087890005295 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 858639275737879609, guid: 9dec731d781485d46875abe46b092af0,
+    type: 3}
+  m_PrefabInstance: {fileID: 8772303205698447638}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8877621069359969310
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8239059089667307077}
+    m_Modifications:
+    - target: {fileID: 676843713163548446, guid: a708dff3dbee2f64eb4e57eef639f806,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 676843713163548446, guid: a708dff3dbee2f64eb4e57eef639f806,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 676843713163548446, guid: a708dff3dbee2f64eb4e57eef639f806,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 676843713163548446, guid: a708dff3dbee2f64eb4e57eef639f806,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 676843713163548446, guid: a708dff3dbee2f64eb4e57eef639f806,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 676843713163548446, guid: a708dff3dbee2f64eb4e57eef639f806,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 676843713163548446, guid: a708dff3dbee2f64eb4e57eef639f806,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 676843713163548446, guid: a708dff3dbee2f64eb4e57eef639f806,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 676843713163548446, guid: a708dff3dbee2f64eb4e57eef639f806,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 676843713163548446, guid: a708dff3dbee2f64eb4e57eef639f806,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 676843713163548446, guid: a708dff3dbee2f64eb4e57eef639f806,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 676843713163840318, guid: a708dff3dbee2f64eb4e57eef639f806,
+        type: 3}
+      propertyPath: m_Name
+      value: Rattlesnake_LOD3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a708dff3dbee2f64eb4e57eef639f806, type: 3}
+--- !u!4 &8239059089115095808 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 676843713163548446, guid: a708dff3dbee2f64eb4e57eef639f806,
+    type: 3}
+  m_PrefabInstance: {fileID: 8877621069359969310}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8239059089129189930 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 676843713158628916, guid: a708dff3dbee2f64eb4e57eef639f806,
+    type: 3}
+  m_PrefabInstance: {fileID: 8877621069359969310}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &9210537330997460859
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8239059089667307077}
+    m_Modifications:
+    - target: {fileID: 974293135999968269, guid: a170a6ae27b3a374c86da5dc51b36a8d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974293135999968269, guid: a170a6ae27b3a374c86da5dc51b36a8d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974293135999968269, guid: a170a6ae27b3a374c86da5dc51b36a8d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974293135999968269, guid: a170a6ae27b3a374c86da5dc51b36a8d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974293135999968269, guid: a170a6ae27b3a374c86da5dc51b36a8d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974293135999968269, guid: a170a6ae27b3a374c86da5dc51b36a8d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974293135999968269, guid: a170a6ae27b3a374c86da5dc51b36a8d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 974293135999968269, guid: a170a6ae27b3a374c86da5dc51b36a8d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 974293135999968269, guid: a170a6ae27b3a374c86da5dc51b36a8d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974293135999968269, guid: a170a6ae27b3a374c86da5dc51b36a8d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974293135999968269, guid: a170a6ae27b3a374c86da5dc51b36a8d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 974293136000333869, guid: a170a6ae27b3a374c86da5dc51b36a8d,
+        type: 3}
+      propertyPath: m_Name
+      value: Rattlesnake_LOD2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a170a6ae27b3a374c86da5dc51b36a8d, type: 3}
+--- !u!4 &8239059089262566262 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 974293135999968269, guid: a170a6ae27b3a374c86da5dc51b36a8d,
+    type: 3}
+  m_PrefabInstance: {fileID: 9210537330997460859}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &8239059089249127004 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 974293136005543207, guid: a170a6ae27b3a374c86da5dc51b36a8d,
+    type: 3}
+  m_PrefabInstance: {fileID: 9210537330997460859}
+  m_PrefabAsset: {fileID: 0}

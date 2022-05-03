@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!136 &136015210798024102
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7232237576587255303}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.44096774
+  m_Height: 1.2833552
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.79103255, z: 0.05903226}
+--- !u!1001 &7232237576587221165
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 100010, guid: 0c5559b5280f2974dbfe1c7e5535a67a, type: 3}
+      propertyPath: m_Name
+      value: Kookaburra_LOD1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 0c5559b5280f2974dbfe1c7e5535a67a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 0c5559b5280f2974dbfe1c7e5535a67a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 0c5559b5280f2974dbfe1c7e5535a67a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 0c5559b5280f2974dbfe1c7e5535a67a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 0c5559b5280f2974dbfe1c7e5535a67a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 0c5559b5280f2974dbfe1c7e5535a67a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 0c5559b5280f2974dbfe1c7e5535a67a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 0c5559b5280f2974dbfe1c7e5535a67a, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 0c5559b5280f2974dbfe1c7e5535a67a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 0c5559b5280f2974dbfe1c7e5535a67a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400010, guid: 0c5559b5280f2974dbfe1c7e5535a67a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 0c5559b5280f2974dbfe1c7e5535a67a, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: cd6e6b38ca38b5b4fb26916037d0659f, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0c5559b5280f2974dbfe1c7e5535a67a, type: 3}
+--- !u!1 &7232237576587255303 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100010, guid: 0c5559b5280f2974dbfe1c7e5535a67a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7232237576587221165}
+  m_PrefabAsset: {fileID: 0}
