@@ -5,16 +5,30 @@ using UnityEngine;
 using DG.Tweening;
 
 public class Player : PoolingObject {
+    public enum PLAYER_STATE {
+        IDLE,
+        JUMP,
+        CROUCH,
+        FALL
+    }
+
+    public PLAYER_STATE currentState { get; private set; }
     public Vector3 CurrentTargetDistance { get; set; }
     private Rigidbody rigidbody;
+    [SerializeField]
+    private Animator animator;
+
+    public bool IsJumping =>
+        currentState == PLAYER_STATE.JUMP;
+
 
     internal override void OnInitialize(params object[] parameters) {
-        if(rigidbody == null)
+        if (rigidbody == null)
             rigidbody = GetComponent<Rigidbody>();
 
         rigidbody.isKinematic = false;
         transform.position = MapManager.Instance.StartPos;
-        transform.rotation = Quaternion.Euler(Vector3.zero);
+        SetRotation();
     }
 
     protected override void OnUse() { }
@@ -24,6 +38,7 @@ public class Player : PoolingObject {
     }
 
     public void Jump(float touchTime) {
+        ChangeState(PLAYER_STATE.JUMP);
         CurrentTargetDistance = MapManager.Instance.GetLastDirection() * touchTime * EConfig.System.MOVE_SPEED;
         if (TryGetCorrectionPos(out Vector3 correctionPos)) {
             CurrentTargetDistance = correctionPos;
@@ -32,9 +47,9 @@ public class Player : PoolingObject {
         Vector3 targetPos = transform.position + CurrentTargetDistance;
         transform.DOMove(targetPos, 1f).SetEase(Ease.Linear);
         transform.DOJump(targetPos, 1f, 1, 1f).SetEase(Ease.InOutSine)
-            .OnComplete(GameManager.Instance.OnPlayerJumpDone);
-
-        GameManager.Instance.OnPlayerJump();
+            .OnComplete(() => {
+                SetRotation();
+            });
     }
 
     private bool TryGetCorrectionPos(out Vector3 correctionPos) {
@@ -49,5 +64,16 @@ public class Player : PoolingObject {
             correctionPos = transform.position;
             return false;
         }
+    }
+
+    private void SetRotation() {
+        Vector3 direction = MapManager.Instance.GetLastDirection();
+        transform.rotation = Quaternion.LookRotation(direction);
+    }
+
+    public void ChangeState(PLAYER_STATE state) {
+        Debug.Log(state);
+        currentState = state;
+        animator.Play(state.ToString());
     }
 }

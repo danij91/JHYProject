@@ -1,59 +1,158 @@
 fileFormatVersion: 2
 guid: 54cedfb49305ce8408f5d65b39634084
 ModelImporter:
-  serializedVersion: 23
-  fileIDToRecycleName:
-    100000: body
-    100002: //RootNode
-    100004: feet.L
-    100006: feet.R
-    100008: hair.01
-    100010: hair.02
-    100012: Mesh
-    100014: Rig
-    100016: root
-    100018: tail.01
-    100020: tail.02
-    100022: wing.L
-    100024: wing.R
-    400000: body
-    400002: //RootNode
-    400004: feet.L
-    400006: feet.R
-    400008: hair.01
-    400010: hair.02
-    400012: Mesh
-    400014: Rig
-    400016: root
-    400018: tail.01
-    400020: tail.02
-    400022: wing.L
-    400024: wing.R
-    2100000: M_Dove
-    4300000: Mesh
-    7400000: Attack
-    7400002: Bounce
-    7400004: Clicked
-    7400006: Death
-    7400008: Eat
-    7400010: Fear
-    7400012: Fly
-    7400014: Hit
-    7400016: Idle_A
-    7400018: Idle_B
-    7400020: Idle_C
-    7400022: Jump
-    7400024: Roll
-    7400026: Run
-    7400028: Sit
-    7400030: Spin
-    7400032: Swim
-    7400034: Walk
-    9500000: //RootNode
-    13700000: Mesh
+  serializedVersion: 20200
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: body
+  - first:
+      1: 100002
+    second: //RootNode
+  - first:
+      1: 100004
+    second: feet.L
+  - first:
+      1: 100006
+    second: feet.R
+  - first:
+      1: 100008
+    second: hair.01
+  - first:
+      1: 100010
+    second: hair.02
+  - first:
+      1: 100012
+    second: Mesh
+  - first:
+      1: 100014
+    second: Rig
+  - first:
+      1: 100016
+    second: root
+  - first:
+      1: 100018
+    second: tail.01
+  - first:
+      1: 100020
+    second: tail.02
+  - first:
+      1: 100022
+    second: wing.L
+  - first:
+      1: 100024
+    second: wing.R
+  - first:
+      4: 400000
+    second: body
+  - first:
+      4: 400002
+    second: //RootNode
+  - first:
+      4: 400004
+    second: feet.L
+  - first:
+      4: 400006
+    second: feet.R
+  - first:
+      4: 400008
+    second: hair.01
+  - first:
+      4: 400010
+    second: hair.02
+  - first:
+      4: 400012
+    second: Mesh
+  - first:
+      4: 400014
+    second: Rig
+  - first:
+      4: 400016
+    second: root
+  - first:
+      4: 400018
+    second: tail.01
+  - first:
+      4: 400020
+    second: tail.02
+  - first:
+      4: 400022
+    second: wing.L
+  - first:
+      4: 400024
+    second: wing.R
+  - first:
+      21: 2100000
+    second: M_Dove
+  - first:
+      43: 4300000
+    second: Mesh
+  - first:
+      74: 7400000
+    second: Attack
+  - first:
+      74: 7400002
+    second: Bounce
+  - first:
+      74: 7400004
+    second: Clicked
+  - first:
+      74: 7400006
+    second: Death
+  - first:
+      74: 7400008
+    second: Eat
+  - first:
+      74: 7400010
+    second: Fear
+  - first:
+      74: 7400012
+    second: Fly
+  - first:
+      74: 7400014
+    second: Hit
+  - first:
+      74: 7400016
+    second: Idle_A
+  - first:
+      74: 7400018
+    second: Idle_B
+  - first:
+      74: 7400020
+    second: Idle_C
+  - first:
+      74: 7400022
+    second: Jump
+  - first:
+      74: 7400024
+    second: Roll
+  - first:
+      74: 7400026
+    second: Run
+  - first:
+      74: 7400028
+    second: Sit
+  - first:
+      74: 7400030
+    second: Spin
+  - first:
+      74: 7400032
+    second: Swim
+  - first:
+      74: 7400034
+    second: Walk
+  - first:
+      95: 9500000
+    second: //RootNode
+  - first:
+      137: 13700000
+    second: Mesh
+  - first:
+      74: -6959024984406318627
+    second: Fear_2
   externalObjects: {}
   materials:
-    importMaterials: 1
+    materialImportMode: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -82,6 +181,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Attack
       takeName: Attack
+      internalID: 0
       firstFrame: 0
       lastFrame: 10
       wrapMode: 0
@@ -110,6 +210,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Bounce
       takeName: Bounce
+      internalID: 0
       firstFrame: 0
       lastFrame: 10
       wrapMode: 0
@@ -138,6 +239,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Clicked
       takeName: Clicked
+      internalID: 0
       firstFrame: 0
       lastFrame: 10
       wrapMode: 0
@@ -166,6 +268,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Death
       takeName: Death
+      internalID: 0
       firstFrame: 0
       lastFrame: 10
       wrapMode: 0
@@ -194,6 +297,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Eat
       takeName: Eat
+      internalID: 0
       firstFrame: 0
       lastFrame: 10
       wrapMode: 0
@@ -222,6 +326,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Fear
       takeName: Fear
+      internalID: 0
       firstFrame: 0
       lastFrame: 10
       wrapMode: 0
@@ -250,6 +355,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Fly
       takeName: Fly
+      internalID: 0
       firstFrame: 0
       lastFrame: 10
       wrapMode: 0
@@ -278,6 +384,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Hit
       takeName: Hit
+      internalID: 0
       firstFrame: 0
       lastFrame: 10
       wrapMode: 0
@@ -306,6 +413,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Idle_A
       takeName: Idle_A
+      internalID: 0
       firstFrame: 0
       lastFrame: 10
       wrapMode: 0
@@ -334,6 +442,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Idle_B
       takeName: Idle_B
+      internalID: 0
       firstFrame: 0
       lastFrame: 10
       wrapMode: 0
@@ -362,6 +471,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Idle_C
       takeName: Idle_C
+      internalID: 0
       firstFrame: 0
       lastFrame: 10
       wrapMode: 0
@@ -390,6 +500,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Jump
       takeName: Jump
+      internalID: 0
       firstFrame: 0
       lastFrame: 10
       wrapMode: 0
@@ -418,6 +529,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Roll
       takeName: Roll
+      internalID: 0
       firstFrame: 0
       lastFrame: 10
       wrapMode: 0
@@ -446,6 +558,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Run
       takeName: Run
+      internalID: 0
       firstFrame: 0
       lastFrame: 10
       wrapMode: 0
@@ -474,6 +587,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Sit
       takeName: Sit
+      internalID: 0
       firstFrame: 0
       lastFrame: 10
       wrapMode: 0
@@ -502,6 +616,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Spin
       takeName: Spin
+      internalID: 0
       firstFrame: 0
       lastFrame: 10
       wrapMode: 0
@@ -530,6 +645,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Swim
       takeName: Swim
+      internalID: 0
       firstFrame: 0
       lastFrame: 10
       wrapMode: 0
@@ -558,6 +674,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Walk
       takeName: Walk
+      internalID: 0
       firstFrame: 0
       lastFrame: 10
       wrapMode: 0
@@ -590,25 +707,32 @@ ModelImporter:
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    bakeAxisConversion: 0
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 0
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 0.01
-    hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -617,10 +741,10 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
+  referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -630,13 +754,17 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
+  avatarSetup: 1
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 0
   additionalBone: 0
   userData: 
   assetBundleName: 

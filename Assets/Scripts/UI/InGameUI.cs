@@ -47,19 +47,17 @@ public class InGameUI : UIBase {
 
     public override void OnButtonEvent(Button inButton) {
         switch (inButton.name) {
-
-            case nameof(btn_back): 
+            case nameof(btn_back):
                 SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY, true).Forget();
                 break;
-
-            case nameof(btn_screen): 
-                if (GameManager.Instance.IsJumping || GameManager.Instance.CurrentState != GameManager.GAME_STATE.PLAY)
+            case nameof(btn_screen):
+                IsScreenBtnDown = false;
+                if (GameManager.Instance.Player.IsJumping || !GameManager.Instance.IsPlaying)
                     return;
                 GameManager.Instance.Player.Jump(elapsedTime);
                 elapsedTime = 0;
                 break;
-
-            case nameof(btn_restart): 
+            case nameof(btn_restart):
                 CloseFailPopup();
                 elapsedTime = 0;
                 GameManager.Instance.GameStart();
@@ -74,5 +72,10 @@ public class InGameUI : UIBase {
 
     private void CloseFailPopup() {
         failPopup.SetActive(false);
+    }
+
+    public void OnScreenButtonDown() {
+        IsScreenBtnDown = true;
+        GameManager.Instance.Player.ChangeState(Player.PLAYER_STATE.CROUCH);
     }
 }

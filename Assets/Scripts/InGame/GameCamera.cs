@@ -13,7 +13,7 @@ public class GameCamera : MonoBehaviour {
     }
 
     private void Update() {
-        if (player != null && GameManager.Instance.IsJumping) {
+        if (player != null && player.IsJumping) {
             transform.position = (player.transform.position + differPos).SetY(10);
         }
     }

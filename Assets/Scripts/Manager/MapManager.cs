@@ -59,7 +59,7 @@ public class MapManager : Singleton<MapManager> {
     }
 
     public Vector3 GetLastDirection() {
-        return lastDirection == EDirection.Right ? EConfig.System.RIGHT : EConfig.System.LEFT;
+        return lastDirection == EDirection.Right ? EConfig.System.DIRECTION_RIGHT : EConfig.System.DIRECTION_LEFT;
     }
 
     public void RemoveMap() {

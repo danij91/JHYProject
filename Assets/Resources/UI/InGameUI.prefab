@@ -331,6 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _sortingLayer: Popup
+  _bgImg: {fileID: 0}
   btn_back: {fileID: 2006816462589523818}
   btn_screen: {fileID: 3081471373105636665}
   btn_restart: {fileID: 1772261177093034755}
@@ -509,8 +510,8 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 7497789129942777860}
           m_TargetAssemblyTypeName: InGameUI, Assembly-CSharp
-          m_MethodName: set_IsScreenBtnDown
-          m_Mode: 6
+          m_MethodName: OnScreenButtonDown
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -518,22 +519,6 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 1
-          m_CallState: 2
-  - eventID: 3
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 7497789129942777860}
-          m_TargetAssemblyTypeName: InGameUI, Assembly-CSharp
-          m_MethodName: set_IsScreenBtnDown
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
           m_CallState: 2
 --- !u!114 &3081471373105636665
 MonoBehaviour:
