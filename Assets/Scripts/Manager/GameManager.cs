@@ -16,17 +16,9 @@ public class GameManager : Singleton<GameManager> {
     public GameCamera GameCamera => camera;
     public Player Player { get; private set; }
     public int JumpCount { get; private set; }
-    public bool isPlaying => CurrentState == GAME_STATE.PLAY;
+    public bool IsPlaying => CurrentState == GAME_STATE.PLAY;
 
     private InGameUI inGameUI;
-
-    private bool isJumping;
-
-    public bool IsJumping {
-        get => CurrentState == GAME_STATE.PLAY && isJumping;
-
-        private set => isJumping = value;
-    }
 
     public void Initialize() {
         GameStart();
@@ -39,7 +31,7 @@ public class GameManager : Singleton<GameManager> {
         JumpCount = 0;
         PoolingManager.Instance.RestoreAll();
         MapManager.Instance.Initialize();
-        Player = PoolingManager.Instance.Create<Player>(EPoolingType.Character, "Player");
+        Player = PoolingManager.Instance.Create<Player>(EPoolingType.Character, "Player_Dove");
         GameCamera.Initialize();
         CurrentState = GAME_STATE.PLAY;
     }
@@ -55,20 +47,14 @@ public class GameManager : Singleton<GameManager> {
             LocalDataHelper.SaveBestCount(JumpCount);
     }
 
-    public void OnPlayerJump() {
-        IsJumping = true;
-    }
-
-    public void OnPlayerJumpDone() {
-        IsJumping = false;
-    }
-
     public void OnFail() {
         GameEnd();
         inGameUI.OpenFailPopup();
+        Player.ChangeState(Player.PLAYER_STATE.FALL);
     }
 
     public void OnSuccess() {
+        Player.ChangeState(Player.PLAYER_STATE.IDLE);
         JumpCount++;
         inGameUI.RefreshCount();
         MapManager.Instance.CreateMap();
