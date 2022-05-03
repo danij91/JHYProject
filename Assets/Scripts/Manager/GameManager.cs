@@ -30,7 +30,8 @@ public class GameManager : Singleton<GameManager> {
 
     public void Initialize() {
         UIManager.Instance.Show<InGameUI>();
-        inGameUI = UIManager.Instance.GetUI<InGameUI>();
+        if(inGameUI == null)
+            inGameUI = UIManager.Instance.GetUI<InGameUI>();
         GameStart();
     }
 
