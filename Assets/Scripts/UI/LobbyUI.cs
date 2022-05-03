@@ -27,8 +27,8 @@ public class LobbyUI : UIBase
         RectTransform rectTr = GetComponent<RectTransform>();
         float screenAspectRatio = (float)Screen.height / (float)Screen.width;
         float defaultAspectRatio = EConfig.System.DEFAULT_CANVAS_HEIGHT / EConfig.System.DEFAULT_CANVAS_WIDTH;
-        float bgRatio = screenAspectRatio < defaultAspectRatio ? rectTr.sizeDelta.y / img_bg.rectTransform.sizeDelta.x
-                                                                : rectTr.sizeDelta.x / img_bg.rectTransform.sizeDelta.y;
+        float bgRatio = screenAspectRatio < defaultAspectRatio ? rectTr.sizeDelta.x / img_bg.rectTransform.sizeDelta.x
+                                                                : rectTr.sizeDelta.y / img_bg.rectTransform.sizeDelta.y;
                                                     
         img_bg.rectTransform.sizeDelta *= bgRatio;
     }
