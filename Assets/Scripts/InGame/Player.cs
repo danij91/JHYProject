@@ -9,7 +9,9 @@ public class Player : PoolingObject {
     private Rigidbody rigidbody;
 
     internal override void OnInitialize(params object[] parameters) {
-        rigidbody = GetComponent<Rigidbody>();
+        if(rigidbody == null)
+            rigidbody = GetComponent<Rigidbody>();
+
         rigidbody.isKinematic = false;
         transform.position = MapManager.Instance.StartPos;
         transform.rotation = Quaternion.Euler(Vector3.zero);
@@ -36,7 +38,7 @@ public class Player : PoolingObject {
     }
 
     private bool TryGetCorrectionPos(out Vector3 correctionPos) {
-        Vector3 targetDistance = MapManager.Instance.CurrentMapPos - transform.position;
+        Vector3 targetDistance = MapManager.Instance.CurrentMap.transform.position - transform.position;
         float differ = Vector3.Distance(CurrentTargetDistance.SetY(0f), targetDistance.SetY(0f));
 
         if (differ <= EConfig.System.CORRECTION_VALUE) {

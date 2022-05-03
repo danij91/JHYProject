@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 4888676759880638287}
   - component: {fileID: 6327124103041760790}
   - component: {fileID: 6974412299736867513}
+  - component: {fileID: 2396803800095159663}
   m_Layer: 0
   m_Name: GrassMap
   m_TagString: Untagged
@@ -191,3 +192,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapType: 2
+--- !u!65 &2396803800095159663
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7670008273501511416}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.1, z: 1}
+  m_Center: {x: 0, y: 0.6, z: 0}

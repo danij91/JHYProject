@@ -12,7 +12,7 @@ public class TitleScene : SceneBase
         SceneLoader.Instance.Initalize();
         UIManager.Instance.Initialize();
         LocalData.Instance.Initialize();
-        UIManager.Instance.Show<LoginUI>();
+        UIManager.Instance.Show<TitleUI>();
         IS_TITLESCENE_LOADED = true;
     }
 

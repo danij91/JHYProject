@@ -90,8 +90,7 @@ public class LocalData
     {
         if (dataSet == null)
         {
-            Debug.LogError("Not initialized!");
-            return;
+            Initialize();
         }
 
         dataSet.Set<T>(key, value);
@@ -102,8 +101,7 @@ public class LocalData
     {
         if (dataSet == null)
         {
-            Debug.LogError("Not initialized!");
-            return;
+            Initialize();
         }
 
         if (dataSet.Has<T>(key))
@@ -118,8 +116,7 @@ public class LocalData
     {
         if (dataSet == null)
         {
-            Debug.LogError("Not initialized!");
-            return default(T);
+            Initialize();
         }
 
         return dataSet.Get<T>(key);

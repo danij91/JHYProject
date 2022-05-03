@@ -29,9 +29,10 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void Initialize() {
-        UIManager.Instance.Show<InGameUI>();
-        inGameUI = UIManager.Instance.GetUI<InGameUI>();
         GameStart();
+        UIManager.Instance.Show<InGameUI>();
+        if(inGameUI == null)
+            inGameUI = UIManager.Instance.GetUI<InGameUI>();
     }
 
     public void GameStart() {
@@ -45,15 +46,17 @@ public class GameManager : Singleton<GameManager> {
 
     public void GameEnd() {
         CurrentState = GAME_STATE.END;
-        LocalDataHelper.SaveBestCount(JumpCount);
+        SaveBestScore();
+    }
+
+    public void SaveBestScore() {
+        int prevCount = LocalDataHelper.GetBestCount();
+        if (JumpCount > prevCount)
+            LocalDataHelper.SaveBestCount(JumpCount);
     }
 
     public void OnPlayerJump() {
         IsJumping = true;
-        JumpCount++;
-        inGameUI.RefreshCount();
-        MapManager.Instance.CreateMap();
-        MapManager.Instance.RemoveMap();
     }
 
     public void OnPlayerJumpDone() {
@@ -63,5 +66,12 @@ public class GameManager : Singleton<GameManager> {
     public void OnFail() {
         GameEnd();
         inGameUI.OpenFailPopup();
+    }
+
+    public void OnSuccess() {
+        JumpCount++;
+        inGameUI.RefreshCount();
+        MapManager.Instance.CreateMap();
+        MapManager.Instance.RemoveMap();
     }
 }

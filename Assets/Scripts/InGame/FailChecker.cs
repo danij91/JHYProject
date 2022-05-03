@@ -5,7 +5,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
 public class FailChecker : PoolingObject {
-    private Collider collider;
 
     private void OnTriggerEnter(Collider other) {
         GameManager.Instance.OnFail();

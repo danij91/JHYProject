@@ -12,10 +12,10 @@ public enum EDirection {
 public class MapManager : Singleton<MapManager> {
     [SerializeField]
     private Transform startTr;
-    public Vector3 CurrentMapPos { get; private set; }
+    public Map CurrentMap { get; private set; }
 
     private EDirection lastDirection;
-    private Queue<CubeMap> mapQueue = new Queue<CubeMap>();
+    private Queue<Map> mapQueue = new Queue<Map>();
     private FailChecker failChecker;
 
     public Vector3 StartPos => startTr.position;
@@ -27,18 +27,18 @@ public class MapManager : Singleton<MapManager> {
         CreateMap();
     }
 
-    public CubeMap CreateMap(bool isInit = false) {
+    public Map CreateMap(bool isInit = false) {
         string mapName = GetMapType().ToString();
-        CubeMap map = PoolingManager.Instance.Create<CubeMap>(EPoolingType.Map, mapName);
+        Map map = PoolingManager.Instance.Create<Map>(EPoolingType.Map, mapName);
 
         if (isInit) {
             map.transform.position = Vector3.zero;
-            CurrentMapPos = map.transform.position;
+            CurrentMap = map;
         }
         else {
             Vector3 nextPos = GetNextPosition();
             map.transform.position = nextPos;
-            CurrentMapPos = nextPos;
+            CurrentMap = map;
             failChecker.transform.position = nextPos.SetY(nextPos.y - 1);
         }
 
@@ -54,7 +54,7 @@ public class MapManager : Singleton<MapManager> {
         var dist = UnityEngine.Random.Range(EConfig.Map.MIN_DISTANCE, EConfig.Map.MAX_DISTANCE);
         lastDirection = (EDirection) UnityEngine.Random.Range(0, 2);
 
-        var nextPos = CurrentMapPos + GetLastDirection() * dist;
+        var nextPos = CurrentMap.transform.position + GetLastDirection() * dist;
         return nextPos;
     }
 
@@ -65,7 +65,7 @@ public class MapManager : Singleton<MapManager> {
     public void RemoveMap() {
         if (mapQueue.Count < 4)
             return;
-        CubeMap oldMap = mapQueue.Dequeue();
+        Map oldMap = mapQueue.Dequeue();
         oldMap.Restore();
     }
 }
