@@ -15,14 +15,14 @@ public class LobbyUI : UIBase
     protected override void PrevOpen(params object[] args)
     {
         elapsedTime = 0f;
-        SetBGResoution();
+        SetBGResolution();
     }
 
     protected override void PrevClose()
     {
     }
 
-    public void SetBGResoution()
+    public void SetBGResolution()
     {
         RectTransform rectTr = GetComponent<RectTransform>();
         float screenAspectRatio = (float)Screen.height / (float)Screen.width;
