@@ -9,6 +9,7 @@ public class UIBase : MonoBehaviour
 
     [Tooltip("Sorting Layer")]
     [SerializeField] protected string _sortingLayer = "Popup";
+    [SerializeField] protected Image _bgImg;
 
     protected Transform _bg;
     protected Action<UIBase> _callback;
@@ -31,6 +32,17 @@ public class UIBase : MonoBehaviour
         set { _canvasGroup.interactable = value; }
     }
 
+    protected void SetBGResolution()
+    {
+        RectTransform rectTr = GetComponent<RectTransform>();
+        float screenAspectRatio = (float)Screen.height / (float)Screen.width;
+        float defaultAspectRatio = EConfig.System.DEFAULT_CANVAS_HEIGHT / EConfig.System.DEFAULT_CANVAS_WIDTH;
+        float bgRatio = screenAspectRatio < defaultAspectRatio ? rectTr.sizeDelta.x / _bgImg.rectTransform.sizeDelta.x
+                                                                : rectTr.sizeDelta.y / _bgImg.rectTransform.sizeDelta.y;
+
+        _bgImg.rectTransform.sizeDelta *= bgRatio;
+    }
+
     protected virtual void Awake()
     {
         _bg = transform.Find("Background");
@@ -43,6 +55,11 @@ public class UIBase : MonoBehaviour
         if (_canvas != null)
         {
             _canvas.sortingLayerName = _sortingLayer;
+        }
+
+        if (_bgImg != null)
+        {
+            SetBGResolution();
         }
     }
 
