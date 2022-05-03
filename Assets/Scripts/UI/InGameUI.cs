@@ -19,7 +19,6 @@ public class InGameUI : UIBase {
     [SerializeField]
     private Text txt_bestcount;
 
-
     private float elapsedTime;
     public bool IsScreenBtnDown { get; set; }
 
@@ -48,17 +47,19 @@ public class InGameUI : UIBase {
 
     public override void OnButtonEvent(Button inButton) {
         switch (inButton.name) {
-            case nameof(btn_back):
+
+            case nameof(btn_back): 
                 SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY, true).Forget();
                 break;
-            case nameof(btn_screen):
-                if (GameManager.Instance.IsJumping)
-                    return;
 
+            case nameof(btn_screen): 
+                if (GameManager.Instance.IsJumping || GameManager.Instance.CurrentState != GameManager.GAME_STATE.PLAY)
+                    return;
                 GameManager.Instance.Player.Jump(elapsedTime);
                 elapsedTime = 0;
                 break;
-            case nameof(btn_restart):
+
+            case nameof(btn_restart): 
                 CloseFailPopup();
                 elapsedTime = 0;
                 GameManager.Instance.GameStart();

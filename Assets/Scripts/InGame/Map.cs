@@ -10,9 +10,15 @@ public enum EMapType
     WoodMap,
 }
 
-public class CubeMap : PoolingObject
+public class Map : PoolingObject
 {
     [SerializeField] private EMapType mapType;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(MapManager.Instance.CurrentMap == this)
+            GameManager.Instance.OnSuccess();
+    }
 
     internal override void OnInitialize(params object[] parameters)
     {

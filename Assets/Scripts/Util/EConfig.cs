@@ -14,6 +14,8 @@ public static class EConfig
     {
         public static readonly float MOVE_SPEED = 5f;
         public static readonly float CORRECTION_VALUE = 3f;
+        public static readonly float DEFAULT_CANVAS_WIDTH = 720f;
+        public static readonly float DEFAULT_CANVAS_HEIGHT = 1280f;
         public static readonly Vector3 RIGHT = new Vector3(1, 0, 1);
         public static readonly Vector3 LEFT = new Vector3(-1, 0, 1);
     }
