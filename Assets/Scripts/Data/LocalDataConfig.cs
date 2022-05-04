@@ -49,6 +49,9 @@ public class LocalDataConfig : ScriptableObject
     }
 #endif
 
-    [Header("[강제 TitleScene 실행 여부]")]
+    [Header("[Start TitleScene Forced]")]
     public bool IsStartTitleScene = false;
+
+    [Header("[Debug Log Level]")]
+    public EConfig.ELogLevel LogLevel = EConfig.ELogLevel.None;
 }
