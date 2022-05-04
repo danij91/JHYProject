@@ -16,6 +16,7 @@ public class Map : PoolingObject
 
     private void OnTriggerEnter(Collider other)
     {
+        GameManager.Instance.Player.ChangeState(Player.PLAYER_STATE.IDLE);
         if(MapManager.Instance.CurrentMap == this)
             GameManager.Instance.OnSuccess();
     }

@@ -54,7 +54,6 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void OnSuccess() {
-        Player.ChangeState(Player.PLAYER_STATE.IDLE);
         JumpCount++;
         inGameUI.RefreshCount();
         MapManager.Instance.CreateMap();
