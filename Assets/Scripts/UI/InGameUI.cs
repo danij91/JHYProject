@@ -42,6 +42,7 @@ public class InGameUI : UIBase {
     private void Update() {
         if (IsScreenBtnDown) {
             elapsedTime += Time.deltaTime;
+            GameManager.Instance.Player.UpdateGauge(elapsedTime);
         }
     }
 

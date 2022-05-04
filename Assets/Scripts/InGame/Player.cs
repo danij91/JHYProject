@@ -14,6 +14,8 @@ public class Player : PoolingObject {
 
     [SerializeField]
     private Animator animator;
+    [SerializeField]
+    private JumpGauge gauge;
 
     private Rigidbody rigidbody;
 
@@ -37,6 +39,7 @@ public class Player : PoolingObject {
     }
 
     public void Jump(float touchTime) {
+        gauge.SetJumpGauge(0f);
         ChangeState(PLAYER_STATE.JUMP);
         CurrentTargetPos = MapManager.Instance.GetLastDirection() * touchTime * EConfig.System.MOVE_SPEED;
         if (TryGetCorrectionPos(out Vector3 correctionPos)) {
@@ -75,4 +78,11 @@ public class Player : PoolingObject {
         CurrentState = state;
         animator.Play(state.ToString());
     }
+
+    public void UpdateGauge(float time)
+    {
+        float value = time;
+        gauge.SetJumpGauge(value);
+    }
+
 }
