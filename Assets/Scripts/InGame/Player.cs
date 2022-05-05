@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using UnityEngine;
 using DG.Tweening;
+using Random = UnityEngine.Random;
 
 public class Player : PoolingObject {
     public enum PLAYER_STATE {
@@ -16,6 +18,12 @@ public class Player : PoolingObject {
     private Animator animator;
     [SerializeField]
     private JumpGauge gauge;
+    [SerializeField]
+    private AudioClip[] jumpClips;
+    [SerializeField]
+    private AudioClip fallClip;
+
+    private AudioSource audioSource;
     private Ease MOVE_EASE = Ease.OutFlash;
     private Ease JUMP_EASE = Ease.OutFlash;
     private float JUMP_DURATION = 0.3f;
@@ -33,6 +41,7 @@ public class Player : PoolingObject {
 
         rigidbody.isKinematic = false;
         transform.position = MapManager.Instance.StartPos;
+        audioSource = GetComponent<AudioSource>();
         SetRotation();
     }
 
@@ -75,7 +84,16 @@ public class Player : PoolingObject {
         }
     }
 
-    private void SetRotation() {
+    private void PlayJumpSound() {
+        int clipIndex = Random.Range(0, jumpClips.Length);
+        audioSource.PlayOneShot(jumpClips[clipIndex]);
+    }
+
+    private Vector3 GetJumpDirection() {
+        return (MapManager.Instance.CurrentMap.transform.position - transform.position).normalized;
+    }
+
+    public void SetRotation() {
         Vector3 direction = MapManager.Instance.GetLastDirection();
         transform.rotation = Quaternion.LookRotation(direction);
     }
@@ -84,12 +102,14 @@ public class Player : PoolingObject {
         Debug.Log($"<color=yellow>[ChangeState] : {state}</color>");
         CurrentState = state;
         animator.Play(state.ToString());
+
+        if (state == PLAYER_STATE.FALL) {
+            audioSource.PlayOneShot(fallClip);
+        }
     }
 
-    public void UpdateGauge(float time)
-    {
+    public void UpdateGauge(float time) {
         float value = time;
         gauge.SetJumpGauge(value);
     }
-
 }
