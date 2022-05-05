@@ -16,6 +16,8 @@ public class GameManager : Singleton<GameManager> {
     public GameCamera GameCamera => camera;
     public Player Player { get; private set; }
     public int JumpCount { get; private set; }
+    public int ComboCount { get; private set; }
+    public bool IsPerfectJump { get; private set; }
     public bool IsPlaying => CurrentState == GAME_STATE.PLAY;
 
     private InGameUI inGameUI;
@@ -23,7 +25,7 @@ public class GameManager : Singleton<GameManager> {
     public void Initialize() {
         GameStart();
         UIManager.Instance.Show<InGameUI>();
-        if(inGameUI == null)
+        if (inGameUI == null)
             inGameUI = UIManager.Instance.GetUI<InGameUI>();
     }
 
@@ -55,8 +57,20 @@ public class GameManager : Singleton<GameManager> {
 
     public void OnSuccess() {
         JumpCount++;
+        JumpCount += ComboCount;
         inGameUI.RefreshCount();
         MapManager.Instance.CreateMap();
         MapManager.Instance.RemoveMap();
+        Player.SetRotation();
+    }
+
+    public void SuccessCombo() {
+        IsPerfectJump = true;
+        ComboCount++;
+    }
+
+    public void FailCombo() {
+        IsPerfectJump = false;
+        ComboCount = 0;
     }
 }
