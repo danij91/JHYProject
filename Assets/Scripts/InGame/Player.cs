@@ -12,15 +12,16 @@ public class Player : PoolingObject {
         FALL
     }
 
-    public PLAYER_STATE currentState { get; private set; }
-    public Vector3 CurrentTargetDistance { get; set; }
-    private Rigidbody rigidbody;
     [SerializeField]
     private Animator animator;
+    [SerializeField]
+    private JumpGauge gauge;
 
-    public bool IsJumping =>
-        currentState == PLAYER_STATE.JUMP;
+    private Rigidbody rigidbody;
 
+    public PLAYER_STATE CurrentState { get; private set; }
+    public Vector3 CurrentTargetPos { get; private set; }
+    public bool IsJumping => CurrentState == PLAYER_STATE.JUMP;
 
     internal override void OnInitialize(params object[] parameters) {
         if (rigidbody == null)
@@ -38,13 +39,14 @@ public class Player : PoolingObject {
     }
 
     public void Jump(float touchTime) {
+        gauge.SetJumpGauge(0f);
         ChangeState(PLAYER_STATE.JUMP);
-        CurrentTargetDistance = MapManager.Instance.GetLastDirection() * touchTime * EConfig.System.MOVE_SPEED;
+        CurrentTargetPos = MapManager.Instance.GetLastDirection() * touchTime * EConfig.System.MOVE_SPEED;
         if (TryGetCorrectionPos(out Vector3 correctionPos)) {
-            CurrentTargetDistance = correctionPos;
+            CurrentTargetPos = correctionPos;
         }
 
-        Vector3 targetPos = transform.position + CurrentTargetDistance;
+        Vector3 targetPos = transform.position + CurrentTargetPos;
         transform.DOMove(targetPos, 1f).SetEase(Ease.Linear);
         transform.DOJump(targetPos, 1f, 1, 1f).SetEase(Ease.InOutSine)
             .OnComplete(() => {
@@ -53,11 +55,11 @@ public class Player : PoolingObject {
     }
 
     private bool TryGetCorrectionPos(out Vector3 correctionPos) {
-        Vector3 targetDistance = MapManager.Instance.CurrentMap.transform.position - transform.position;
-        float differ = Vector3.Distance(CurrentTargetDistance.SetY(0f), targetDistance.SetY(0f));
+        Vector3 moveTargetPos = MapManager.Instance.CurrentMap.transform.position - transform.position;
+        float differ = Vector3.Distance(CurrentTargetPos.SetY(0f), moveTargetPos.SetY(0f));
 
         if (differ <= EConfig.System.CORRECTION_VALUE) {
-            correctionPos = targetDistance.SetY(0f);
+            correctionPos = moveTargetPos.SetY(0f);
             return true;
         }
         else {
@@ -72,8 +74,15 @@ public class Player : PoolingObject {
     }
 
     public void ChangeState(PLAYER_STATE state) {
-        Debug.Log(state);
-        currentState = state;
+        Debug.Log($"<color=yellow>[ChangeState] : {state}</color>");
+        CurrentState = state;
         animator.Play(state.ToString());
     }
+
+    public void UpdateGauge(float time)
+    {
+        float value = time;
+        gauge.SetJumpGauge(value);
+    }
+
 }

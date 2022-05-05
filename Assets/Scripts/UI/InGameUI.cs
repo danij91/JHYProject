@@ -42,6 +42,7 @@ public class InGameUI : UIBase {
     private void Update() {
         if (IsScreenBtnDown) {
             elapsedTime += Time.deltaTime;
+            GameManager.Instance.Player.UpdateGauge(elapsedTime);
         }
     }
 
@@ -52,8 +53,7 @@ public class InGameUI : UIBase {
                 break;
             case nameof(btn_screen):
                 IsScreenBtnDown = false;
-                if (GameManager.Instance.Player.IsJumping || !GameManager.Instance.IsPlaying)
-                    return;
+                if (!CheckJumpable()) return;
                 GameManager.Instance.Player.Jump(elapsedTime);
                 elapsedTime = 0;
                 break;
@@ -74,7 +74,13 @@ public class InGameUI : UIBase {
         failPopup.SetActive(false);
     }
 
+    private bool CheckJumpable()
+    {
+        return !GameManager.Instance.Player.IsJumping && GameManager.Instance.IsPlaying;
+    }
+
     public void OnScreenButtonDown() {
+        if (!CheckJumpable()) return;
         IsScreenBtnDown = true;
         GameManager.Instance.Player.ChangeState(Player.PLAYER_STATE.CROUCH);
     }

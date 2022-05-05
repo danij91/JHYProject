@@ -16,4 +16,12 @@ public static class EConfig {
         public static readonly Vector3 DIRECTION_RIGHT = new Vector3(1, 0, 1);
         public static readonly Vector3 DIRECTION_LEFT = new Vector3(-1, 0, 1);
     }
+
+    public enum ELogLevel
+    {
+        None,
+        Error,
+        Warning,
+        All,
+    }
 }
