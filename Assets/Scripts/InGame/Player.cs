@@ -16,6 +16,10 @@ public class Player : PoolingObject {
     private Animator animator;
     [SerializeField]
     private JumpGauge gauge;
+    private Ease MOVE_EASE = Ease.OutFlash;
+    private Ease JUMP_EASE = Ease.OutFlash;
+    private float JUMP_DURATION = 0.3f;
+    private float JUMP_POWER = 1.5f;
 
     private Rigidbody rigidbody;
 
@@ -41,17 +45,20 @@ public class Player : PoolingObject {
     public void Jump(float touchTime) {
         gauge.SetJumpGauge(0f);
         ChangeState(PLAYER_STATE.JUMP);
-        CurrentTargetPos = MapManager.Instance.GetLastDirection() * touchTime * EConfig.System.MOVE_SPEED;
-        if (TryGetCorrectionPos(out Vector3 correctionPos)) {
+        CurrentTargetPos = GetJumpDirection() * touchTime * EConfig.System.MOVE_SPEED;
+        bool isPerfectJump = TryGetCorrectionPos(out Vector3 correctionPos);
+        if (isPerfectJump) {
             CurrentTargetPos = correctionPos;
+            GameManager.Instance.SuccessCombo();
+        }
+        else {
+            GameManager.Instance.FailCombo();
         }
 
         Vector3 targetPos = transform.position + CurrentTargetPos;
-        transform.DOMove(targetPos, 1f).SetEase(Ease.Linear);
-        transform.DOJump(targetPos, 1f, 1, 1f).SetEase(Ease.InOutSine)
-            .OnComplete(() => {
-                SetRotation();
-            });
+        PlayJumpSound();
+        transform.DOMove(targetPos, JUMP_DURATION).SetEase(MOVE_EASE);
+        transform.DOJump(targetPos, JUMP_POWER, 1, JUMP_DURATION).SetEase(JUMP_EASE);
     }
 
     private bool TryGetCorrectionPos(out Vector3 correctionPos) {
