@@ -49,6 +49,7 @@ public class InGameUI : UIBase {
     public override void OnButtonEvent(Button inButton) {
         switch (inButton.name) {
             case nameof(btn_back):
+                PoolingManager.Instance.RestoreAll();
                 SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY, true).Forget();
                 break;
             case nameof(btn_screen):

@@ -10,23 +10,27 @@ public enum EMapType {
 }
 
 public class Map : PoolingObject {
-    [SerializeField]
-    private EMapType mapType;
-    private AudioSource audioSource;
-    [SerializeField]
-    private AudioClip normalSuccessClip;
-    [SerializeField]
-    private AudioClip perfectSuccessClip;
+    [SerializeField] private EMapType mapType;
+
+    private Sfx normalSuccessSfx;
+    private Sfx perfectSuccessSfx;
 
     private void OnTriggerEnter(Collider other) {
-        audioSource.PlayOneShot(GameManager.Instance.IsPerfectJump ? perfectSuccessClip : normalSuccessClip);
+        if (GameManager.Instance.IsPerfectJump) {
+            perfectSuccessSfx.Play();
+        }
+        else {
+            normalSuccessSfx.Play();
+        }
+
         GameManager.Instance.Player.ChangeState(Player.PLAYER_STATE.IDLE);
         if (MapManager.Instance.CurrentMap == this)
             GameManager.Instance.OnSuccess();
     }
 
     internal override void OnInitialize(params object[] parameters) {
-        audioSource = GetComponent<AudioSource>();
+        normalSuccessSfx = PoolingManager.Instance.Create<Sfx>(EPoolingType.Sound, "Sfx_SuccessJumpNormal");
+        perfectSuccessSfx = PoolingManager.Instance.Create<Sfx>(EPoolingType.Sound, "Sfx_SuccessJumpPerfect");
         SetRandomSize();
     }
 
