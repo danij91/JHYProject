@@ -36,6 +36,7 @@ public class GameManager : Singleton<GameManager> {
         Player = PoolingManager.Instance.Create<Player>(EPoolingType.Character, "Player_Dove");
         GameCamera.Initialize();
         CurrentState = GAME_STATE.PLAY;
+        IsPerfectJump = false;
     }
 
     public void GameEnd() {

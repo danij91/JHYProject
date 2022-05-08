@@ -18,18 +18,15 @@ public class Player : PoolingObject {
     private Animator animator;
     [SerializeField]
     private JumpGauge gauge;
-    [SerializeField]
-    private AudioClip[] jumpClips;
-    [SerializeField]
-    private AudioClip fallClip;
 
-    private AudioSource audioSource;
     private Ease MOVE_EASE = Ease.OutFlash;
     private Ease JUMP_EASE = Ease.OutFlash;
     private float JUMP_DURATION = 0.3f;
     private float JUMP_POWER = 1.5f;
 
     private Rigidbody rigidbody;
+    private Sfx fallSfx;
+    private List<Sfx> jumpSfxs = new List<Sfx>();
 
     public PLAYER_STATE CurrentState { get; private set; }
     public Vector3 CurrentTargetPos { get; private set; }
@@ -41,7 +38,9 @@ public class Player : PoolingObject {
 
         rigidbody.isKinematic = false;
         transform.position = MapManager.Instance.StartPos;
-        audioSource = GetComponent<AudioSource>();
+        fallSfx = PoolingManager.Instance.Create<Sfx>(EPoolingType.Sound, "Sfx_Fall_00");
+        jumpSfxs.Add(PoolingManager.Instance.Create<Sfx>(EPoolingType.Sound, "Sfx_Jump_00"));
+        jumpSfxs.Add(PoolingManager.Instance.Create<Sfx>(EPoolingType.Sound, "Sfx_Jump_01"));
         SetRotation();
     }
 
@@ -85,8 +84,8 @@ public class Player : PoolingObject {
     }
 
     private void PlayJumpSound() {
-        int clipIndex = Random.Range(0, jumpClips.Length);
-        audioSource.PlayOneShot(jumpClips[clipIndex]);
+        int clipIndex = Random.Range(0, jumpSfxs.Count);
+        jumpSfxs[clipIndex].Play();
     }
 
     private Vector3 GetJumpDirection() {
@@ -104,7 +103,7 @@ public class Player : PoolingObject {
         animator.Play(state.ToString());
 
         if (state == PLAYER_STATE.FALL) {
-            audioSource.PlayOneShot(fallClip);
+            fallSfx.Play();
         }
     }
 

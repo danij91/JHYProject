@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class LobbyUI : UIBase
 {
     [SerializeField] private Button btn_gameStart;
+    [SerializeField] private Button btn_setting;
 
     protected override void PrevOpen(params object[] args)
     {
@@ -22,6 +23,9 @@ public class LobbyUI : UIBase
         {
             case nameof(btn_gameStart):
                 SceneLoader.Instance.ChangeSceneAsync(EScene.INGAME, true).Forget();
+                break;
+            case nameof(btn_setting):
+                UIManager.Instance.Show<settingPopup>();
                 break;
         }
     }
