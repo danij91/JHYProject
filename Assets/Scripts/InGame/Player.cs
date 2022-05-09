@@ -25,8 +25,6 @@ public class Player : PoolingObject {
     private float JUMP_POWER = 1.5f;
 
     private Rigidbody rigidbody;
-    private Sfx fallSfx;
-    private List<Sfx> jumpSfxs = new List<Sfx>();
 
     public PLAYER_STATE CurrentState { get; private set; }
     public Vector3 CurrentTargetPos { get; private set; }
@@ -38,9 +36,6 @@ public class Player : PoolingObject {
 
         rigidbody.isKinematic = false;
         transform.position = MapManager.Instance.StartPos;
-        fallSfx = PoolingManager.Instance.Create<Sfx>(EPoolingType.Sound, "Sfx_Fall_00");
-        jumpSfxs.Add(PoolingManager.Instance.Create<Sfx>(EPoolingType.Sound, "Sfx_Jump_00"));
-        jumpSfxs.Add(PoolingManager.Instance.Create<Sfx>(EPoolingType.Sound, "Sfx_Jump_01"));
         SetRotation();
     }
 
@@ -64,7 +59,7 @@ public class Player : PoolingObject {
         }
 
         Vector3 targetPos = transform.position + CurrentTargetPos;
-        PlayJumpSound();
+        AudioManager.Instance.SFXPlay(SFXType.Jump);
         transform.DOMove(targetPos, JUMP_DURATION).SetEase(MOVE_EASE);
         transform.DOJump(targetPos, JUMP_POWER, 1, JUMP_DURATION).SetEase(JUMP_EASE);
     }
@@ -83,11 +78,6 @@ public class Player : PoolingObject {
         }
     }
 
-    private void PlayJumpSound() {
-        int clipIndex = Random.Range(0, jumpSfxs.Count);
-        jumpSfxs[clipIndex].Play();
-    }
-
     private Vector3 GetJumpDirection() {
         return (MapManager.Instance.CurrentMap.transform.position - transform.position).normalized;
     }
@@ -103,7 +93,7 @@ public class Player : PoolingObject {
         animator.Play(state.ToString());
 
         if (state == PLAYER_STATE.FALL) {
-            fallSfx.Play();
+            AudioManager.Instance.SFXPlay(SFXType.Fall);
         }
     }
 

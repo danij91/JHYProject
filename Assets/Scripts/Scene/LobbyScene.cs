@@ -6,6 +6,7 @@ public class LobbyScene : SceneBase
         if (TryLoadTitleScene()) return;
 
         base.OnStart();
+        AudioManager.Instance.BGMPlay(BGMType.Lobby);
         UIManager.Instance.Show<LobbyUI>();
     }
 

@@ -42,6 +42,7 @@ public class GameManager : Singleton<GameManager> {
     public void GameEnd() {
         CurrentState = GAME_STATE.END;
         SaveBestScore();
+        AudioManager.Instance.AllSFXStop();
     }
 
     public void SaveBestScore() {

@@ -5,6 +5,7 @@ public class InGameScene : SceneBase {
         if (TryLoadTitleScene()) return;
 
         base.OnStart();
+        AudioManager.Instance.BGMPlay(BGMType.InGame);
         GameManager.Instance.Initialize();
     }
 
