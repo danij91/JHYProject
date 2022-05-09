@@ -16,12 +16,9 @@ public class Map : PoolingObject {
     private Sfx perfectSuccessSfx;
 
     private void OnTriggerEnter(Collider other) {
-        if (GameManager.Instance.IsPerfectJump) {
-            perfectSuccessSfx.Play();
-        }
-        else {
-            normalSuccessSfx.Play();
-        }
+
+        SFXType SuccessSfx = GameManager.Instance.IsPerfectJump ? SFXType.Success_Perfect : SFXType.Success_Normal;
+        AudioManager.Instance.SFXPlay(SuccessSfx);
 
         GameManager.Instance.Player.ChangeState(Player.PLAYER_STATE.IDLE);
         if (MapManager.Instance.CurrentMap == this)
@@ -29,8 +26,6 @@ public class Map : PoolingObject {
     }
 
     internal override void OnInitialize(params object[] parameters) {
-        normalSuccessSfx = PoolingManager.Instance.Create<Sfx>(EPoolingType.Sound, "Sfx_SuccessJumpNormal");
-        perfectSuccessSfx = PoolingManager.Instance.Create<Sfx>(EPoolingType.Sound, "Sfx_SuccessJumpPerfect");
         SetRandomSize();
     }
 

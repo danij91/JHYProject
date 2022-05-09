@@ -83,8 +83,8 @@ public class PoolingManager : Singleton<PoolingManager>
 
             if (pObj != null)
             {
-                pObj.OnInitialize(parameters);
                 pObj.Use();
+                pObj.OnInitialize(parameters);
                 return pObj;
             }
         }
@@ -92,8 +92,8 @@ public class PoolingManager : Singleton<PoolingManager>
         var newObj = CreatePoolingObject<T>(type, resourceName);
         if (parent != null) newObj.transform.SetParent(parent);
 
-        newObj.OnInitialize(parameters);
         newObj.Use();
+        newObj.OnInitialize(parameters);
 
         return newObj;
     }
