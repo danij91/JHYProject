@@ -1,10 +1,20 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
 using UnityEngine;
 using DG.Tweening;
-using Random = UnityEngine.Random;
+
+public enum ECharacterType
+{
+    Chick,
+    Crocodile,
+    Dog,
+    Dolphin,
+    Dove,
+    Lizard,
+    SeaLion,
+    Squid,
+}
 
 public class Player : PoolingObject {
     public enum PLAYER_STATE {
@@ -26,6 +36,7 @@ public class Player : PoolingObject {
 
     private Rigidbody rigidbody;
 
+    public ECharacterType CharacterType { get; private set; }
     public PLAYER_STATE CurrentState { get; private set; }
     public Vector3 CurrentTargetPos { get; private set; }
     public bool IsJumping => CurrentState == PLAYER_STATE.JUMP;
@@ -33,6 +44,9 @@ public class Player : PoolingObject {
     internal override void OnInitialize(params object[] parameters) {
         if (rigidbody == null)
             rigidbody = GetComponent<Rigidbody>();
+
+        if (parameters.Length > 0)
+            CharacterType = (ECharacterType)parameters[0];
 
         rigidbody.isKinematic = false;
         transform.position = MapManager.Instance.StartPos;

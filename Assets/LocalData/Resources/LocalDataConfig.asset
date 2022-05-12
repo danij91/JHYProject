@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d5c5a62fc4ad44bb9ae127525f6e65, type: 3}
   m_Name: LocalDataConfig
   m_EditorClassIdentifier: 
-  IsStartTitleScene: 0
+  IsStartTitleScene: 1
+  LogLevel: 0
+  StartCharacterType: 7
