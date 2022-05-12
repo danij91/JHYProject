@@ -41,7 +41,17 @@ public class GameManager : Singleton<GameManager> {
 
     private void CreatePlayer()
     {
-        ECharacterType type = LocalDataConfig.Instance.StartCharacterType;
+        ECharacterType type;
+        if (LocalDataConfig.Instance.IsCharacterTest)
+        {
+            type = LocalDataConfig.Instance.StartCharacterType;
+            if (type == ECharacterType.None) 
+                type = EConfig.Character.INITIAL_CHARACTER;
+        }
+        else
+        {
+            type = CharacterInventory.Instance.MainCharacter;
+        }
         Player = PoolingManager.Instance.Create<Player>(EPoolingType.Character, $"Player_{type}", null , type);
     }
 

@@ -55,6 +55,7 @@ public class LocalDataConfig : ScriptableObject
     [Header("[Debug Log Level]")]
     public EConfig.ELogLevel LogLevel = EConfig.ELogLevel.None;
 
-    [Header("[Start Character]")]
+    [Header("[Character Test]")]
+    public bool IsCharacterTest = false;
     public ECharacterType StartCharacterType = ECharacterType.Chick;
 }

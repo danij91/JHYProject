@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class LobbyUI : UIBase
 {
     [SerializeField] private Button btn_gameStart;
+    [SerializeField] private Button btn_inventory;
     [SerializeField] private Button btn_setting;
 
     protected override void PrevOpen(params object[] args)
@@ -26,6 +27,9 @@ public class LobbyUI : UIBase
                 break;
             case nameof(btn_setting):
                 UIManager.Instance.Show<settingPopup>();
+                break;
+            case nameof(btn_inventory):
+                UIManager.Instance.Show<CharacterInvenUI>();
                 break;
         }
     }

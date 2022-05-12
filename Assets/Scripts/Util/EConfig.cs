@@ -17,6 +17,10 @@ public static class EConfig {
         public static readonly Vector3 DIRECTION_LEFT = new Vector3(-1, 0, 1);
     }
 
+    public static class Character {
+        public static readonly ECharacterType INITIAL_CHARACTER = ECharacterType.Chick;
+    }
+
     public enum ELogLevel
     {
         None,
