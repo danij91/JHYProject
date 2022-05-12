@@ -19,7 +19,7 @@ public static class Extensions
     public static void GrayScale(this Image image, bool isGray)
     {
         float value = isGray ? 1f : 0f;
-        image.material.SetFloat("_GrayscaleAmount", value);
+        image.material.SetFloat("_GrayPhase", value);
     }
 
     public static int[] SplitInt(this string inValue, params char[] inSeperators)
