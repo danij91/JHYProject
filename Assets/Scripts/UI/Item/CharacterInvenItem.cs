@@ -11,34 +11,34 @@ public class CharacterInvenItem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI tmp_name;
 
 
-    private ECharacterType characterType;
+    public ECharacterType CharacterType { get; private set; }
     private CharacterInvenUI InvenUI;
 
     public void SetData(CharacterInvenUI ui, ECharacterType inType)
     {
         InvenUI = ui;
-        characterType = inType;
+        CharacterType = inType;
 
-        bool isSelected = characterType == InvenUI.CurrentCharacterType;
+        bool isSelected = CharacterType == InvenUI.CurrentCharacterType;
         img_select.gameObject.SetActive(isSelected);
-        tmp_name.text = characterType.ToString().ToUpper();
-        SetCharacterIcon();
+        tmp_name.text = CharacterType.ToString().ToUpper();
+        string iconPath = $"Image/Icon/{CharacterType}";
+        img_character.sprite = ResourceManager.Instance.Load<Sprite>(iconPath);
+        SetGrayScale();
     }
 
-    private void SetCharacterIcon()
+    public void SetGrayScale()
     {
-        string iconPath = $"Image/Icon/{characterType}";
-        img_character.sprite = ResourceManager.Instance.Load<Sprite>(iconPath);
         Material tempMat = Instantiate(img_character.material);
         img_character.material = tempMat;
-        img_character.GrayScale(!CharacterInventory.Instance.IsVaild(characterType));
+        img_character.GrayScale(!CharacterInventory.Instance.IsVaild(CharacterType));
     }
 
     public void OnClick_Select()
     {
         InvenUI.ResetSelectedItem();
         ActiveSelect(true);
-        InvenUI.SetCurrentCharacter(characterType);
+        InvenUI.SetCurrentCharacter(CharacterType);
     }
 
     public void ActiveSelect(bool isSelect)

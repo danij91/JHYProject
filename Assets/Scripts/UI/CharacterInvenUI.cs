@@ -118,6 +118,8 @@ public class CharacterInvenUI : UIBase
 
         Inven.Add(CurrentCharacterType);
         RefreshButton();
+        CharacterInvenItem item = itemList.Find(x => x.CharacterType == CurrentCharacterType);
+        item.SetGrayScale();
     }
 
 
