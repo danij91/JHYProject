@@ -22,10 +22,16 @@ public class CharacterInvenItem : MonoBehaviour
         bool isSelected = characterType == InvenUI.CurrentCharacterType;
         img_select.gameObject.SetActive(isSelected);
         tmp_name.text = characterType.ToString().ToUpper();
+        SetCharacterIcon();
+    }
 
+    private void SetCharacterIcon()
+    {
         string iconPath = $"Image/Icon/{characterType}";
-        Sprite iconSprite = ResourceManager.Instance.Load<Sprite>(iconPath);
-        img_character.sprite = iconSprite;
+        img_character.sprite = ResourceManager.Instance.Load<Sprite>(iconPath);
+        Material tempMat = Instantiate(img_character.material);
+        img_character.material = tempMat;
+        img_character.GrayScale(!CharacterInventory.Instance.IsVaild(characterType));
     }
 
     public void OnClick_Select()

@@ -16,6 +16,12 @@ public static class Extensions
         return string.IsNullOrEmpty(inValue);
     }
 
+    public static void GrayScale(this Image image, bool isGray)
+    {
+        float value = isGray ? 1f : 0f;
+        image.material.SetFloat("_GrayscaleAmount", value);
+    }
+
     public static int[] SplitInt(this string inValue, params char[] inSeperators)
     {
         if (inValue.IsNullOrEmpty())
