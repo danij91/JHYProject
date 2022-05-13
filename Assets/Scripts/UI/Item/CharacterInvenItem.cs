@@ -8,8 +8,8 @@ public class CharacterInvenItem : MonoBehaviour
 {
     [SerializeField] private Image img_character;
     [SerializeField] private Image img_select;
+    [SerializeField] private Image img_checkmark;
     [SerializeField] private TextMeshProUGUI tmp_name;
-
 
     public ECharacterType CharacterType { get; private set; }
     private CharacterInvenUI InvenUI;
@@ -25,6 +25,7 @@ public class CharacterInvenItem : MonoBehaviour
         string iconPath = $"Image/Icon/{CharacterType}";
         img_character.sprite = ResourceManager.Instance.Load<Sprite>(iconPath);
         SetGrayScale();
+        CheckMainCharacter();
     }
 
     public void SetGrayScale()
@@ -32,6 +33,12 @@ public class CharacterInvenItem : MonoBehaviour
         Material tempMat = Instantiate(img_character.material);
         img_character.material = tempMat;
         img_character.GrayScale(!CharacterInventory.Instance.IsVaild(CharacterType));
+    }
+
+    public void CheckMainCharacter()
+    {
+        bool isMain = CharacterInventory.Instance.MainCharacter == CharacterType;
+        img_checkmark.gameObject.SetActive(isMain);
     }
 
     public void OnClick_Select()

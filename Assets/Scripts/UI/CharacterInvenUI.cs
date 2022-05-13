@@ -27,7 +27,7 @@ public class CharacterInvenUI : UIBase
         CurrentCharacterType = Inven.MainCharacter;
         RefreshButton();
         CreateCharacterItems();
-        ActiveSelectedCharacter();
+        RefreshCharacterViewer();
     }
 
     protected override void PrevClose()
@@ -44,7 +44,7 @@ public class CharacterInvenUI : UIBase
     {
         CurrentCharacterType = type;
         RefreshButton();
-        ActiveSelectedCharacter();
+        RefreshCharacterViewer();
     }
 
     public void RefreshButton()
@@ -55,7 +55,7 @@ public class CharacterInvenUI : UIBase
         tmp_select.text = CurrentCharacterType == Inven.MainCharacter ? "SELECTED" : "TOSELECT";
     }
 
-    private void CreateViewerCharacter()
+    private void CreateCharacterViewer()
     {
         characterList.Clear();
         for (int i = 0; i < CharacterCount; i++)
@@ -89,10 +89,10 @@ public class CharacterInvenUI : UIBase
         }
     }
 
-    private void ActiveSelectedCharacter()
+    private void RefreshCharacterViewer()
     {
         if (characterList.Count != CharacterCount || characterList.Count == 0)
-            CreateViewerCharacter();
+            CreateCharacterViewer();
 
         foreach (var pair in characterList)
             pair.Value.gameObject.SetActive(false);
@@ -108,6 +108,9 @@ public class CharacterInvenUI : UIBase
 
         Inven.SelectCharacter(CurrentCharacterType);
         RefreshButton();
+
+        foreach (var item in itemList)
+            item.CheckMainCharacter();
     }
 
     private void PurchaseCharacter()
@@ -116,12 +119,21 @@ public class CharacterInvenUI : UIBase
         if (Inven.IsVaild(CurrentCharacterType))
             return;
 
-        Inven.Add(CurrentCharacterType);
-        RefreshButton();
-        CharacterInvenItem item = itemList.Find(x => x.CharacterType == CurrentCharacterType);
-        item.SetGrayScale();
+        UIManager.Instance.Show<MessageBoxUI>(ui =>
+        {
+            viewerTr.gameObject.SetActive(false);
+            ui.SetMessage("Are you sure?", "PURCHASE", () =>
+            {
+                Inven.Add(CurrentCharacterType);
+                RefreshButton();
+                CharacterInvenItem item = itemList.Find(x => x.CharacterType == CurrentCharacterType);
+                item.SetGrayScale();
+            }, null);
+        }, ui =>
+        {
+            viewerTr.gameObject.SetActive(true);
+        });
     }
-
 
     public override void OnButtonEvent(Button inButton)
     {

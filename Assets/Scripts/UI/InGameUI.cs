@@ -49,8 +49,7 @@ public class InGameUI : UIBase {
     public override void OnButtonEvent(Button inButton) {
         switch (inButton.name) {
             case nameof(btn_back):
-                PoolingManager.Instance.RestoreAll();
-                SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY, true).Forget();
+                ExitGame();
                 break;
             case nameof(btn_screen):
                 IsScreenBtnDown = false;
@@ -65,6 +64,17 @@ public class InGameUI : UIBase {
                 SetView();
                 break;
         }
+    }
+
+    private void ExitGame()
+    {
+        UIManager.Instance.Show<MessageBoxUI>(ui =>
+        {
+            ui.SetMessage("Are you sure?", "EXITGAME", () =>
+            {
+                SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY, true).Forget();
+            }, null);
+        });
     }
 
     public void OpenFailPopup() {
