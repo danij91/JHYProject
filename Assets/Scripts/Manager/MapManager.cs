@@ -63,7 +63,7 @@ public class MapManager : Singleton<MapManager> {
     }
 
     public void RemoveMap() {
-        if (mapQueue.Count < 4)
+        if (mapQueue.Count < 5)
             return;
         Map oldMap = mapQueue.Dequeue();
         oldMap.Restore();
