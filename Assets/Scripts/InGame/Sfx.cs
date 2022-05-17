@@ -15,14 +15,15 @@ public class Sfx : PoolingObject {
     private bool isLoop = false;
 
     internal override void OnInitialize(params object[] parameters) {
-        if(audioSource == null)
+        if (audioSource == null)
             audioSource = GetComponent<AudioSource>();
 
-        isLoop = (bool)parameters[0];
-        volume = (float)parameters[1];
+        audioSource.mute = AudioManager.Instance.IsSfxMute;
+        isLoop = (bool) parameters[0];
+        volume = (float) parameters[1];
 
         if (parameters.Length > 2)
-            endCallback = (Action)parameters[2];
+            endCallback = (Action) parameters[2];
 
         audioSource.loop = isLoop;
         audioSource.volume = volume;
@@ -33,27 +34,23 @@ public class Sfx : PoolingObject {
 
     protected override void OnRestore() { }
 
-    private IEnumerator Co_Play()
-    {
+    private IEnumerator Co_Play() {
         audioSource.Play();
-        if(!isLoop)
-        {
+        if (!isLoop) {
             yield return new WaitForSeconds(audioSource.clip.length);
             OnPlayEnd();
         }
     }
 
-    public void Stop(bool isRemove = true)
-    {
+    public void Stop(bool isRemove = true) {
         StopCoroutine(Co_Play());
         audioSource.Stop();
         OnPlayEnd(isRemove);
     }
 
-    public void OnPlayEnd(bool isRemove = true) 
-    {
+    public void OnPlayEnd(bool isRemove = true) {
         endCallback?.Invoke();
-        if(isRemove)
+        if (isRemove)
             AudioManager.Instance.RemovePlayList(this);
         Restore();
     }

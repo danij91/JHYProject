@@ -50,16 +50,16 @@ public class settingPopup : UIBase {
         return isMute ? Preferences.EAudioSettings.Mute : Preferences.EAudioSettings.Play;
     }
 
-    //public void OnToggleEvent(Toggle inToggle) {
-    //    Preferences.EAudioSettings value = inToggle.isOn ? Preferences.EAudioSettings.Mute 
-    //                                                    : Preferences.EAudioSettings.Play;
-    //    switch (inToggle.name) {
-    //        case nameof(tgl_bgm):
-    //            AudioManager.Instance.SetBGMSettings(value);
-    //            break;
-    //        case nameof(tgl_sfx):
-    //            AudioManager.Instance.SetSFXSettings(value);
-    //            break;
-    //    }
-    //}
+    // public void OnToggleEvent(Toggle inToggle) {
+    //     Preferences.EAudioSettings value = inToggle.isOn ? Preferences.EAudioSettings.Mute 
+    //                                                     : Preferences.EAudioSettings.Play;
+    //     switch (inToggle.name) {
+    //         case nameof(tgl_bgm):
+    //             AudioManager.Instance.SetBGMSettings(value);
+    //             break;
+    //         case nameof(tgl_sfx):
+    //             AudioManager.Instance.SetSFXSettings(value);
+    //             break;
+    //     }
+    // }
 }

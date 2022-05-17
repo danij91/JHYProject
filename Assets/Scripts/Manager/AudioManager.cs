@@ -5,16 +5,14 @@ using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 
-public enum SFXType
-{
+public enum SFXType {
     Fall,
     Jump,
     Success_Normal,
     Success_Perfect,
 }
 
-public enum BGMType
-{
+public enum BGMType {
     Stop,
     Title,
     Lobby,
@@ -39,76 +37,69 @@ public class AudioManager : Singleton<AudioManager> {
         playingList.Clear();
         IsBgmMute = Preferences.GetBGMSettings() == Preferences.EAudioSettings.Mute;
         IsSfxMute = Preferences.GetSFXSettings() == Preferences.EAudioSettings.Mute;
+        bgmAudioSource.mute = IsBgmMute;
     }
 
-    public void SetBGMSettings(Preferences.EAudioSettings setting)
-    {
+    public void SetBGMSettings(Preferences.EAudioSettings setting) {
         IsBgmMute = setting == Preferences.EAudioSettings.Mute;
+        bgmAudioSource.mute = IsBgmMute;
         Preferences.SaveBGMSettings(setting);
     }
 
-    public void SetSFXSettings(Preferences.EAudioSettings setting)
-    {
+    public void SetSFXSettings(Preferences.EAudioSettings setting) {
         IsSfxMute = setting == Preferences.EAudioSettings.Mute;
         Preferences.SaveSFXSettings(setting);
     }
 
-    public void SFXPlay(SFXType type, Action endCallback = null, bool isLoop = false, bool isOverlap = false)
-    {
+    public void SFXPlay(SFXType type, Action endCallback = null, bool isLoop = false, bool isOverlap = false) {
         if (IsPlaying(type) && !isOverlap)
             return;
-        
+
         string extraNum = string.Empty;
-        if(type == SFXType.Jump) //ToDo 랜덤Play 설정 (더 좋은 방법이 있으면 수정 부탁)
+        if (type == SFXType.Jump) //ToDo 랜덤Play 설정 (더 좋은 방법이 있으면 수정 부탁)
         {
             int randomNum = UnityEngine.Random.Range(1, 3);
             extraNum = randomNum.ToString();
         }
 
         string sfxName = $"Sfx_{type}{extraNum}";
-        Sfx sfx = PoolingManager.Instance.Create<Sfx>(EPoolingType.Sound, sfxName, null, isLoop, masterVolume, endCallback);
+        Sfx sfx = PoolingManager.Instance.Create<Sfx>(EPoolingType.Sound, sfxName, null, isLoop, masterVolume,
+            endCallback);
         playingList.Add(sfx);
     }
 
-    private bool IsPlaying(SFXType type)
-    {
+    private bool IsPlaying(SFXType type) {
         return playingList.Select(x => x.SFXType == type).FirstOrDefault();
     }
 
-    public void RemovePlayList(Sfx sfx)
-    {
+    public void RemovePlayList(Sfx sfx) {
         if (playingList.Contains(sfx))
             playingList.Remove(sfx);
     }
 
-    public void AllSFXStop()
-    {
+    public void AllSFXStop() {
         foreach (var sfx in playingList)
             sfx.Stop(false);
 
         playingList.Clear();
     }
 
-    public void BGMPlay(BGMType type, Action endCallback = null, bool isStopBefore = true)
-    {
+    public void BGMPlay(BGMType type, Action endCallback = null, bool isStopBefore = true) {
         AudioClip bgm = LoadBGM(type);
         bgmAudioSource.clip = bgm;
 
-        if(isStopBefore)
+        if (isStopBefore)
             FadeOut(type, endCallback);
         else
             FadeIn(type, endCallback);
     }
 
-    public void BGMStop(Action endCallback = null)
-    {
+    public void BGMStop(Action endCallback = null) {
         FadeOut(BGMType.Stop, endCallback);
     }
 
-    public void FadeOut(BGMType type, Action endCallback)
-    {
-        bgmAudioSource.DOFade(0f, FADE_TIME).OnComplete(() => 
-        {
+    public void FadeOut(BGMType type, Action endCallback) {
+        bgmAudioSource.DOFade(0f, FADE_TIME).OnComplete(() => {
             bgmAudioSource.Stop();
             if (type == BGMType.Stop)
                 endCallback?.Invoke();
@@ -117,20 +108,15 @@ public class AudioManager : Singleton<AudioManager> {
         });
     }
 
-    public void FadeIn(BGMType type, Action endCallback)
-    {
+    public void FadeIn(BGMType type, Action endCallback) {
         AudioClip bgm = LoadBGM(type);
         bgmAudioSource.clip = bgm;
         bgmAudioSource.loop = true;
         bgmAudioSource.Play();
-        bgmAudioSource.DOFade(masterVolume, FADE_TIME).OnComplete(() => 
-        {
-            endCallback?.Invoke();
-        });
+        bgmAudioSource.DOFade(masterVolume, FADE_TIME).OnComplete(() => { endCallback?.Invoke(); });
     }
 
-    private AudioClip LoadBGM(BGMType type)
-    {
+    private AudioClip LoadBGM(BGMType type) {
         string path = $"Sound/Bgm/Bgm_{type}";
         return ResourceManager.Instance.Load<AudioClip>(path);
     }
