@@ -18,6 +18,10 @@ public class InGameUI : UIBase {
     private Text txt_currentcount;
     [SerializeField]
     private Text txt_bestcount;
+    [SerializeField]
+    private Text txt_combocount;
+    [SerializeField]
+    private Text txt_endscore;
 
     private float elapsedTime;
     public bool IsScreenBtnDown { get; set; }
@@ -36,7 +40,9 @@ public class InGameUI : UIBase {
 
     public void RefreshCount() {
         txt_currentcount.text = GameManager.Instance.JumpCount.ToString();
-        txt_currentcount.transform.DOPunchScale(Vector3.one * 2f, 0.5f).SetEase(Ease.InSine);
+        txt_currentcount.transform.DOPunchScale(Vector3.one * 2f, 0.5f).SetEase(Ease.OutFlash);
+        txt_combocount.text = GameManager.Instance.ComboCount.ToString();
+        txt_combocount.transform.DOPunchScale(Vector3.one * 2f, 0.5f).SetEase(Ease.OutFlash);
     }
 
     private void Update() {
@@ -49,8 +55,7 @@ public class InGameUI : UIBase {
     public override void OnButtonEvent(Button inButton) {
         switch (inButton.name) {
             case nameof(btn_back):
-                PoolingManager.Instance.RestoreAll();
-                SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY, true).Forget();
+                ExitGame();
                 break;
             case nameof(btn_screen):
                 IsScreenBtnDown = false;
@@ -67,8 +72,20 @@ public class InGameUI : UIBase {
         }
     }
 
+    private void ExitGame()
+    {
+        UIManager.Instance.Show<MessageBoxUI>(ui =>
+        {
+            ui.SetMessage("Are you sure?", "EXITGAME", () =>
+            {
+                SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY, true).Forget();
+            }, null);
+        });
+    }
+
     public void OpenFailPopup() {
         failPopup.SetActive(true);
+        txt_endscore.text = $"SCORE : {GameManager.Instance.JumpCount}";
     }
 
     private void CloseFailPopup() {

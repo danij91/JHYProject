@@ -10,10 +10,7 @@ public enum EMapType {
 }
 
 public class Map : PoolingObject {
-    [SerializeField] private EMapType mapType;
-
-    private Sfx normalSuccessSfx;
-    private Sfx perfectSuccessSfx;
+    public EMapType MapType { get; private set; }
 
     private void OnTriggerEnter(Collider other) {
 
@@ -26,6 +23,8 @@ public class Map : PoolingObject {
     }
 
     internal override void OnInitialize(params object[] parameters) {
+        if (parameters.Length > 0)
+            MapType = (EMapType)parameters[0];
         SetRandomSize();
     }
 

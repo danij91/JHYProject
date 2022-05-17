@@ -28,8 +28,8 @@ public class MapManager : Singleton<MapManager> {
     }
 
     public Map CreateMap(bool isInit = false) {
-        string mapName = GetMapType().ToString();
-        Map map = PoolingManager.Instance.Create<Map>(EPoolingType.Map, mapName);
+        EMapType mapType = GetMapType();
+        Map map = PoolingManager.Instance.Create<Map>(EPoolingType.Map, mapType.ToString(), null, mapType);
 
         if (isInit) {
             map.transform.position = Vector3.zero;
@@ -63,7 +63,7 @@ public class MapManager : Singleton<MapManager> {
     }
 
     public void RemoveMap() {
-        if (mapQueue.Count < 4)
+        if (mapQueue.Count < 5)
             return;
         Map oldMap = mapQueue.Dequeue();
         oldMap.Restore();

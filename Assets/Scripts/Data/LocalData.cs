@@ -17,6 +17,8 @@ public class LocalData
     }
 
     public const string BEST_COUNT_KEY = "BEST_COUNT_KEY";
+    public const string CHARACTER_INVEN_KEY = "CHARACTER_INVEN_KEY";
+    public const string MAIN_CHARACTER_KEY = "MAIN_CHARACTER_KEY";
 
     private static LocalData instance = null;
     public static LocalData Instance { get { if (instance == null) { instance = new LocalData(); } return instance; } }
@@ -217,6 +219,14 @@ public class LocalData
         Instance.RemoveKey<int>(BEST_COUNT_KEY);
     }
 
+    [MenuItem("Tools/LocalData/Clear CharacterInven")]
+    public static void LoaclDataClear_CharacterInven()
+    {
+        Instance.Initialize();
+        Instance.RemoveKey<int>(CHARACTER_INVEN_KEY);
+        Instance.RemoveKey<int>(MAIN_CHARACTER_KEY);
+    }
+
     [MenuItem("Tools/LocalData/Clear PlayerPrefs")]
     public static void LocalDataClear_PlayerPrefs()
     {
@@ -236,5 +246,24 @@ public static class LocalDataHelper
     public static void SaveBestCount(int inCount)
     {
         LocalData.Instance.SetKey<int>(LocalData.BEST_COUNT_KEY, inCount);
+    }
+
+    public static int GetCharacterInven()
+    {
+        return LocalData.Instance.GetKey<int>(LocalData.CHARACTER_INVEN_KEY);
+    }
+
+    public static void SaveCharacterInven(int inFlags)
+    {
+        LocalData.Instance.SetKey<int>(LocalData.CHARACTER_INVEN_KEY, inFlags);
+    }
+    public static int GetMainCharacter()
+    {
+        return LocalData.Instance.GetKey<int>(LocalData.MAIN_CHARACTER_KEY);
+    }
+
+    public static void SaveMainCharacter(int intType)
+    {
+        LocalData.Instance.SetKey<int>(LocalData.MAIN_CHARACTER_KEY, intType);
     }
 }

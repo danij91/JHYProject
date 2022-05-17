@@ -1,10 +1,21 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
 using UnityEngine;
 using DG.Tweening;
-using Random = UnityEngine.Random;
+
+public enum ECharacterType // 캐릭터가 8개 넘어가면 Flags를 byte배열로 해야할듯...?
+{
+    None        = 0,
+    Chick       = 1,    //(1 << 0)
+    Crocodile   = 2,    //(1 << 1)
+    Dog         = 4,    //(1 << 2)
+    Dolphin     = 8,    //(1 << 3)
+    Dove        = 16,   //(1 << 4)
+    Lizard      = 32,   //(1 << 5)
+    SeaLion     = 64,   //(1 << 6)
+    Squid       = 128,  //(1 << 7)
+}
 
 public class Player : PoolingObject {
     public enum PLAYER_STATE {
@@ -17,7 +28,7 @@ public class Player : PoolingObject {
     [SerializeField]
     private Animator animator;
     [SerializeField]
-    private JumpGauge gauge;
+    public JumpGauge gauge;
 
     private Ease MOVE_EASE = Ease.OutFlash;
     private Ease JUMP_EASE = Ease.OutFlash;
@@ -26,6 +37,7 @@ public class Player : PoolingObject {
 
     private Rigidbody rigidbody;
 
+    public ECharacterType CharacterType { get; private set; }
     public PLAYER_STATE CurrentState { get; private set; }
     public Vector3 CurrentTargetPos { get; private set; }
     public bool IsJumping => CurrentState == PLAYER_STATE.JUMP;
@@ -34,6 +46,10 @@ public class Player : PoolingObject {
         if (rigidbody == null)
             rigidbody = GetComponent<Rigidbody>();
 
+        if (parameters.Length > 0)
+            CharacterType = (ECharacterType)parameters[0];
+
+        gauge.gameObject.SetActive(true);
         rigidbody.isKinematic = false;
         transform.position = MapManager.Instance.StartPos;
         SetRotation();

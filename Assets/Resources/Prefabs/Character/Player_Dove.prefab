@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1740669558881319905}
-  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 7237332386036219817}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1740669558881319918
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -45,10 +45,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.57659435
-  m_Height: 1.6797752
+  m_Radius: 0.5
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 1.0771081, z: 0.07659435}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &6799814857303286508
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -79,10 +79,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1740669559690164417}
   gauge: {fileID: 3275944488681037116}
-  jumpClips:
-  - {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
-  - {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
-  fallClip: {fileID: 8300000, guid: a235d590ef2a04d1b85b61ef4c21337c, type: 3}
 --- !u!1 &1740669559682861825
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,6 +574,10 @@ PrefabInstance:
     - target: {fileID: 1544489321506367486, guid: a8a862e2ed731084b9d11980a70d0f6b, type: 3}
       propertyPath: m_Name
       value: Gauge
+      objectReference: {fileID: 0}
+    - target: {fileID: 3099400939678733894, guid: a8a862e2ed731084b9d11980a70d0f6b, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8798231312682149837, guid: a8a862e2ed731084b9d11980a70d0f6b, type: 3}
       propertyPath: m_AnchorMax.y

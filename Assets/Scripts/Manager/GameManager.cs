@@ -33,10 +33,26 @@ public class GameManager : Singleton<GameManager> {
         JumpCount = 0;
         PoolingManager.Instance.RestoreAll();
         MapManager.Instance.Initialize();
-        Player = PoolingManager.Instance.Create<Player>(EPoolingType.Character, "Player_Dove");
+        CreatePlayer();
         GameCamera.Initialize();
         CurrentState = GAME_STATE.PLAY;
         IsPerfectJump = false;
+    }
+
+    private void CreatePlayer()
+    {
+        ECharacterType type;
+        if (LocalDataConfig.Instance.IsCharacterTest)
+        {
+            type = LocalDataConfig.Instance.StartCharacterType;
+            if (type == ECharacterType.None) 
+                type = EConfig.Character.INITIAL_CHARACTER;
+        }
+        else
+        {
+            type = CharacterInventory.Instance.MainCharacter;
+        }
+        Player = PoolingManager.Instance.Create<Player>(EPoolingType.Character, $"Player_{type}", null , type);
     }
 
     public void GameEnd() {
