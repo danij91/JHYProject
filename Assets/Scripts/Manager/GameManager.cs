@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager> {
-    [SerializeField]
-    private GameCamera camera;
+    [SerializeField] private GameCamera camera;
 
     public enum GAME_STATE {
         READY,
@@ -39,20 +38,18 @@ public class GameManager : Singleton<GameManager> {
         IsPerfectJump = false;
     }
 
-    private void CreatePlayer()
-    {
+    private void CreatePlayer() {
         ECharacterType type;
-        if (LocalDataConfig.Instance.IsCharacterTest)
-        {
+        if (LocalDataConfig.Instance.IsCharacterTest) {
             type = LocalDataConfig.Instance.StartCharacterType;
-            if (type == ECharacterType.None) 
+            if (type == ECharacterType.None)
                 type = EConfig.Character.INITIAL_CHARACTER;
         }
-        else
-        {
+        else {
             type = CharacterInventory.Instance.MainCharacter;
         }
-        Player = PoolingManager.Instance.Create<Player>(EPoolingType.Character, $"Player_{type}", null , type);
+
+        Player = PoolingManager.Instance.Create<Player>(EPoolingType.Character, $"Player_{type}", null, type);
     }
 
     public void GameEnd() {
