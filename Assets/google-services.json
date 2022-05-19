@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "148045014698",
+    "firebase_url": "https://jumpralf-default-rtdb.firebaseio.com",
+    "project_id": "jumpralf",
+    "storage_bucket": "jumpralf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:148045014698:android:e7d3ea8c08e88e3f0ed2d3",
+        "android_client_info": {
+          "package_name": "com.flare.jumpralf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "148045014698-mq8qk0fnopli9oto1e9klalbd3atm118.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaXoKxXcT_iFFiY60-xA9yYpDJ80liLy0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "148045014698-mq8qk0fnopli9oto1e9klalbd3atm118.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

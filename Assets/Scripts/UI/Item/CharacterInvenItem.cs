@@ -32,7 +32,6 @@ public class CharacterInvenItem : MonoBehaviour
     {
         Material tempMat = Instantiate(img_character.material);
         img_character.material = tempMat;
-        Debug.Log(!CharacterInventory.Instance.IsVaild(CharacterType));
         img_character.GrayScale(!CharacterInventory.Instance.IsVaild(CharacterType));
     }
 

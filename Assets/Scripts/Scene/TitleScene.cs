@@ -14,6 +14,7 @@ public class TitleScene : SceneBase
         LocalData.Instance.Initialize();
         CharacterInventory.Instance.Initialize();
         AudioManager.Instance.Initialize();
+        DataManager.Instance.Initialize();
         UIManager.Instance.Show<TitleUI>();
         IS_TITLESCENE_LOADED = true;
     }
