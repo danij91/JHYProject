@@ -9,7 +9,6 @@ public class SignInUI : UIBase {
     [SerializeField] private Button btn_guest;
     [SerializeField] private Button btn_skip;
 
-    // Start is called before the first frame update
     protected override void PrevOpen(params object[] args) {
 #if UNITY_EDITOR
         btn_skip.gameObject.SetActive(true);
@@ -32,7 +31,6 @@ public class SignInUI : UIBase {
     }
 
     private void OnSuccessSignIn() {
-        Debug.Log("gotolobby");
         SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY).Forget();
     }
 }

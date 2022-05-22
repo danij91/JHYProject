@@ -31,35 +31,19 @@ public class settingPopup : UIBase {
         }
     }
 
-    private void OnToggleBGMSettings()
-    {
+    private void OnToggleBGMSettings() {
         bool value = !AudioManager.Instance.IsBgmMute;
         img_bgm_check.gameObject.SetActive(value);
         AudioManager.Instance.SetBGMSettings(GetAudioSettings(value));
     }
 
-    private void OnToggleSFXSettings()
-    {
+    private void OnToggleSFXSettings() {
         bool value = !AudioManager.Instance.IsSfxMute;
         img_sfx_check.gameObject.SetActive(value);
         AudioManager.Instance.SetSFXSettings(GetAudioSettings(value));
     }
 
-    private Preferences.EAudioSettings GetAudioSettings(bool isMute)
-    {
+    private Preferences.EAudioSettings GetAudioSettings(bool isMute) {
         return isMute ? Preferences.EAudioSettings.Mute : Preferences.EAudioSettings.Play;
     }
-
-    // public void OnToggleEvent(Toggle inToggle) {
-    //     Preferences.EAudioSettings value = inToggle.isOn ? Preferences.EAudioSettings.Mute 
-    //                                                     : Preferences.EAudioSettings.Play;
-    //     switch (inToggle.name) {
-    //         case nameof(tgl_bgm):
-    //             AudioManager.Instance.SetBGMSettings(value);
-    //             break;
-    //         case nameof(tgl_sfx):
-    //             AudioManager.Instance.SetSFXSettings(value);
-    //             break;
-    //     }
-    // }
 }

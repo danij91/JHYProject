@@ -27,7 +27,7 @@ public class LocalData
 
     public void Initialize()
     {
-        // Ä³½ÃµÈ µ¥ÀÌÅÍ°¡ ¾ø´Ù¸é
+        // ìºì‹œëœ ë°ì´í„°ê°€ ì—†ë‹¤ë©´
         if (!LoadDataSetFromFile())
         {
             Reset();
@@ -61,7 +61,7 @@ public class LocalData
     {
         if (!System.IO.File.Exists(inFilePath))
         {
-            Debug.Log(inFilePath + "ÀÇ ÆÄÀÏÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.");
+            Debug.Log(inFilePath + "ì˜ íŒŒì¼ì´ ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
             return default(T);
         }
 

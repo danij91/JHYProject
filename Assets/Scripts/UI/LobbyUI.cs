@@ -8,6 +8,7 @@ public class LobbyUI : UIBase {
     [SerializeField] private Button btn_gameStart;
     [SerializeField] private Button btn_inventory;
     [SerializeField] private Button btn_setting;
+    [SerializeField] private Button btn_ranking;
 
     protected override void PrevOpen(params object[] args) { }
 
@@ -23,6 +24,9 @@ public class LobbyUI : UIBase {
                 break;
             case nameof(btn_inventory):
                 UIManager.Instance.Show<CharacterInvenUI>();
+                break;
+            case nameof(btn_ranking):
+                UIManager.Instance.Show<RankingUI>();
                 break;
         }
     }
