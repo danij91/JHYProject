@@ -56,13 +56,14 @@ public class GameManager : Singleton<GameManager> {
         CurrentState = GAME_STATE.END;
         SaveBestScore();
         AudioManager.Instance.AllSFXStop();
-        DataManager.Instance.UpdateScore(JumpCount);
     }
 
     public void SaveBestScore() {
         int prevCount = LocalDataHelper.GetBestCount();
-        if (JumpCount > prevCount)
+        if (JumpCount > prevCount) {
+            DataManager.Instance.UpdateScore(JumpCount);
             LocalDataHelper.SaveBestCount(JumpCount);
+        }
     }
 
     public void OnFail() {

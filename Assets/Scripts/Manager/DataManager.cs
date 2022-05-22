@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Firebase.Auth;
 using Firebase.Database;
 using UnityEngine;
@@ -9,6 +10,9 @@ public class DataManager : Singleton<DataManager> {
     private DatabaseReference reference;
     private FirebaseAuth auth;
     private FirebaseUser currentUser;
+    public List<UserRecord> UserRecords { get; private set; } = new List<UserRecord>();
+    public bool isRecordLoaded { get; private set; }
+    public int myRecordIndex { get; set; }
 
     public void Initialize() {
         reference = FirebaseDatabase.DefaultInstance.RootReference;
@@ -16,7 +20,14 @@ public class DataManager : Singleton<DataManager> {
     }
 
     public void UpdateScore(int score) {
-        reference.Child("score").Child(GetCurrentUserId()).SetValueAsync(score);
+        var userRecord = new UserRecord {
+            nickname = "test",
+            score = score
+        };
+
+        string json = JsonUtility.ToJson(userRecord);
+
+        reference.Child("scores").Child(GetCurrentUserId()).SetValueAsync(json);
     }
 
     public void SignUp() {
@@ -71,4 +82,31 @@ public class DataManager : Singleton<DataManager> {
 #endif
         return currentUser.UserId;
     }
+
+    public async UniTaskVoid LoadUserRecords() {
+        isRecordLoaded = false;
+        myRecordIndex = -1;
+        UserRecords.Clear();
+        var task = reference.Child("scores").OrderByChild("score").GetValueAsync();
+        var result = await task;
+
+        if (task.IsCompleted) {
+            foreach (var r in result.Children) {
+                var userRecord = JsonUtility.FromJson<UserRecord>(r.Value.ToString());
+                UserRecords.Add(userRecord);
+                if (r.Key == GetCurrentUserId()) {
+                    myRecordIndex = UserRecords.Count - 1;
+                }
+            }
+
+            
+
+            isRecordLoaded = true;
+        }
+    }
+}
+
+public struct UserRecord {
+    public string nickname;
+    public int score;
 }
