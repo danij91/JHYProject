@@ -42,8 +42,6 @@ public class GameManager : Singleton<GameManager> {
         ECharacterType type;
         if (LocalDataConfig.Instance.IsCharacterTest) {
             type = LocalDataConfig.Instance.StartCharacterType;
-            if (type == ECharacterType.None)
-                type = EConfig.Character.INITIAL_CHARACTER;
         }
         else {
             type = CharacterInventory.Instance.MainCharacter;
@@ -59,10 +57,9 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void SaveBestScore() {
-        int prevCount = LocalDataHelper.GetBestCount();
+        int prevCount = DataManager.Instance.CurrentUserRecord.score;
         if (JumpCount > prevCount) {
             DataManager.Instance.UpdateScore(JumpCount);
-            LocalDataHelper.SaveBestCount(JumpCount);
         }
     }
 

@@ -22,15 +22,11 @@ public class SignInUI : UIBase {
             case nameof(btn_signUp):
                 break;
             case nameof(btn_guest):
-                DataManager.Instance.SignInAnonymously(OnSuccessSignIn);
+                DataManager.Instance.SignInAnonymously(() => { UIManager.Instance.Show<NicknamePopup>(); });
                 break;
             case nameof(btn_skip):
-                OnSuccessSignIn();
+                SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY).Forget();
                 break;
         }
-    }
-
-    private void OnSuccessSignIn() {
-        SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY).Forget();
     }
 }

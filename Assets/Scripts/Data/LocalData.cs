@@ -6,10 +6,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEditor;
 #endif
 
-public class LocalData
-{
-    public enum EReturn
-    {
+public class LocalData {
+    public enum EReturn {
         SUCCESS,
         NO_OBJECT,
         BINARY_ERROR,
@@ -21,35 +19,35 @@ public class LocalData
     public const string MAIN_CHARACTER_KEY = "MAIN_CHARACTER_KEY";
 
     private static LocalData instance = null;
-    public static LocalData Instance { get { if (instance == null) { instance = new LocalData(); } return instance; } }
+    public static LocalData Instance {
+        get {
+            if (instance == null) {
+                instance = new LocalData();
+            }
+
+            return instance;
+        }
+    }
 
     DataSet dataSet;
 
-    public void Initialize()
-    {
+    public void Initialize() {
         // 캐시된 데이터가 없다면
-        if (!LoadDataSetFromFile())
-        {
+        if (!LoadDataSetFromFile()) {
             Reset();
         }
     }
 
-    public void Reset()
-    {
+    public void Reset() { }
 
-    }
-
-    private bool LoadDataSetFromFile()
-    {
+    private bool LoadDataSetFromFile() {
         string path = GetDataSetPath();
 
-        if (System.IO.File.Exists(path))
-        {
+        if (System.IO.File.Exists(path)) {
             dataSet = LoadFromFile<DataSet>(path);
         }
 
-        if (dataSet == null)
-        {
+        if (dataSet == null) {
             dataSet = new DataSet();
             return false;
         }
@@ -57,16 +55,13 @@ public class LocalData
         return true;
     }
 
-    private T LoadFromFile<T>(string inFilePath, string inSecretKey = null)
-    {
-        if (!System.IO.File.Exists(inFilePath))
-        {
+    private T LoadFromFile<T>(string inFilePath, string inSecretKey = null) {
+        if (!System.IO.File.Exists(inFilePath)) {
             Debug.Log(inFilePath + "의 파일이 존재하지 않습니다.");
             return default(T);
         }
 
-        try
-        {
+        try {
             FileStream fs = new FileStream(inFilePath, FileMode.Open);
             byte[] byteArr = new byte[fs.Length];
             fs.Read(byteArr, 0, System.Convert.ToInt32(fs.Length));
@@ -79,19 +74,16 @@ public class LocalData
 
             MemoryStream ms = new MemoryStream(result);
             BinaryFormatter f = new BinaryFormatter();
-            return (T)f.Deserialize(ms);
+            return (T) f.Deserialize(ms);
         }
-        catch (System.Exception e)
-        {
+        catch (System.Exception e) {
             Debug.Log(e.ToString());
             return default(T);
         }
     }
 
-    public void SetKey<T>(string key, object value)
-    {
-        if (dataSet == null)
-        {
+    public void SetKey<T>(string key, object value) {
+        if (dataSet == null) {
             Initialize();
         }
 
@@ -99,76 +91,62 @@ public class LocalData
         SaveCachedDataSet();
     }
 
-	public void RemoveKey<T>(string key)
-    {
-        if (dataSet == null)
-        {
+    public void RemoveKey<T>(string key) {
+        if (dataSet == null) {
             Initialize();
         }
 
-        if (dataSet.Has<T>(key))
-        {
+        if (dataSet.Has<T>(key)) {
             dataSet.Remove<T>(key);
         }
 
         SaveCachedDataSet();
     }
 
-    public T GetKey<T>(string key)
-    {
-        if (dataSet == null)
-        {
+    public T GetKey<T>(string key) {
+        if (dataSet == null) {
             Initialize();
         }
 
         return dataSet.Get<T>(key);
     }
 
-    public bool TryGetValue<T>(string key, out T result)
-    {
-        if (dataSet.Has<T>(key))
-        {
+    public bool TryGetValue<T>(string key, out T result) {
+        if (dataSet.Has<T>(key)) {
             result = GetKey<T>(key);
             return true;
         }
-        else
-        {
+        else {
             result = default(T);
             return false;
         }
     }
 
-    public void SaveCachedDataSet()
-    {
+    public void SaveCachedDataSet() {
         EReturn eMessage = SaveAsFile(dataSet, GetDataSetPath());
         if (eMessage != EReturn.SUCCESS)
             Debug.LogError(eMessage);
     }
 
-    private EReturn SaveAsFile(object inObject, string inFilePath)
-    {
-        if (inObject == null)
-        {
+    private EReturn SaveAsFile(object inObject, string inFilePath) {
+        if (inObject == null) {
             return EReturn.NO_OBJECT;
         }
 
         string folderPath = inFilePath.Substring(0, inFilePath.LastIndexOf("/"));
-        if (!System.IO.Directory.Exists(folderPath))
-        {
+        if (!System.IO.Directory.Exists(folderPath)) {
             System.IO.Directory.CreateDirectory(folderPath);
         }
 
         MemoryStream ms = new MemoryStream();
         byte[] byteArr = null;
-        try
-        {
+        try {
             BinaryFormatter f = new BinaryFormatter();
             f.Serialize(ms, inObject);
             byteArr = ms.ToArray();
             ms.Close();
         }
-        catch (System.Exception e)
-        {
+        catch (System.Exception e) {
             ms.Close();
             byteArr = null;
             Debug.Log("<color=#ff0000>" + e.Message + "</color>");
@@ -177,13 +155,11 @@ public class LocalData
         }
 
         FileStream fs = new FileStream(inFilePath, FileMode.Create);
-        try
-        {
+        try {
             fs.Write(byteArr, 0, byteArr.Length);
             fs.Close();
         }
-        catch (System.Exception)
-        {
+        catch (System.Exception) {
             fs.Close();
             return EReturn.WRITING_ERROR;
         }
@@ -191,15 +167,12 @@ public class LocalData
         return EReturn.SUCCESS;
     }
 
-    public string GetDataSetPath()
-    {
+    public string GetDataSetPath() {
         return $"{Application.persistentDataPath}.dat";
     }
 
-    public void Clear()
-    {
-        if (dataSet != null)
-        {
+    public void Clear() {
+        if (dataSet != null) {
             dataSet.Clear();
             SaveCachedDataSet();
         }
@@ -207,63 +180,37 @@ public class LocalData
 
 #if UNITY_EDITOR
     [MenuItem("Tools/LocalData/Delete Caching Data")]
-    public static void OnMenuDeleteCachingData()
-    {
+    public static void OnMenuDeleteCachingData() {
         if (Directory.Exists(Application.persistentDataPath)) Directory.Delete(Application.persistentDataPath, true);
     }
 
     [MenuItem("Tools/LocalData/Clear BestCount")]
-    public static void LoaclDataClear_BestCount()
-    {
+    public static void LoaclDataClear_BestCount() {
         Instance.Initialize();
         Instance.RemoveKey<int>(BEST_COUNT_KEY);
     }
 
     [MenuItem("Tools/LocalData/Clear CharacterInven")]
-    public static void LoaclDataClear_CharacterInven()
-    {
+    public static void LoaclDataClear_CharacterInven() {
         Instance.Initialize();
         Instance.RemoveKey<int>(CHARACTER_INVEN_KEY);
         Instance.RemoveKey<int>(MAIN_CHARACTER_KEY);
     }
 
     [MenuItem("Tools/LocalData/Clear PlayerPrefs")]
-    public static void LocalDataClear_PlayerPrefs()
-    {
+    public static void LocalDataClear_PlayerPrefs() {
         PlayerPrefs.DeleteAll();
     }
 #endif
 }
 
 
-public static class LocalDataHelper
-{
-    public static int GetBestCount()
-    {
-        return LocalData.Instance.GetKey<int>(LocalData.BEST_COUNT_KEY);
-    }
-
-    public static void SaveBestCount(int inCount)
-    {
-        LocalData.Instance.SetKey<int>(LocalData.BEST_COUNT_KEY, inCount);
-    }
-
-    public static int GetCharacterInven()
-    {
-        return LocalData.Instance.GetKey<int>(LocalData.CHARACTER_INVEN_KEY);
-    }
-
-    public static void SaveCharacterInven(int inFlags)
-    {
-        LocalData.Instance.SetKey<int>(LocalData.CHARACTER_INVEN_KEY, inFlags);
-    }
-    public static int GetMainCharacter()
-    {
+public static class LocalDataHelper {
+    public static int GetMainCharacter() {
         return LocalData.Instance.GetKey<int>(LocalData.MAIN_CHARACTER_KEY);
     }
 
-    public static void SaveMainCharacter(int intType)
-    {
+    public static void SaveMainCharacter(int intType) {
         LocalData.Instance.SetKey<int>(LocalData.MAIN_CHARACTER_KEY, intType);
     }
 }

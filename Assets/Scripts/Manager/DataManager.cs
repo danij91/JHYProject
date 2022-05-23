@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using Firebase.Auth;
 using Firebase.Database;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class DataManager : Singleton<DataManager> {
     private DatabaseReference reference;
@@ -12,7 +13,9 @@ public class DataManager : Singleton<DataManager> {
     private FirebaseUser currentUser;
     public List<UserRecord> UserRecords { get; private set; } = new List<UserRecord>();
     public bool isRecordLoaded { get; private set; }
-    public int myRecordIndex { get; set; }
+    public int myRecordIndex { get; private set; }
+    public UserData CurrentUserData { get; private set; }
+    public UserRecord CurrentUserRecord { get;  set; }
 
     public void Initialize() {
         reference = FirebaseDatabase.DefaultInstance.RootReference;
@@ -20,12 +23,8 @@ public class DataManager : Singleton<DataManager> {
     }
 
     public void UpdateScore(int score) {
-        var userRecord = new UserRecord {
-            nickname = "test",
-            score = score
-        };
-
-        string json = JsonUtility.ToJson(userRecord);
+        CurrentUserRecord.score = score;
+        string json = JsonUtility.ToJson(CurrentUserRecord);
 
         reference.Child("scores").Child(GetCurrentUserId()).SetValueAsync(json);
     }
@@ -49,7 +48,7 @@ public class DataManager : Singleton<DataManager> {
         });
     }
 
-    public async void SignInAnonymously(Action onSuccess, Action onFailed = null) {
+    public async void SignInAnonymously(Action onSuccess = null, Action onFailed = null) {
         var signInAnonymouslyTask = auth.SignInAnonymouslyAsync();
         await signInAnonymouslyTask;
 
@@ -99,14 +98,32 @@ public class DataManager : Singleton<DataManager> {
                 }
             }
 
-            
-
             isRecordLoaded = true;
         }
     }
+
+    public void SetUserNickname(string nickname) {
+        CurrentUserData = new UserData {nickname = nickname, characters = new List<int>()};
+        CurrentUserData.characters.Add((int) EConfig.Character.INITIAL_CHARACTER);
+        var json = JsonUtility.ToJson(CurrentUserData);
+        reference.Child("users").Child(GetCurrentUserId()).SetValueAsync(json);
+        LocalDataHelper.SaveMainCharacter((int) EConfig.Character.INITIAL_CHARACTER);
+        CharacterInventory.Instance.SetValidCharacters(CurrentUserData.characters);
+        CurrentUserRecord = new UserRecord {nickname = nickname, score = 0};
+    }
+
+    public void UpdateUserData() {
+        var json = JsonUtility.ToJson(CurrentUserData);
+        reference.Child("users").Child(GetCurrentUserId()).SetValueAsync(json);
+    }
 }
 
-public struct UserRecord {
+public class UserRecord {
     public string nickname;
     public int score;
+}
+
+public class UserData {
+    public string nickname;
+    public List<int> characters;
 }
