@@ -2,60 +2,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterInventory
-{
+public class CharacterInventory {
     private static CharacterInventory instance = null;
-    public static CharacterInventory Instance { get { if (instance == null) { instance = new CharacterInventory(); } return instance; } }
+    public static CharacterInventory Instance {
+        get {
+            if (instance == null) {
+                instance = new CharacterInventory();
+            }
+
+            return instance;
+        }
+    }
     public ECharacterType MainCharacter { get; private set; }
 
-    private BitFlags VaildCharacter;
+    private List<int> VaildCharacters;
 
-    public void Initialize()
-    {
-        int initailFlags = LocalDataHelper.GetCharacterInven();
-        if (initailFlags < 1) 
-            initailFlags = (int)EConfig.Character.INITIAL_CHARACTER;
-        
-        VaildCharacter = new BitFlags(initailFlags);
-
-        MainCharacter = (ECharacterType)LocalDataHelper.GetMainCharacter();
-        if (MainCharacter == ECharacterType.None) 
-            MainCharacter = EConfig.Character.INITIAL_CHARACTER;
+    public void Initialize() {
+        MainCharacter = (ECharacterType) LocalDataHelper.GetMainCharacter();
+        MainCharacter = EConfig.Character.INITIAL_CHARACTER;
     }
 
-    public void SelectCharacter(ECharacterType type)
-    {
-        if (!IsVaild(type)) return;
+    public void SetValidCharacters(List<int> characters) {
+        VaildCharacters = characters;
+    }
+
+    public void SelectCharacter(ECharacterType type) {
+        if (!IsValid(type)) return;
         MainCharacter = type;
-        LocalDataHelper.SaveMainCharacter((int)type);
+        LocalDataHelper.SaveMainCharacter((int) type);
     }
 
-    public bool IsVaild(ECharacterType type)
-    {
-        return VaildCharacter.Has((byte)type);
+    public bool IsValid(ECharacterType type) {
+        return VaildCharacters.Contains((int) type);
     }
 
-    public void Add(ECharacterType type)
-    {
-        VaildCharacter.Add((byte)type);
+    public void Add(ECharacterType type) {
+        VaildCharacters.Add((byte) type);
         SaveInven();
     }
 
-    public void Remove(ECharacterType type)
-    {
-        VaildCharacter.Remove((byte)type);
+    public void Remove(ECharacterType type) {
+        VaildCharacters.Remove((byte) type);
         SaveInven();
     }
 
-    public void Clear()
-    {
-        VaildCharacter.Clear();
+    public void Clear() {
+        VaildCharacters.Clear();
         SaveInven();
     }
 
-    private void SaveInven()
-    {
-        int flags = VaildCharacter.Value;
-        LocalDataHelper.SaveCharacterInven(flags);
+    private void SaveInven() {
+        DataManager.Instance.UpdateUserData();
     }
 }

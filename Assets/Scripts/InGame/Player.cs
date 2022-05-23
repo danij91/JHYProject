@@ -6,15 +6,14 @@ using DG.Tweening;
 
 public enum ECharacterType // 캐릭터가 8개 넘어가면 Flags를 byte배열로 해야할듯...?
 {
-    None        = 0,
-    Chick       = 1,    //(1 << 0)
-    Crocodile   = 2,    //(1 << 1)
-    Dog         = 4,    //(1 << 2)
-    Dolphin     = 8,    //(1 << 3)
-    Dove        = 16,   //(1 << 4)
-    Lizard      = 32,   //(1 << 5)
-    SeaLion     = 64,   //(1 << 6)
-    Squid       = 128,  //(1 << 7)
+    Chick, //(1 << 0)
+    Crocodile, //(1 << 1)
+    Dog, //(1 << 2)
+    Dolphin, //(1 << 3)
+    Dove, //(1 << 4)
+    Lizard, //(1 << 5)
+    SeaLion, //(1 << 6)
+    Squid, //(1 << 7)
 }
 
 public class Player : PoolingObject {
@@ -25,10 +24,8 @@ public class Player : PoolingObject {
         FALL
     }
 
-    [SerializeField]
-    private Animator animator;
-    [SerializeField]
-    public JumpGauge gauge;
+    [SerializeField] private Animator animator;
+    [SerializeField] public JumpGauge gauge;
 
     private Ease MOVE_EASE = Ease.OutFlash;
     private Ease JUMP_EASE = Ease.OutFlash;
@@ -47,7 +44,7 @@ public class Player : PoolingObject {
             rigidbody = GetComponent<Rigidbody>();
 
         if (parameters.Length > 0)
-            CharacterType = (ECharacterType)parameters[0];
+            CharacterType = (ECharacterType) parameters[0];
 
         gauge.gameObject.SetActive(true);
         rigidbody.isKinematic = false;

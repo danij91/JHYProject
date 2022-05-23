@@ -34,7 +34,7 @@ public class UIManager : Singleton<UIManager>
         {
             if (ui.isActiveAndEnabled)
             {
-                Debug.LogWarning($"{uiType.Name} UI°¡ ÀÌ¹Ì È°¼ºÈ­µÇ¾î ÀÖ½À´Ï´Ù");
+                Debug.LogWarning($"{uiType.Name} UIê°€ ì´ë¯¸ í™œì„±í™”ë˜ì–´ ìˆìŠµë‹ˆë‹¤");
                 return;
             }
 
@@ -47,7 +47,7 @@ public class UIManager : Singleton<UIManager>
             Object obj = Resources.Load<GameObject>(path);
             if (obj == null)
             {
-                Debug.LogError($"{uiType.Name} UI°¡ ÇØ´ç °æ·Î¿¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù : {path}");
+                Debug.LogError($"{uiType.Name} UIê°€ í•´ë‹¹ ê²½ë¡œì— ì¡´ì¬í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤ : {path}");
                 return;
             }
 
@@ -126,7 +126,7 @@ public class UIManager : Singleton<UIManager>
 
         if (ui == null)
         {
-            Debug.LogError($"{typeof(T).Name} UI°¡ È°¼ºÈ­µÇ¾î ÀÖÁö ¾Ê½À´Ï´Ù");
+            Debug.LogError($"{typeof(T).Name} UIê°€ í™œì„±í™”ë˜ì–´ ìˆì§€ ì•ŠìŠµë‹ˆë‹¤");
         }
         else
         {
