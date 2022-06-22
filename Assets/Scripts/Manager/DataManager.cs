@@ -15,7 +15,7 @@ public class DataManager : Singleton<DataManager> {
     public bool isRecordLoaded { get; private set; }
     public int myRecordIndex { get; private set; }
     public UserData CurrentUserData { get; private set; }
-    public UserRecord CurrentUserRecord { get;  set; }
+    public UserRecord CurrentUserRecord { get; set; }
 
     public void Initialize() {
         reference = FirebaseDatabase.DefaultInstance.RootReference;
@@ -71,8 +71,41 @@ public class DataManager : Singleton<DataManager> {
         onSuccess?.Invoke();
     }
 
+    public async UniTask LoadUserData() {
+        currentUser = auth.CurrentUser;
+        var loadUserDataTask = reference.Child("users").Child(GetCurrentUserId()).GetValueAsync();
+        var loadUserDataResult = await loadUserDataTask;
+
+        if (loadUserDataTask.IsCompleted && loadUserDataResult.Exists) {
+            CurrentUserData = JsonUtility.FromJson<UserData>(loadUserDataResult.Value.ToString());
+        } else {
+            CurrentUserData = new UserData {nickname = "", characters = new List<int>()};
+            LocalDataHelper.SaveMainCharacter((int) EConfig.Character.INITIAL_CHARACTER);
+        }
+
+        CharacterInventory.Instance.SetValidCharacters(CurrentUserData.characters);
+
+        var loadUserRecordTask = reference.Child("scores").Child(GetCurrentUserId()).GetValueAsync();
+        var loadUserRecordResult = await loadUserRecordTask;
+
+        if (loadUserRecordTask.IsCompleted && loadUserRecordResult.Exists) {
+            CurrentUserRecord = JsonUtility.FromJson<UserRecord>(loadUserRecordResult.Value.ToString());
+        } else {
+            CurrentUserRecord = new UserRecord {nickname = CurrentUserData.nickname, score = 0};
+        }
+    }
+
     public void SignOut() {
         auth.SignOut();
+        CharacterInventory.Instance.ResetCharacter();
+    }
+
+    public bool IsSignedIn() {
+        return auth.CurrentUser != null;
+    }
+
+    public bool IsAnonymous() {
+        return currentUser.IsAnonymous;
     }
 
     public string GetCurrentUserId() {

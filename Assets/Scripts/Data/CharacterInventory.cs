@@ -19,7 +19,10 @@ public class CharacterInventory {
 
     public void Initialize() {
         MainCharacter = (ECharacterType) LocalDataHelper.GetMainCharacter();
-        MainCharacter = EConfig.Character.INITIAL_CHARACTER;
+    }
+
+    public void ResetCharacter() {
+        LocalDataHelper.SaveMainCharacter((int) EConfig.Character.INITIAL_CHARACTER);
     }
 
     public void SetValidCharacters(List<int> characters) {

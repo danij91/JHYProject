@@ -115,8 +115,7 @@ public class LocalData {
         if (dataSet.Has<T>(key)) {
             result = GetKey<T>(key);
             return true;
-        }
-        else {
+        } else {
             result = default(T);
             return false;
         }
