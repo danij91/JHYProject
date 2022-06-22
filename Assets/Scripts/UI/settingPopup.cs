@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class settingPopup : UIBase {
     [SerializeField] private Button btn_bgm;
     [SerializeField] private Button btn_sfx;
     [SerializeField] private Button btn_back;
+    [SerializeField] private Button btn_signOut;
     [SerializeField] private Image img_bgm_check;
     [SerializeField] private Image img_sfx_check;
 
@@ -27,6 +30,24 @@ public class settingPopup : UIBase {
                 break;
             case nameof(btn_sfx):
                 OnToggleSFXSettings();
+                break;
+            case nameof(btn_signOut):
+                if (DataManager.Instance.IsAnonymous()) {
+                    UIManager.Instance.Show<MessageBoxUI>(ui => {
+                        ui.SetMessage(
+                            "Are you sure? guest user can't keep there game data"
+                            , "SignOut"
+                            , () => {
+                                DataManager.Instance.SignOut();
+                                SceneLoader.Instance.ChangeSceneAsync(EScene.TITLE).Forget();
+                            }, null);
+                    });
+                    return;
+                }
+
+                DataManager.Instance.SignOut();
+                SceneLoader.Instance.ChangeSceneAsync(EScene.TITLE).Forget();
+
                 break;
         }
     }
