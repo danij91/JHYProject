@@ -18,8 +18,10 @@ public class GameManager : Singleton<GameManager> {
     public int ComboCount { get; private set; }
     public bool IsPerfectJump { get; private set; }
     public bool IsPlaying => CurrentState == GAME_STATE.PLAY;
+    public int playCount;
 
     private InGameUI inGameUI;
+    private const int AD_PLAY_COUNT = 3;
 
     public void Initialize() {
         GameStart();
@@ -42,8 +44,7 @@ public class GameManager : Singleton<GameManager> {
         ECharacterType type;
         if (LocalDataConfig.Instance.IsCharacterTest) {
             type = LocalDataConfig.Instance.StartCharacterType;
-        }
-        else {
+        } else {
             type = CharacterInventory.Instance.MainCharacter;
         }
 
@@ -54,6 +55,13 @@ public class GameManager : Singleton<GameManager> {
         CurrentState = GAME_STATE.END;
         SaveBestScore();
         AudioManager.Instance.AllSFXStop();
+
+        playCount++;
+        
+        if (playCount >= AD_PLAY_COUNT) {
+            AdManager.Instance.LoadPlayAds();
+            playCount = 0;
+        }
     }
 
     public void SaveBestScore() {
