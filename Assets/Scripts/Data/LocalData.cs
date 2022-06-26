@@ -212,4 +212,12 @@ public static class LocalDataHelper {
     public static void SaveMainCharacter(int intType) {
         LocalData.Instance.SetKey<int>(LocalData.MAIN_CHARACTER_KEY, intType);
     }
+
+    public static int GetLanguage() {
+        return PlayerPrefs.GetInt("language", LocalizationManager.Instance.GetCurrentLanguage());
+    }
+    
+    public static void SetLanguage() {
+        PlayerPrefs.SetInt("language", LocalizationManager.Instance.GetCurrentLanguage());
+    }
 }

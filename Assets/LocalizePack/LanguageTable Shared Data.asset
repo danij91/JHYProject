@@ -171,6 +171,14 @@ MonoBehaviour:
     m_Key: characterName_Squid
     m_Metadata:
       m_Items: []
+  - m_Id: 92122752999424
+    m_Key: language_KOREAN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92165497151488
+    m_Key: language_ENGLISH
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

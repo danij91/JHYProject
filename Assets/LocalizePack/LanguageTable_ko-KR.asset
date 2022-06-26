@@ -176,5 +176,13 @@ MonoBehaviour:
     m_Localized: "\uC624\uC9D5\uC5B4"
     m_Metadata:
       m_Items: []
+  - m_Id: 92122752999424
+    m_Localized: "\uD55C\uAD6D\uC5B4"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92165497151488
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

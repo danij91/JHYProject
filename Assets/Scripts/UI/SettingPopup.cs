@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class settingPopup : UIBase {
+public class SettingPopup : UIBase {
     [SerializeField] private Button btn_bgm;
     [SerializeField] private Button btn_sfx;
     [SerializeField] private Button btn_back;
