@@ -13,9 +13,15 @@ public class settingPopup : UIBase {
     [SerializeField] private Image img_bgm_check;
     [SerializeField] private Image img_sfx_check;
 
+    private string signOutTitle;
+    private string signOutMessage;
+
     protected override void PrevOpen(params object[] args) {
-        img_bgm_check.gameObject.SetActive(AudioManager.Instance.IsBgmMute);
-        img_sfx_check.gameObject.SetActive(AudioManager.Instance.IsSfxMute);
+        img_bgm_check.gameObject.SetActive(!AudioManager.Instance.IsBgmMute);
+        img_sfx_check.gameObject.SetActive(!AudioManager.Instance.IsSfxMute);
+
+        signOutTitle = LocalizationManager.Instance.GetLocalizedText("setting_signOutTitle");
+        signOutMessage = LocalizationManager.Instance.GetLocalizedText("setting_signOutMessage");
     }
 
     protected override void PrevClose() { }
@@ -35,8 +41,8 @@ public class settingPopup : UIBase {
                 if (DataManager.Instance.IsAnonymous()) {
                     UIManager.Instance.Show<MessageBoxUI>(ui => {
                         ui.SetMessage(
-                            "Are you sure? guest user can't keep there game data"
-                            , "SignOut"
+                            signOutMessage
+                            , signOutTitle
                             , () => {
                                 DataManager.Instance.SignOut();
                                 SceneLoader.Instance.ChangeSceneAsync(EScene.TITLE).Forget();
@@ -54,13 +60,13 @@ public class settingPopup : UIBase {
 
     private void OnToggleBGMSettings() {
         bool value = !AudioManager.Instance.IsBgmMute;
-        img_bgm_check.gameObject.SetActive(value);
+        img_bgm_check.gameObject.SetActive(!value);
         AudioManager.Instance.SetBGMSettings(GetAudioSettings(value));
     }
 
     private void OnToggleSFXSettings() {
         bool value = !AudioManager.Instance.IsSfxMute;
-        img_sfx_check.gameObject.SetActive(value);
+        img_sfx_check.gameObject.SetActive(!value);
         AudioManager.Instance.SetSFXSettings(GetAudioSettings(value));
     }
 
