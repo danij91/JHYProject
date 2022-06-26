@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 public class InGameUI : UIBase {
     [SerializeField]
@@ -15,19 +16,25 @@ public class InGameUI : UIBase {
     [SerializeField]
     private GameObject failPopup;
     [SerializeField]
-    private Text txt_currentcount;
+    private TMP_Text txt_currentcount;
     [SerializeField]
-    private Text txt_bestcount;
+    private TMP_Text txt_bestcount;
     [SerializeField]
-    private Text txt_combocount;
+    private TMP_Text txt_combocount;
     [SerializeField]
-    private Text txt_endscore;
+    private TMP_Text txt_endscore;
+    private string score;
+    private string exitTitle;
+    private string exitMessage;
 
     private float elapsedTime;
     public bool IsScreenBtnDown { get; set; }
 
     protected override void PrevOpen(params object[] args) {
         SetView();
+        score = LocalizationManager.Instance.GetLocalizedText("inGame_score");
+        exitTitle = LocalizationManager.Instance.GetLocalizedText("inGame_exitTitle");
+        exitMessage = LocalizationManager.Instance.GetLocalizedText("inGame_exitMessage");
     }
 
     protected override void PrevClose() { }
@@ -76,7 +83,7 @@ public class InGameUI : UIBase {
     {
         UIManager.Instance.Show<MessageBoxUI>(ui =>
         {
-            ui.SetMessage("Are you sure?", "EXITGAME", () =>
+                ui.SetMessage(exitMessage, exitTitle, () =>
             {
                 SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY, true).Forget();
             }, null);
@@ -85,7 +92,7 @@ public class InGameUI : UIBase {
 
     public void OpenFailPopup() {
         failPopup.SetActive(true);
-        txt_endscore.text = $"SCORE : {GameManager.Instance.JumpCount}";
+        txt_endscore.text = $"{score} : {GameManager.Instance.JumpCount}";
     }
 
     private void CloseFailPopup() {

@@ -16,11 +16,167 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: 0894b99818f1da14ba40f1a7c2134261
   m_Entries:
   - m_Id: 35462307840
-    m_Key: Title_title_text
+    m_Key: Title_title
     m_Metadata:
       m_Items: []
   - m_Id: 320029057024
-    m_Key: Title_tabToStart_text
+    m_Key: Title_tabToStart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63663133679616
+    m_Key: setting_sfx
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63877903015936
+    m_Key: setting_bgm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64877976084480
+    m_Key: setting_signOut
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65094678994944
+    m_Key: lobby_ranking
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65098156072960
+    m_Key: lobby_character
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65100869787648
+    m_Key: lobby_gameStart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65553586184192
+    m_Key: messageBox_confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65621999476736
+    m_Key: messageBox_cancel
+    m_Metadata:
+      m_Items: []
+  - m_Id: 66288524713984
+    m_Key: signIn_signUp
+    m_Metadata:
+      m_Items: []
+  - m_Id: 66377259409408
+    m_Key: signIn_guest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 66940738985984
+    m_Key: nickname_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 67059139993600
+    m_Key: nickname_ok
+    m_Metadata:
+      m_Items: []
+  - m_Id: 67088273629184
+    m_Key: nickname_skip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 67102127415296
+    m_Key: nickname_placeHolder
+    m_Metadata:
+      m_Items: []
+  - m_Id: 67857290878976
+    m_Key: characterInven_purchase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 67861946556416
+    m_Key: characterInven_select
+    m_Metadata:
+      m_Items: []
+  - m_Id: 67960869216256
+    m_Key: characterInven_selected
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69791162818560
+    m_Key: inGame_gameOver
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69833160384512
+    m_Key: inGame_restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69870959452160
+    m_Key: inGame_combo
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69872913997824
+    m_Key: inGame_score
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69874147123200
+    m_Key: inGame_bestScore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70633580388352
+    m_Key: inGame_currentScore
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74308092682240
+    m_Key: inGame_exitTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74393660678144
+    m_Key: inGame_exitMessage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 75442123431936
+    m_Key: characterInven_purchaseTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 75535773851648
+    m_Key: characterInven_purchaseMessage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 76023718207488
+    m_Key: setting_signOutTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 76081767374848
+    m_Key: setting_signOutMessage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 80899718242304
+    m_Key: characterName_Chick
+    m_Metadata:
+      m_Items: []
+  - m_Id: 80936019943424
+    m_Key: characterName_Crocodile
+    m_Metadata:
+      m_Items: []
+  - m_Id: 80937563447296
+    m_Key: characterName_Dog
+    m_Metadata:
+      m_Items: []
+  - m_Id: 80938247118848
+    m_Key: characterName_Dolphin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 80938964344832
+    m_Key: characterName_Dove
+    m_Metadata:
+      m_Items: []
+  - m_Id: 80939723513856
+    m_Key: characterName_Lizard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 80940503654400
+    m_Key: characterName_SeaLion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 80941287989248
+    m_Key: characterName_Squid
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92122752999424
+    m_Key: language_KOREAN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92165497151488
+    m_Key: language_ENGLISH
     m_Metadata:
       m_Items: []
   m_Metadata:

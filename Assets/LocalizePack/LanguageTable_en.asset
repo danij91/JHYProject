@@ -26,5 +26,161 @@ MonoBehaviour:
     m_Localized: TAP TO START
     m_Metadata:
       m_Items: []
+  - m_Id: 63663133679616
+    m_Localized: SFX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 63877903015936
+    m_Localized: BGM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64877976084480
+    m_Localized: Sign Out
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65094678994944
+    m_Localized: RANKING
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65098156072960
+    m_Localized: CHARACTER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65100869787648
+    m_Localized: GAME START
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65553586184192
+    m_Localized: CONFIRM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 65621999476736
+    m_Localized: CANCEL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 66288524713984
+    m_Localized: Sign Up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 66377259409408
+    m_Localized: Guest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 66940738985984
+    m_Localized: Write Your Nickname
+    m_Metadata:
+      m_Items: []
+  - m_Id: 67059139993600
+    m_Localized: OK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 67088273629184
+    m_Localized: Skip
+    m_Metadata:
+      m_Items: []
+  - m_Id: 67102127415296
+    m_Localized: enter nickname...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 67857290878976
+    m_Localized: PURCHASE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 67861946556416
+    m_Localized: SELECT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 67960869216256
+    m_Localized: SELECTED
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69791162818560
+    m_Localized: GAME OVER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69833160384512
+    m_Localized: RESTART
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69870959452160
+    m_Localized: COMBO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69872913997824
+    m_Localized: SCORE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 70633580388352
+    m_Localized: ' Now'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 69874147123200
+    m_Localized: BEST
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74308092682240
+    m_Localized: EXITGAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 74393660678144
+    m_Localized: Are you sure?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 75442123431936
+    m_Localized: PURCHASE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 75535773851648
+    m_Localized: Are you sure?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 76023718207488
+    m_Localized: Sign Out
+    m_Metadata:
+      m_Items: []
+  - m_Id: 76081767374848
+    m_Localized: Are you sure? guest user can't keep there game data
+    m_Metadata:
+      m_Items: []
+  - m_Id: 80939723513856
+    m_Localized: Lizard
+    m_Metadata:
+      m_Items: []
+  - m_Id: 80940503654400
+    m_Localized: SeaLion
+    m_Metadata:
+      m_Items: []
+  - m_Id: 80936019943424
+    m_Localized: Crocodile
+    m_Metadata:
+      m_Items: []
+  - m_Id: 80899718242304
+    m_Localized: Chick
+    m_Metadata:
+      m_Items: []
+  - m_Id: 80937563447296
+    m_Localized: Dog
+    m_Metadata:
+      m_Items: []
+  - m_Id: 80938247118848
+    m_Localized: Dolphin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 80938964344832
+    m_Localized: Dove
+    m_Metadata:
+      m_Items: []
+  - m_Id: 80941287989248
+    m_Localized: Squid
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92122752999424
+    m_Localized: "\uD55C\uAD6D\uC5B4"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92165497151488
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

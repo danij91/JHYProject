@@ -21,11 +21,15 @@ public static class EConfig {
         public static readonly ECharacterType INITIAL_CHARACTER = ECharacterType.Chick;
     }
 
-    public enum ELogLevel
-    {
+    public enum ELogLevel {
         None,
         Error,
         Warning,
         All,
+    }
+
+    public enum ELanguage {
+        ENGLISH,
+        KOREAN
     }
 }

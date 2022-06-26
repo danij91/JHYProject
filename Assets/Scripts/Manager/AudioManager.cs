@@ -56,7 +56,7 @@ public class AudioManager : Singleton<AudioManager> {
             return;
 
         string extraNum = string.Empty;
-        if (type == SFXType.Jump) //ToDo ·£´ıPlay ¼³Á¤ (´õ ÁÁÀº ¹æ¹ıÀÌ ÀÖÀ¸¸é ¼öÁ¤ ºÎÅ¹)
+        if (type == SFXType.Jump) //ToDo ëœë¤Play ì„¤ì • (ë” ì¢‹ì€ ë°©ë²•ì´ ìˆìœ¼ë©´ ìˆ˜ì • ë¶€íƒ)
         {
             int randomNum = UnityEngine.Random.Range(1, 3);
             extraNum = randomNum.ToString();

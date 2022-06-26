@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
 
 public class CharacterInvenUI : UIBase {
@@ -20,13 +22,23 @@ public class CharacterInvenUI : UIBase {
 
     private List<CharacterInvenItem> itemList = new List<CharacterInvenItem>();
     private Dictionary<ECharacterType, Player> characterList = new Dictionary<ECharacterType, Player>();
+    private string select;
+    private string selected;
+    private string purchaseTitle;
+    private string purchaseMessage;
 
     protected override void PrevOpen(params object[] args) {
         CurrentCharacterType = Inven.MainCharacter;
         RefreshButton();
         CreateCharacterItems();
         RefreshCharacterViewer();
+        select = LocalizationManager.Instance.GetLocalizedText("characterInven_select");
+        selected = LocalizationManager.Instance.GetLocalizedText("characterInven_selected");
+        purchaseTitle = LocalizationManager.Instance.GetLocalizedText("characterInven_purchaseTitle");
+        purchaseMessage = LocalizationManager.Instance.GetLocalizedText("characterInven_purchaseMessage");
+        tmp_select.text = CurrentCharacterType == Inven.MainCharacter ? select : selected;
     }
+    
 
     protected override void PrevClose() { }
 
@@ -45,7 +57,7 @@ public class CharacterInvenUI : UIBase {
         bool isValid = Inven.IsValid(CurrentCharacterType);
         btn_purchase.gameObject.SetActive(!isValid);
         btn_select.gameObject.SetActive(isValid);
-        tmp_select.text = CurrentCharacterType == Inven.MainCharacter ? "SELECTED" : "TOSELECT";
+        tmp_select.text = CurrentCharacterType == Inven.MainCharacter ? select : selected;
     }
 
     private void CreateCharacterViewer() {
@@ -107,7 +119,7 @@ public class CharacterInvenUI : UIBase {
 
         UIManager.Instance.Show<MessageBoxUI>(ui => {
             viewerTr.gameObject.SetActive(false);
-            ui.SetMessage("Are you sure?", "PURCHASE", () => {
+            ui.SetMessage(purchaseMessage, purchaseTitle, () => {
                 Inven.Add(CurrentCharacterType);
                 RefreshButton();
                 CharacterInvenItem item = itemList.Find(x => x.CharacterType == CurrentCharacterType);
