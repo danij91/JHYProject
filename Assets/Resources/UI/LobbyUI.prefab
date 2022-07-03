@@ -191,6 +191,7 @@ GameObject:
   - component: {fileID: 190526897708891876}
   - component: {fileID: 3411037394003531002}
   - component: {fileID: 1551119190174438954}
+  - component: {fileID: 215963630698760684}
   m_Layer: 5
   m_Name: btn_setting
   m_TagString: Untagged
@@ -327,6 +328,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 25
+--- !u!114 &215963630698760684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113989031292046604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f388ec3223b0eff449868b7fedf87947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxType: 4
 --- !u!1 &1714648411131011458
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,6 +933,7 @@ GameObject:
   - component: {fileID: 4870510108357794460}
   - component: {fileID: 8244479693872401514}
   - component: {fileID: 1728467424138525157}
+  - component: {fileID: 4997024760175569630}
   m_Layer: 5
   m_Name: btn_inventory
   m_TagString: Untagged
@@ -1055,6 +1070,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 35
+--- !u!114 &4997024760175569630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4765671844436591207}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f388ec3223b0eff449868b7fedf87947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxType: 4
 --- !u!1 &6170507551430147523
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,6 +1096,7 @@ GameObject:
   - component: {fileID: 7189081325932085551}
   - component: {fileID: 7066436753944226388}
   - component: {fileID: 352884788707115410}
+  - component: {fileID: 4199654849497217048}
   m_Layer: 5
   m_Name: btn_language
   m_TagString: Untagged
@@ -1204,6 +1233,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 25
+--- !u!114 &4199654849497217048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6170507551430147523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f388ec3223b0eff449868b7fedf87947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxType: 4
 --- !u!1 &6827878029127972805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,6 +1259,7 @@ GameObject:
   - component: {fileID: 5575858223121456728}
   - component: {fileID: 216660470254006185}
   - component: {fileID: 8687585057457306432}
+  - component: {fileID: 4328287872280834020}
   m_Layer: 5
   m_Name: btn_ranking
   m_TagString: Untagged
@@ -1353,6 +1396,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 35
+--- !u!114 &4328287872280834020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6827878029127972805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f388ec3223b0eff449868b7fedf87947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxType: 4
 --- !u!1 &7498413299330756056
 GameObject:
   m_ObjectHideFlags: 0
@@ -1615,6 +1671,7 @@ GameObject:
   - component: {fileID: 2006816462589523818}
   - component: {fileID: 7361888335923682985}
   - component: {fileID: 93907199100513361}
+  - component: {fileID: 7922271130723949682}
   m_Layer: 5
   m_Name: btn_gameStart
   m_TagString: Untagged
@@ -1751,3 +1808,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 35
+--- !u!114 &7922271130723949682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159029768090161638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f388ec3223b0eff449868b7fedf87947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxType: 4

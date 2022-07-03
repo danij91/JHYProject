@@ -270,6 +270,7 @@ GameObject:
   - component: {fileID: 3799060221819095173}
   - component: {fileID: 2565418080196860656}
   - component: {fileID: 213613709038388145}
+  - component: {fileID: 910960231995904614}
   m_Layer: 5
   m_Name: btn_back
   m_TagString: Untagged
@@ -374,6 +375,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 15
+--- !u!114 &910960231995904614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4038952590916745772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f388ec3223b0eff449868b7fedf87947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxType: 4
 --- !u!1 &4428699779692405791
 GameObject:
   m_ObjectHideFlags: 0
