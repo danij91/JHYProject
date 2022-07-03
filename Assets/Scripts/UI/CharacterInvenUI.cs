@@ -36,7 +36,7 @@ public class CharacterInvenUI : UIBase {
         selected = LocalizationManager.Instance.GetLocalizedText("characterInven_selected");
         purchaseTitle = LocalizationManager.Instance.GetLocalizedText("characterInven_purchaseTitle");
         purchaseMessage = LocalizationManager.Instance.GetLocalizedText("characterInven_purchaseMessage");
-        tmp_select.text = CurrentCharacterType == Inven.MainCharacter ? select : selected;
+        tmp_select.text = CurrentCharacterType == Inven.MainCharacter ? selected : select;
     }
     
 
@@ -57,7 +57,7 @@ public class CharacterInvenUI : UIBase {
         bool isValid = Inven.IsValid(CurrentCharacterType);
         btn_purchase.gameObject.SetActive(!isValid);
         btn_select.gameObject.SetActive(isValid);
-        tmp_select.text = CurrentCharacterType == Inven.MainCharacter ? select : selected;
+        tmp_select.text = CurrentCharacterType == Inven.MainCharacter ? selected : select;
     }
 
     private void CreateCharacterViewer() {

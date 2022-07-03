@@ -10,6 +10,7 @@ public enum SFXType {
     Jump,
     Success_Normal,
     Success_Perfect,
+    BtnClick,
 }
 
 public enum BGMType {
@@ -56,8 +57,8 @@ public class AudioManager : Singleton<AudioManager> {
             return;
 
         string extraNum = string.Empty;
-        if (type == SFXType.Jump) //ToDo 랜덤Play 설정 (더 좋은 방법이 있으면 수정 부탁)
-        {
+
+        if (type == SFXType.Jump) {
             int randomNum = UnityEngine.Random.Range(1, 3);
             extraNum = randomNum.ToString();
         }

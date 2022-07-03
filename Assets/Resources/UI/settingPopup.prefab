@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 2438388754210237587}
   - component: {fileID: 6671635741748835418}
   - component: {fileID: 7437012024897580199}
+  - component: {fileID: 2060037790442566893}
   m_Layer: 5
   m_Name: btn_bgm
   m_TagString: Untagged
@@ -272,6 +273,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 10
+--- !u!114 &2060037790442566893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1293804090002934782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f388ec3223b0eff449868b7fedf87947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxType: 4
 --- !u!1 &1322539913036174104
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,6 +705,7 @@ GameObject:
   - component: {fileID: 3799060221819095173}
   - component: {fileID: 2565418080196860656}
   - component: {fileID: 213613709038388145}
+  - component: {fileID: 5858731596424235582}
   m_Layer: 5
   m_Name: btn_back
   m_TagString: Untagged
@@ -795,6 +810,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 15
+--- !u!114 &5858731596424235582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4038952590916745772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f388ec3223b0eff449868b7fedf87947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxType: 4
 --- !u!1 &4532566093402959226
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,6 +1177,7 @@ GameObject:
   - component: {fileID: 9019780207874633456}
   - component: {fileID: 9080168012141625530}
   - component: {fileID: 6356668339752180021}
+  - component: {fileID: 7328199066519518398}
   m_Layer: 5
   m_Name: btn_signOut
   m_TagString: Untagged
@@ -1285,6 +1314,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 25
+--- !u!114 &7328199066519518398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6837203143288867437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f388ec3223b0eff449868b7fedf87947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxType: 4
 --- !u!1 &6965547877241503403
 GameObject:
   m_ObjectHideFlags: 0
@@ -1768,6 +1810,7 @@ GameObject:
   - component: {fileID: 7567633957887701194}
   - component: {fileID: 6789438519225629185}
   - component: {fileID: 2788248746029942876}
+  - component: {fileID: 1257458082850972636}
   m_Layer: 5
   m_Name: btn_sfx
   m_TagString: Untagged
@@ -1931,3 +1974,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 10
+--- !u!114 &1257458082850972636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8606537217550695802}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f388ec3223b0eff449868b7fedf87947, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxType: 4
