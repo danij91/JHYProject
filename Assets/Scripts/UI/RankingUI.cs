@@ -13,15 +13,15 @@ public class RankingUI : UIBase {
     private int MAX_RANKING_COUNT = 50;
 
     protected override void PrevOpen(params object[] args) {
-        DataManager.Instance.LoadUserRecords().Forget();
+        UserManager.Instance.LoadUserRecords().Forget();
 
         CreateRankingRecords().Forget();
         SetMyRecord().Forget();
     }
 
     private async UniTaskVoid CreateRankingRecords() {
-        await UniTask.WaitUntil(() => DataManager.Instance.isRecordLoaded);
-        var userRecords = DataManager.Instance.UserRecords;
+        await UniTask.WaitUntil(() => UserManager.Instance.isRecordLoaded);
+        var userRecords = UserManager.Instance.UserRecords;
         int count = 0;
         foreach (var userRecord in userRecords) {
             RecordItem item = count < contentTr.childCount
@@ -40,12 +40,12 @@ public class RankingUI : UIBase {
     }
 
     private async UniTaskVoid SetMyRecord() {
-        await UniTask.WaitUntil(() => DataManager.Instance.isRecordLoaded);
-        if (DataManager.Instance.myRecordIndex == -1) {
+        await UniTask.WaitUntil(() => UserManager.Instance.isRecordLoaded);
+        if (UserManager.Instance.myRecordIndex == -1) {
             return;
         }
-        var myRecord = DataManager.Instance.UserRecords[DataManager.Instance.myRecordIndex];
-        myRecordItem.SetRank(DataManager.Instance.myRecordIndex + 1);
+        var myRecord = UserManager.Instance.UserRecords[UserManager.Instance.myRecordIndex];
+        myRecordItem.SetRank(UserManager.Instance.myRecordIndex + 1);
         myRecordItem.SetNickname(myRecord.nickname);
         myRecordItem.SetScore(myRecord.score);
     }

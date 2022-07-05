@@ -23,7 +23,7 @@ public class NicknamePopup : UIBase {
     }
 
     private void SaveUserData(string nickname) {
-        DataManager.Instance.SetUserNickname(nickname);
+        UserManager.Instance.SetUserNickname(nickname);
         SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY).Forget();
     }
 }

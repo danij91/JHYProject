@@ -55,6 +55,6 @@ public class CharacterInventory {
     }
 
     private void SaveInven() {
-        DataManager.Instance.UpdateUserData();
+        UserManager.Instance.UpdateUserData();
     }
 }

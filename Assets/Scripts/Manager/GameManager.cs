@@ -65,9 +65,9 @@ public class GameManager : Singleton<GameManager> {
     }
 
     public void SaveBestScore() {
-        int prevCount = DataManager.Instance.CurrentUserRecord.score;
+        int prevCount = UserManager.Instance.CurrentUserRecord.score;
         if (JumpCount > prevCount) {
-            DataManager.Instance.UpdateScore(JumpCount);
+            UserManager.Instance.UpdateScore(JumpCount);
         }
     }
 

@@ -7,7 +7,7 @@ using Firebase.Database;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
 
-public class DataManager : Singleton<DataManager> {
+public class UserManager : Singleton<UserManager> {
     private DatabaseReference reference;
     private FirebaseAuth auth;
     private FirebaseUser currentUser;
@@ -47,6 +47,28 @@ public class DataManager : Singleton<DataManager> {
                 newUser.DisplayName, newUser.UserId);
         });
     }
+
+    public async void SignInWithGoogle(Action onSuccess = null, Action onFailed = null) {
+        // Firebase.Auth.Credential credential =
+        //     Firebase.Auth.GoogleAuthProvider.GetCredential(googleIdToken, googleAccessToken);
+        // auth.SignInWithCredentialAsync(credential).ContinueWith(task => {
+        //     if (task.IsCanceled) {
+        //         Debug.LogError("SignInWithCredentialAsync was canceled.");
+        //         return;
+        //     }
+        //     if (task.IsFaulted) {
+        //         Debug.LogError("SignInWithCredentialAsync encountered an error: " + task.Exception);
+        //         return;
+        //     }
+        //
+        //     Firebase.Auth.FirebaseUser newUser = task.Result;
+        //     Debug.LogFormat("User signed in successfully: {0} ({1})",
+        //         newUser.DisplayName, newUser.UserId);
+        // });
+    }
+
+    public async void SignInWithApple(Action onSuccess = null, Action onFailed = null) { }
+    public async void SignInWithEmail(Action onSuccess = null, Action onFailed = null) { }
 
     public async void SignInAnonymously(Action onSuccess = null, Action onFailed = null) {
         var signInAnonymouslyTask = auth.SignInAnonymouslyAsync();

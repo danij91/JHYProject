@@ -20,8 +20,8 @@ public class TitleUI : UIBase {
     public override void OnButtonEvent(Button inButton) {
         switch (inButton.name) {
             case nameof(btn_touch):
-                if (DataManager.Instance.IsSignedIn()) {
-                    DataManager.Instance.LoadUserData().Forget();
+                if (UserManager.Instance.IsSignedIn()) {
+                    UserManager.Instance.LoadUserData().Forget();
                     SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY).Forget();
                     return;
                 }
