@@ -40,7 +40,7 @@ public class InGameUI : UIBase {
     protected override void PrevClose() { }
 
     public void SetView() {
-        txt_bestcount.text = DataManager.Instance.CurrentUserRecord.score.ToString();
+        txt_bestcount.text = UserManager.Instance.CurrentUserRecord.score.ToString();
         RefreshCount();
         CloseFailPopup();
     }

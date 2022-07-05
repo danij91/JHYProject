@@ -38,20 +38,20 @@ public class SettingPopup : UIBase {
                 OnToggleSFXSettings();
                 break;
             case nameof(btn_signOut):
-                if (DataManager.Instance.IsAnonymous()) {
+                if (UserManager.Instance.IsAnonymous()) {
                     UIManager.Instance.Show<MessageBoxUI>(ui => {
                         ui.SetMessage(
                             signOutMessage
                             , signOutTitle
                             , () => {
-                                DataManager.Instance.SignOut();
+                                UserManager.Instance.SignOut();
                                 SceneLoader.Instance.ChangeSceneAsync(EScene.TITLE).Forget();
                             }, null);
                     });
                     return;
                 }
 
-                DataManager.Instance.SignOut();
+                UserManager.Instance.SignOut();
                 SceneLoader.Instance.ChangeSceneAsync(EScene.TITLE).Forget();
 
                 break;

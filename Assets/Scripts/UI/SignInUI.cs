@@ -5,8 +5,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SignInUI : UIBase {
-    [SerializeField] private Button btn_signUp;
-    [SerializeField] private Button btn_guest;
+    [SerializeField] private Button btn_signInGoogle;
+    [SerializeField] private Button btn_signInApple;
+    [SerializeField] private Button btn_signInEmail;
+    [SerializeField] private Button btn_signInGuest;
     [SerializeField] private Button btn_skip;
 
     protected override void PrevOpen(params object[] args) {
@@ -19,10 +21,17 @@ public class SignInUI : UIBase {
 
     public override void OnButtonEvent(Button inButton) {
         switch (inButton.name) {
-            case nameof(btn_signUp):
+            case nameof(btn_signInGoogle):
+                UserManager.Instance.SignInWithGoogle(() => { UIManager.Instance.Show<NicknamePopup>(); });
                 break;
-            case nameof(btn_guest):
-                DataManager.Instance.SignInAnonymously(() => { UIManager.Instance.Show<NicknamePopup>(); });
+            case nameof(btn_signInApple):
+                UserManager.Instance.SignInWithApple(() => { UIManager.Instance.Show<NicknamePopup>(); });
+                break;
+            case nameof(btn_signInEmail):
+                UserManager.Instance.SignInWithEmail(() => { UIManager.Instance.Show<NicknamePopup>(); });
+                break;
+            case nameof(btn_signInGuest):
+                UserManager.Instance.SignInAnonymously(() => { UIManager.Instance.Show<NicknamePopup>(); });
                 break;
             case nameof(btn_skip):
                 SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY).Forget();
