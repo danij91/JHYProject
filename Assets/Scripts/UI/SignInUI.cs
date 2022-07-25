@@ -22,7 +22,8 @@ public class SignInUI : UIBase {
     public override void OnButtonEvent(Button inButton) {
         switch (inButton.name) {
             case nameof(btn_signInGoogle):
-                UserManager.Instance.SignInWithGoogle(() => { UIManager.Instance.Show<NicknamePopup>(); });
+                UserManager.Instance.SignInWithGoogle(() => { UIManager.Instance.Show<NicknamePopup>(); },
+                    () => { Debug.Log("jinjja"); });
                 break;
             case nameof(btn_signInApple):
                 UserManager.Instance.SignInWithApple(() => { UIManager.Instance.Show<NicknamePopup>(); });

@@ -4,8 +4,9 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-
+#if UNITY_EDITOR
 [CanEditMultipleObjects]
+#endif
 public class ButtonClickSfxPlayer : MonoBehaviour, IPointerDownHandler {
     [SerializeField] private SFXType sfxType = SFXType.BtnClick;
 
