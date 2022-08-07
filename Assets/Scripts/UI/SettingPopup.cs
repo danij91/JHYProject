@@ -51,7 +51,7 @@ public class SettingPopup : UIBase {
                     return;
                 }
 
-                UserManager.Instance.SignOut();
+                UserManager.Instance.SignOutFromGoogle();
                 SceneLoader.Instance.ChangeSceneAsync(EScene.TITLE).Forget();
 
                 break;
