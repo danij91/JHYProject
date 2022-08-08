@@ -13,10 +13,14 @@ public class RecordItem : MonoBehaviour {
         txt_rank.text = ranking + ".";
     }
 
+    public void SetRankEmpty() {
+        txt_rank.text = "";
+    }
+
     public void SetNickname(string nickname) {
         txt_nickname.text = nickname;
     }
-    
+
     public void SetScore(int score) {
         txt_score.text = score.ToString();
     }
