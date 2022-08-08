@@ -42,6 +42,9 @@ public class RankingUI : UIBase {
     private async UniTaskVoid SetMyRecord() {
         await UniTask.WaitUntil(() => UserManager.Instance.isRecordLoaded);
         if (UserManager.Instance.myRecordIndex == -1) {
+            myRecordItem.SetRankEmpty();
+            myRecordItem.SetNickname(UserManager.Instance.CurrentUserData.nickname);
+            myRecordItem.SetScore(0);
             return;
         }
         var myRecord = UserManager.Instance.UserRecords[UserManager.Instance.myRecordIndex];

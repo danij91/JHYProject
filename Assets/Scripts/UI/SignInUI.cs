@@ -10,8 +10,15 @@ public class SignInUI : UIBase {
     [SerializeField] private Button btn_signInEmail;
     [SerializeField] private Button btn_signInGuest;
     [SerializeField] private Button btn_skip;
+    [SerializeField] private Image img_guestKr;
+    [SerializeField] private Image img_guestEn;
 
     protected override void PrevOpen(params object[] args) {
+        bool isKorean = LocalizationManager.Instance.GetCurrentLanguage() == 1;
+        img_guestKr.gameObject.SetActive(isKorean);
+        img_guestEn.gameObject.SetActive(!isKorean);
+
+        btn_signInGuest.targetGraphic = isKorean ? img_guestKr : img_guestEn;
 #if UNITY_EDITOR
         btn_skip.gameObject.SetActive(true);
 #endif

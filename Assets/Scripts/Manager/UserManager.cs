@@ -50,11 +50,12 @@ public class UserManager : Singleton<UserManager> {
             await SignInWithGoogleOnFirebase(idToken);
 
             if (await IsNewUser()) {
-                
                 onNewUser?.Invoke();
             } else {
                 onOldUser?.Invoke();
             }
+            
+            LoadUserData().Forget();
         }
         catch (Exception e) {
             Console.WriteLine(e);
