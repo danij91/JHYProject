@@ -54,6 +54,8 @@ ExportedObj/
 .idea/**/tasks.xml
 .idea/.name
 
+[Aa]ssets/Models/
+
 # JetBrains Rider Plugin
 [Aa]ssets/Plugins/Editor/JetBrains*
 
