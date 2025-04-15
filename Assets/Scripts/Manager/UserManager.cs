@@ -1,18 +1,16 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Firebase;
 using Firebase.Auth;
-using Firebase.Database;
+using Firebase.Firestore;
 using Google;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 
 public class UserManager : Singleton<UserManager> {
-    private DatabaseReference reference;
+    private FirebaseFirestore firestore;
     private FirebaseAuth auth;
     private FirebaseUser currentUser;
     public List<UserRecord> UserRecords { get; private set; } = new List<UserRecord>();
@@ -133,18 +131,24 @@ public class UserManager : Singleton<UserManager> {
     }
 
     public void Initialize() {
-        reference = FirebaseDatabase.DefaultInstance.RootReference;
-        configuration = new GoogleSignInConfiguration
-            {WebClientId = webClientId, RequestEmail = true, RequestIdToken = true};
+        firestore = FirebaseFirestore.DefaultInstance;
+        configuration = new GoogleSignInConfiguration {
+            WebClientId = webClientId,
+            RequestEmail = true,
+            RequestIdToken = true
+        };
         CheckFirebaseDependencies();
     }
 
     public void UpdateScore(int score) {
+        if (CurrentUserRecord == null)
+        {
+            return;
+        }
         CurrentUserRecord.score = score;
-        string json = JsonUtility.ToJson(CurrentUserRecord);
-
-        reference.Child("scores").Child(GetCurrentUserId()).SetValueAsync(json);
+        firestore.Collection("scores").Document(GetCurrentUserId()).SetAsync(CurrentUserRecord);
     }
+
 
     public void SignUp() {
         auth.CreateUserWithEmailAndPasswordAsync("testEmail@test.com", "testpw1000").ContinueWith(task => {
@@ -158,12 +162,12 @@ public class UserManager : Singleton<UserManager> {
                 return;
             }
 
-            // Firebase user has been created.
-            FirebaseUser newUser = task.Result;
+            FirebaseUser newUser = task.Result.User;
             Debug.LogFormat("Firebase user created successfully: {0} ({1})",
                 newUser.DisplayName, newUser.UserId);
         });
     }
+
 
     // public async void SignInWithGoogle(Action onSuccess = null, Action onFailed = null) {
     //     // Firebase.Auth.Credential credential =
@@ -203,7 +207,7 @@ public class UserManager : Singleton<UserManager> {
             return;
         }
 
-        FirebaseUser newUser = signInAnonymouslyTask.Result;
+        FirebaseUser newUser = signInAnonymouslyTask.Result.User;
         currentUser = newUser;
         Debug.LogFormat("User signed in successfully: {0} ({1})",
             newUser.DisplayName, newUser.UserId);
@@ -212,27 +216,25 @@ public class UserManager : Singleton<UserManager> {
 
     public async UniTask LoadUserData() {
         currentUser = auth.CurrentUser;
-        var loadUserDataTask = reference.Child("users").Child(GetCurrentUserId()).GetValueAsync();
-        var loadUserDataResult = await loadUserDataTask;
 
-        if (loadUserDataTask.IsCompleted && loadUserDataResult.Exists) {
-            CurrentUserData = JsonUtility.FromJson<UserData>(loadUserDataResult.Value.ToString());
+        var userDoc = await firestore.Collection("users").Document(GetCurrentUserId()).GetSnapshotAsync();
+        if (userDoc.Exists) {
+            CurrentUserData = userDoc.ConvertTo<UserData>();
         } else {
             CurrentUserData = new UserData {nickname = "", characters = new List<int>()};
-            LocalDataHelper.SaveMainCharacter((int) EConfig.Character.INITIAL_CHARACTER);
+            LocalDataHelper.SaveMainCharacter((int)EConfig.Character.INITIAL_CHARACTER);
         }
 
         CharacterInventory.Instance.SetValidCharacters(CurrentUserData.characters);
 
-        var loadUserRecordTask = reference.Child("scores").Child(GetCurrentUserId()).GetValueAsync();
-        var loadUserRecordResult = await loadUserRecordTask;
-
-        if (loadUserRecordTask.IsCompleted && loadUserRecordResult.Exists) {
-            CurrentUserRecord = JsonUtility.FromJson<UserRecord>(loadUserRecordResult.Value.ToString());
+        var scoreDoc = await firestore.Collection("scores").Document(GetCurrentUserId()).GetSnapshotAsync();
+        if (scoreDoc.Exists) {
+            CurrentUserRecord = scoreDoc.ConvertTo<UserRecord>();
         } else {
             CurrentUserRecord = new UserRecord {nickname = CurrentUserData.nickname, score = 0};
         }
     }
+
 
     public void SignOut() {
         auth.SignOut();
@@ -263,59 +265,64 @@ public class UserManager : Singleton<UserManager> {
         isRecordLoaded = false;
         myRecordIndex = -1;
         UserRecords.Clear();
-        var task = reference.Child("scores").OrderByChild("score").GetValueAsync();
-        var result = await task;
 
-        if (task.IsCompleted) {
-            foreach (var r in result.Children) {
-                var userRecord = JsonUtility.FromJson<UserRecord>(r.Value.ToString());
-                UserRecords.Add(userRecord);
-                if (r.Key == GetCurrentUserId()) {
-                    myRecordIndex = UserRecords.Count - 1;
-                }
+        var query = firestore.Collection("scores").OrderByDescending("score");
+        var snapshot = await query.GetSnapshotAsync();
+
+        int index = 0;
+        foreach (var doc in snapshot.Documents) {
+            var record = doc.ConvertTo<UserRecord>();
+            UserRecords.Add(record);
+
+            if (doc.Id == GetCurrentUserId()) {
+                myRecordIndex = index;
             }
-
-            isRecordLoaded = true;
+            index++;
         }
+
+        isRecordLoaded = true;
     }
 
     public void SetUserNickname(string nickname) {
-        CurrentUserData = new UserData {nickname = nickname, characters = new List<int>()};
-        CurrentUserData.characters.Add((int) EConfig.Character.INITIAL_CHARACTER);
-        var json = JsonUtility.ToJson(CurrentUserData);
-        reference.Child("users").Child(GetCurrentUserId()).SetValueAsync(json);
-        LocalDataHelper.SaveMainCharacter((int) EConfig.Character.INITIAL_CHARACTER);
-        CharacterInventory.Instance.SetValidCharacters(CurrentUserData.characters);
+        CurrentUserData = new UserData {nickname = nickname, characters = new List<int> { (int)EConfig.Character.INITIAL_CHARACTER }};
+        firestore.Collection("users").Document(GetCurrentUserId()).SetAsync(CurrentUserData);
+    
         CurrentUserRecord = new UserRecord {nickname = nickname, score = 0};
+        firestore.Collection("scores").Document(GetCurrentUserId()).SetAsync(CurrentUserRecord);
+
+        LocalDataHelper.SaveMainCharacter((int)EConfig.Character.INITIAL_CHARACTER);
+        CharacterInventory.Instance.SetValidCharacters(CurrentUserData.characters);
     }
 
     public async UniTask<bool> IsNewUser() {
-        var task = reference.Child("users").Child(GetCurrentUserId()).GetValueAsync();
-        await task;
-
-        if (task.IsFaulted) {
-            throw task.Exception;
-        }
-
-        if (task.IsCanceled) {
-            throw new Exception("IsNewUser canceled");
-        }
-
-        return !task.Result.Exists;
+        var doc = await firestore.Collection("users").Document(GetCurrentUserId()).GetSnapshotAsync();
+        return !doc.Exists;
     }
+
 
     public void UpdateUserData() {
-        var json = JsonUtility.ToJson(CurrentUserData);
-        reference.Child("users").Child(GetCurrentUserId()).SetValueAsync(json);
+        firestore.Collection("users").Document(GetCurrentUserId()).SetAsync(CurrentUserData);
     }
+
 }
 
-public class UserRecord {
-    public string nickname;
-    public int score;
+
+[FirestoreData]
+public class UserData
+{
+    [FirestoreProperty]
+    public string nickname { get; set; }
+
+    [FirestoreProperty]
+    public List<int> characters { get; set; }
 }
 
-public class UserData {
-    public string nickname;
-    public List<int> characters;
+[FirestoreData]
+public class UserRecord
+{
+    [FirestoreProperty]
+    public string nickname { get; set; }
+
+    [FirestoreProperty]
+    public int score { get; set; }
 }

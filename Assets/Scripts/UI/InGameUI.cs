@@ -40,7 +40,7 @@ public class InGameUI : UIBase {
     protected override void PrevClose() { }
 
     public void SetView() {
-        txt_bestcount.text = UserManager.Instance.CurrentUserRecord.score.ToString();
+        txt_bestcount.text = UserManager.Instance.CurrentUserRecord!=null?UserManager.Instance.CurrentUserRecord.score.ToString():"0";
         RefreshCount();
         CloseFailPopup();
     }
@@ -60,12 +60,14 @@ public class InGameUI : UIBase {
     }
 
     public override void OnButtonEvent(Button inButton) {
+        Debug.Log($"{inButton.name} clicked!");
         switch (inButton.name) {
             case nameof(btn_back):
                 ExitGame();
                 break;
             case nameof(btn_screen):
                 IsScreenBtnDown = false;
+                
                 if (!CheckJumpable()) return;
                 GameManager.Instance.Player.Jump(elapsedTime);
                 elapsedTime = 0;
