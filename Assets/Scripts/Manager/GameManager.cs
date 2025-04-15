@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : Singleton<GameManager> {
+public class GameManager : Singleton<GameManager>
+{
     [SerializeField] private GameCamera camera;
 
-    public enum GAME_STATE {
+    public enum GAME_STATE
+    {
         READY,
         PLAY,
         END
@@ -23,14 +25,16 @@ public class GameManager : Singleton<GameManager> {
     private InGameUI inGameUI;
     private const int AD_PLAY_COUNT = 3;
 
-    public void Initialize() {
+    public void Initialize()
+    {
         GameStart();
         UIManager.Instance.Show<InGameUI>();
         if (inGameUI == null)
             inGameUI = UIManager.Instance.GetUI<InGameUI>();
     }
 
-    public void GameStart() {
+    public void GameStart()
+    {
         JumpCount = 0;
         PoolingManager.Instance.RestoreAll();
         MapManager.Instance.Initialize();
@@ -40,44 +44,56 @@ public class GameManager : Singleton<GameManager> {
         IsPerfectJump = false;
     }
 
-    private void CreatePlayer() {
+    private void CreatePlayer()
+    {
         ECharacterType type;
-        if (LocalDataConfig.Instance.IsCharacterTest) {
+        if (LocalDataConfig.Instance.IsCharacterTest)
+        {
             type = LocalDataConfig.Instance.StartCharacterType;
-        } else {
+        }
+        else
+        {
             type = CharacterInventory.Instance.MainCharacter;
         }
 
         Player = PoolingManager.Instance.Create<Player>(EPoolingType.Character, $"Player_{type}", null, type);
     }
 
-    public void GameEnd() {
+    public void GameEnd()
+    {
         CurrentState = GAME_STATE.END;
         SaveBestScore();
         AudioManager.Instance.AllSFXStop();
 
         playCount++;
-        
-        if (playCount >= AD_PLAY_COUNT) {
+
+        if (playCount >= AD_PLAY_COUNT)
+        {
             AdManager.Instance.LoadPlayAds();
             playCount = 0;
         }
     }
 
-    public void SaveBestScore() {
-        int prevCount = UserManager.Instance.CurrentUserRecord.score;
-        if (JumpCount > prevCount) {
+    public void SaveBestScore()
+    {
+        int prevCount = UserManager.Instance.CurrentUserRecord != null
+            ? UserManager.Instance.CurrentUserRecord.score
+            : 0;
+        if (JumpCount > prevCount)
+        {
             UserManager.Instance.UpdateScore(JumpCount);
         }
     }
 
-    public void OnFail() {
+    public void OnFail()
+    {
         GameEnd();
         inGameUI.OpenFailPopup();
         Player.ChangeState(Player.PLAYER_STATE.FALL);
     }
 
-    public void OnSuccess() {
+    public void OnSuccess()
+    {
         JumpCount++;
         JumpCount += ComboCount;
         inGameUI.RefreshCount();
@@ -86,12 +102,14 @@ public class GameManager : Singleton<GameManager> {
         Player.SetRotation();
     }
 
-    public void SuccessCombo() {
+    public void SuccessCombo()
+    {
         IsPerfectJump = true;
         ComboCount++;
     }
 
-    public void FailCombo() {
+    public void FailCombo()
+    {
         IsPerfectJump = false;
         ComboCount = 0;
     }

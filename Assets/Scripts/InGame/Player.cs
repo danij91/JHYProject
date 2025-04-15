@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public enum ECharacterType // 캐릭터가 8개 넘어가면 Flags를 byte배열로 해야할듯...?
+public enum ECharacterType 
 {
     Chick, //(1 << 0)
     Crocodile, //(1 << 1)
