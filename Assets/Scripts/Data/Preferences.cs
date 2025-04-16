@@ -20,6 +20,10 @@ public static class Preferences
     private const string LANGUAGE_SETTINGS_KEY = "Language_Settings_Key";
     private const string SFX_SETTINGS_KEY = "SFX_Settings_Key";
     private const string BGM_SETTINGS_KEY = "BGM_Settings_Key";
+    private const string BGM_VOLUME_KEY = "BGM_Volume_Key";
+    private const string SFX_VOLUME_KEY = "SFX_Volume_Key";
+    
+    private const float DEFAULT_VOLUME = 1f;
 
     private const ELanguageSettings DEFAULT_LANGUAGE = ELanguageSettings.Korean;
     private const EAudioSettings DEFAULT_AUDIO = EAudioSettings.Play;
@@ -64,5 +68,27 @@ public static class Preferences
             return DEFAULT_AUDIO;
 
         return (EAudioSettings)PlayerPrefs.GetInt(BGM_SETTINGS_KEY);
+    }
+    
+    public static void SaveBGMVolume(float value)
+    {
+        PlayerPrefs.SetFloat(BGM_VOLUME_KEY, value);
+        PlayerPrefs.Save();
+    }
+
+    public static float GetBGMVolume()
+    {
+        return PlayerPrefs.HasKey(BGM_VOLUME_KEY) ? PlayerPrefs.GetFloat(BGM_VOLUME_KEY) : DEFAULT_VOLUME;
+    }
+
+    public static void SaveSFXVolume(float value)
+    {
+        PlayerPrefs.SetFloat(SFX_VOLUME_KEY, value);
+        PlayerPrefs.Save();
+    }
+
+    public static float GetSFXVolume()
+    {
+        return PlayerPrefs.HasKey(SFX_VOLUME_KEY) ? PlayerPrefs.GetFloat(SFX_VOLUME_KEY) : DEFAULT_VOLUME;
     }
 }

@@ -12,7 +12,9 @@ public class SettingPopup : UIBase {
     [SerializeField] private Button btn_signOut;
     [SerializeField] private Image img_bgm_check;
     [SerializeField] private Image img_sfx_check;
-
+    [SerializeField] private Slider bgmSlider;
+    [SerializeField] private Slider sfxSlider;
+    
     private string signOutTitle;
     private string signOutMessage;
 
@@ -22,6 +24,20 @@ public class SettingPopup : UIBase {
 
         signOutTitle = LocalizationManager.Instance.GetLocalizedText("setting_signOutTitle");
         signOutMessage = LocalizationManager.Instance.GetLocalizedText("setting_signOutMessage");
+        
+        bgmSlider.minValue = 0.0001f;
+        sfxSlider.minValue = 0.0001f;
+
+        bgmSlider.value = AudioManager.Instance.BGMVolume;
+        sfxSlider.value = AudioManager.Instance.SFXVolume;
+
+        bgmSlider.onValueChanged.AddListener((value) => {
+            AudioManager.Instance.SetBGMVolume(value);
+        });
+
+        sfxSlider.onValueChanged.AddListener((value) => {
+            AudioManager.Instance.SetSFXVolume(value);
+        });
     }
 
     protected override void PrevClose() { }
