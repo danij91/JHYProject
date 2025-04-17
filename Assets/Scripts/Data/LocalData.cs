@@ -205,12 +205,12 @@ public class LocalData {
 
 
 public static class LocalDataHelper {
-    public static int GetMainCharacter() {
-        return LocalData.Instance.GetKey<int>(LocalData.MAIN_CHARACTER_KEY);
+    public static string GetMainCharacterId() {
+        return LocalData.Instance.GetKey<string>(LocalData.MAIN_CHARACTER_KEY);
     }
 
-    public static void SaveMainCharacter(int intType) {
-        LocalData.Instance.SetKey<int>(LocalData.MAIN_CHARACTER_KEY, intType);
+    public static void SaveMainCharacterId(string characterId) {
+        LocalData.Instance.SetKey<string>(LocalData.MAIN_CHARACTER_KEY, characterId);
     }
 
     public static int GetLanguage() {

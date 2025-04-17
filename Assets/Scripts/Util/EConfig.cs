@@ -18,7 +18,7 @@ public static class EConfig {
     }
 
     public static class Character {
-        public static readonly ECharacterType INITIAL_CHARACTER = ECharacterType.Chick;
+        public static readonly string INITIAL_CHARACTER_ID = "chick";
     }
 
     public enum ELogLevel {

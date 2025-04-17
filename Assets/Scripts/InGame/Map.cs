@@ -17,7 +17,7 @@ public class Map : PoolingObject {
         SFXType SuccessSfx = GameManager.Instance.IsPerfectJump ? SFXType.Success_Perfect : SFXType.Success_Normal;
         AudioManager.Instance.SFXPlay(SuccessSfx);
 
-        GameManager.Instance.Player.ChangeState(Player.PLAYER_STATE.IDLE);
+        GameManager.Instance.PlayerController.ChangeState(PlayerController.PLAYER_STATE.IDLE);
         if (MapManager.Instance.CurrentMap == this)
             GameManager.Instance.OnSuccess();
     }

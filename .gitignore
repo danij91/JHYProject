@@ -11,7 +11,7 @@
 UserSettings/
 
 # 🔄 Unity 메타 데이터 (자산은 포함, 단독 메타 제외)
-!/[Aa]ssets/**/*.meta
+# !/[Aa]ssets/**/*.meta
 
 # Unity Auto-generated
 ExportedObj/
@@ -55,6 +55,7 @@ ExportedObj/
 .idea/.name
 
 [Aa]ssets/Models/
+[Aa]ssets/Quirky Series Ultimate/
 
 # JetBrains Rider Plugin
 [Aa]ssets/Plugins/Editor/JetBrains*

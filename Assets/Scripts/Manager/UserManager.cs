@@ -221,8 +221,8 @@ public class UserManager : Singleton<UserManager> {
         if (userDoc.Exists) {
             CurrentUserData = userDoc.ConvertTo<UserData>();
         } else {
-            CurrentUserData = new UserData {nickname = "", characters = new List<int>()};
-            LocalDataHelper.SaveMainCharacter((int)EConfig.Character.INITIAL_CHARACTER);
+            CurrentUserData = new UserData {nickname = "", characters = new List<string>()};
+            LocalDataHelper.SaveMainCharacterId(EConfig.Character.INITIAL_CHARACTER_ID); 
         }
 
         CharacterInventory.Instance.SetValidCharacters(CurrentUserData.characters);
@@ -284,13 +284,13 @@ public class UserManager : Singleton<UserManager> {
     }
 
     public void SetUserNickname(string nickname) {
-        CurrentUserData = new UserData {nickname = nickname, characters = new List<int> { (int)EConfig.Character.INITIAL_CHARACTER }};
+        CurrentUserData = new UserData {nickname = nickname, characters = new List<string> { EConfig.Character.INITIAL_CHARACTER_ID }};
         firestore.Collection("users").Document(GetCurrentUserId()).SetAsync(CurrentUserData);
     
         CurrentUserRecord = new UserRecord {nickname = nickname, score = 0};
         firestore.Collection("scores").Document(GetCurrentUserId()).SetAsync(CurrentUserRecord);
 
-        LocalDataHelper.SaveMainCharacter((int)EConfig.Character.INITIAL_CHARACTER);
+        LocalDataHelper.SaveMainCharacterId(EConfig.Character.INITIAL_CHARACTER_ID);
         CharacterInventory.Instance.SetValidCharacters(CurrentUserData.characters);
     }
 
@@ -314,7 +314,7 @@ public class UserData
     public string nickname { get; set; }
 
     [FirestoreProperty]
-    public List<int> characters { get; set; }
+    public List<string> characters { get; set; }
 }
 
 [FirestoreData]
