@@ -5,17 +5,18 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private GameCamera camera;
+    [SerializeField] private PlayerController playerPrefab;
+    [SerializeField] private CharacterDatabase characterDatabase;
 
-    public enum GAME_STATE
-    {
+    public enum GAME_STATE {
         READY,
         PLAY,
         END
     }
 
-    public GAME_STATE CurrentState { get; set; }
+    public GAME_STATE CurrentState { get; private set; }
     public GameCamera GameCamera => camera;
-    public Player Player { get; private set; }
+    public PlayerController PlayerController { get; private set; }
     public int JumpCount { get; private set; }
     public int ComboCount { get; private set; }
     public bool IsPerfectJump { get; private set; }
@@ -25,17 +26,16 @@ public class GameManager : Singleton<GameManager>
     private InGameUI inGameUI;
     private const int AD_PLAY_COUNT = 3;
 
-    public void Initialize()
-    {
+    public void Initialize() {
         GameStart();
         UIManager.Instance.Show<InGameUI>();
         if (inGameUI == null)
             inGameUI = UIManager.Instance.GetUI<InGameUI>();
     }
 
-    public void GameStart()
-    {
+    public void GameStart() {
         JumpCount = 0;
+        ComboCount = 0;
         PoolingManager.Instance.RestoreAll();
         MapManager.Instance.Initialize();
         CreatePlayer();
@@ -44,72 +44,59 @@ public class GameManager : Singleton<GameManager>
         IsPerfectJump = false;
     }
 
-    private void CreatePlayer()
-    {
-        ECharacterType type;
-        if (LocalDataConfig.Instance.IsCharacterTest)
-        {
-            type = LocalDataConfig.Instance.StartCharacterType;
-        }
-        else
-        {
-            type = CharacterInventory.Instance.MainCharacter;
+    private void CreatePlayer() {
+        CharacterData data;
+
+        if (LocalDataConfig.Instance.IsCharacterTest) {
+            data = characterDatabase.GetCharacterDataById(LocalDataConfig.Instance.StartCharacterType.ToString().ToLower());
+        } else {
+            data = CharacterInventory.Instance.GetSelectedCharacterData();
         }
 
-        Player = PoolingManager.Instance.Create<Player>(EPoolingType.Character, $"Player_{type}", null, type);
+        PlayerController = PoolingManager.Instance.Create<PlayerController>(
+            EPoolingType.Character, "Player", null, data);
     }
 
-    public void GameEnd()
-    {
+    public void GameEnd() {
         CurrentState = GAME_STATE.END;
         SaveBestScore();
         AudioManager.Instance.AllSFXStop();
 
         playCount++;
-
-        if (playCount >= AD_PLAY_COUNT)
-        {
+        if (playCount >= AD_PLAY_COUNT) {
             AdManager.Instance.LoadPlayAds();
             playCount = 0;
         }
     }
 
-    public void SaveBestScore()
-    {
-        int prevCount = UserManager.Instance.CurrentUserRecord != null
-            ? UserManager.Instance.CurrentUserRecord.score
-            : 0;
-        if (JumpCount > prevCount)
-        {
+    public void SaveBestScore() {
+        int prevCount = UserManager.Instance.CurrentUserRecord?.score ?? 0;
+        if (JumpCount > prevCount) {
             UserManager.Instance.UpdateScore(JumpCount);
         }
     }
 
-    public void OnFail()
-    {
+    public void OnFail() {
         GameEnd();
         inGameUI.OpenFailPopup();
-        Player.ChangeState(Player.PLAYER_STATE.FALL);
+        PlayerController.ChangeState(PlayerController.PLAYER_STATE.FALL);
     }
 
-    public void OnSuccess()
-    {
+    public void OnSuccess() {
         JumpCount++;
         JumpCount += ComboCount;
         inGameUI.RefreshCount();
         MapManager.Instance.CreateMap();
         MapManager.Instance.RemoveMap();
-        Player.SetRotation();
+        PlayerController.SetRotation(); // 🔄 바뀐 부분
     }
 
-    public void SuccessCombo()
-    {
+    public void SuccessCombo() {
         IsPerfectJump = true;
         ComboCount++;
     }
 
-    public void FailCombo()
-    {
+    public void FailCombo() {
         IsPerfectJump = false;
         ComboCount = 0;
     }

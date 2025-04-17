@@ -1,11 +1,8 @@
-using System;
-using System.Collections;
+// CharacterInvenUI.cs
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Localization;
-using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
+using TMPro;
 
 public class CharacterInvenUI : UIBase {
     [SerializeField] private Button btn_select;
@@ -16,74 +13,42 @@ public class CharacterInvenUI : UIBase {
     [SerializeField] private CharacterInvenItem itemTemplate;
     [SerializeField] private Transform viewerTr;
 
-    public ECharacterType CurrentCharacterType { get; private set; }
-    private CharacterInventory Inven => CharacterInventory.Instance;
-    private int CharacterCount => Enum.GetValues(typeof(ECharacterType)).Length - 1;
+    private CharacterData CurrentCharacterData;
+    private GameObject currentModel; // ✅ 모델만 표시할 GameObject
 
+    private CharacterInventory Inven => CharacterInventory.Instance;
     private List<CharacterInvenItem> itemList = new List<CharacterInvenItem>();
-    private Dictionary<ECharacterType, Player> characterList = new Dictionary<ECharacterType, Player>();
+    private List<CharacterData> allCharacters => Inven.GetAllCharacters();
+
     private string select;
     private string selected;
     private string purchaseTitle;
     private string purchaseMessage;
 
     protected override void PrevOpen(params object[] args) {
-        CurrentCharacterType = Inven.MainCharacter;
-        RefreshButton();
+        CurrentCharacterData = Inven.GetSelectedCharacterData();
         CreateCharacterItems();
         RefreshCharacterViewer();
+        RefreshButton();
+
         select = LocalizationManager.Instance.GetLocalizedText("characterInven_select");
         selected = LocalizationManager.Instance.GetLocalizedText("characterInven_selected");
         purchaseTitle = LocalizationManager.Instance.GetLocalizedText("characterInven_purchaseTitle");
         purchaseMessage = LocalizationManager.Instance.GetLocalizedText("characterInven_purchaseMessage");
-        tmp_select.text = CurrentCharacterType == Inven.MainCharacter ? selected : select;
-    }
-    
-
-    protected override void PrevClose() { }
-
-    public void ResetSelectedItem() {
-        foreach (var item in itemList)
-            item.ActiveSelect(false);
-    }
-
-    public void SetCurrentCharacter(ECharacterType type) {
-        CurrentCharacterType = type;
-        RefreshButton();
-        RefreshCharacterViewer();
-    }
-
-    public void RefreshButton() {
-        bool isValid = Inven.IsValid(CurrentCharacterType);
-        btn_purchase.gameObject.SetActive(!isValid);
-        btn_select.gameObject.SetActive(isValid);
-        tmp_select.text = CurrentCharacterType == Inven.MainCharacter ? selected : select;
-    }
-
-    private void CreateCharacterViewer() {
-        characterList.Clear();
-        for (int i = 0; i < CharacterCount; i++) {
-            Player character =
-                Instantiate(ResourceManager.Instance.Load<Player>($"Prefabs/Character/Player_{(ECharacterType) i}"),
-                    viewerTr);
-            character.transform.GetChild(0).GetChild(0).gameObject.layer = LayerMask.NameToLayer("UI");
-            character.GetComponent<Rigidbody>().isKinematic = true;
-            character.gauge.gameObject.SetActive(false);
-            character.transform.localPosition = Vector3.zero;
-            character.transform.localRotation = Quaternion.identity;
-            character.transform.localScale = Vector3.one * 150f;
-            characterList.Add((ECharacterType) i, character);
-        }
+        tmp_select.text = selected;
     }
 
     private void CreateCharacterItems() {
         itemList.Clear();
-        for (int i = 0; i < CharacterCount; i++) {
+
+        for (int i = 0; i < allCharacters.Count; i++) {
+            CharacterData data = allCharacters[i];
+
             CharacterInvenItem item = i < contentTr.childCount
                 ? contentTr.GetChild(i).GetComponent<CharacterInvenItem>()
                 : Instantiate(itemTemplate, contentTr);
 
-            item.SetData(this, (ECharacterType) i);
+            item.SetData(this, data);
             item.gameObject.SetActive(true);
 
             itemList.Add(item);
@@ -91,41 +56,62 @@ public class CharacterInvenUI : UIBase {
     }
 
     private void RefreshCharacterViewer() {
-        if (characterList.Count != CharacterCount || characterList.Count == 0)
-            CreateCharacterViewer();
+        if (currentModel != null)
+            DestroyImmediate(currentModel);
 
-        foreach (var pair in characterList)
-            pair.Value.gameObject.SetActive(false);
+        if (CurrentCharacterData == null) return;
 
-        if (characterList.ContainsKey(CurrentCharacterType))
-            characterList[CurrentCharacterType].gameObject.SetActive(true);
+        currentModel = Instantiate(CurrentCharacterData.modelPrefab, viewerTr);
+        currentModel.transform.localPosition = Vector3.zero;
+        currentModel.transform.localRotation = Quaternion.Euler(0, 180, 0);
+        currentModel.transform.localScale = Vector3.one * 150f;
+    }
+
+    public void SetCurrentCharacter(CharacterData data) {
+        CurrentCharacterData = data;
+        RefreshCharacterViewer();
+        RefreshButton();
+    }
+
+    public CharacterData GetCurrentCharacterData() {
+        return CurrentCharacterData;
+    }
+
+    public void ResetSelectedItem() {
+        foreach (var item in itemList) {
+            item.ActiveSelect(false);
+        }
+    }
+
+    private void RefreshButton() {
+        bool isValid = Inven.IsValid(CurrentCharacterData.characterId);
+        btn_purchase.gameObject.SetActive(!isValid);
+        btn_select.gameObject.SetActive(isValid);
+        tmp_select.text = CurrentCharacterData.characterId == Inven.MainCharacterId ? selected : select;
     }
 
     private void SelectCharacter() {
-        if (!Inven.IsValid(CurrentCharacterType))
-            return;
+        if (!Inven.IsValid(CurrentCharacterData.characterId)) return;
 
-        Inven.SelectCharacter(CurrentCharacterType);
+        Inven.SelectCharacter(CurrentCharacterData.characterId);
         RefreshButton();
 
-        foreach (var item in itemList)
+        foreach (var item in itemList) {
             item.CheckMainCharacter();
+        }
     }
 
     private void PurchaseCharacter() {
-        // ToDo 재화로 구매할 때 재화충분한지 체크 추가
-        if (Inven.IsValid(CurrentCharacterType))
-            return;
+        if (Inven.IsValid(CurrentCharacterData.characterId)) return;
 
         UIManager.Instance.Show<MessageBoxUI>(ui => {
             viewerTr.gameObject.SetActive(false);
             ui.SetMessage(purchaseMessage, purchaseTitle, () => {
-                Inven.Add(CurrentCharacterType);
+                Inven.Add(CurrentCharacterData.characterId);
                 RefreshButton();
-                CharacterInvenItem item = itemList.Find(x => x.CharacterType == CurrentCharacterType);
-                item.SetGrayScale();
+                itemList.Find(x => x.CharacterId == CurrentCharacterData.characterId)?.SetGrayScale();
             }, null);
-        }, ui => { viewerTr.gameObject.SetActive(true); });
+        }, ui => viewerTr.gameObject.SetActive(true));
     }
 
     public override void OnButtonEvent(Button inButton) {

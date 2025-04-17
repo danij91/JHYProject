@@ -57,5 +57,5 @@ public class LocalDataConfig : ScriptableObject
 
     [Header("[Character Test]")]
     public bool IsCharacterTest = false;
-    public ECharacterType StartCharacterType = ECharacterType.Chick;
+    public string StartCharacterType = "chick";
 }

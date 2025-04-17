@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CharacterInvenItem : MonoBehaviour {
     [SerializeField] private Image img_character;
@@ -11,20 +9,28 @@ public class CharacterInvenItem : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI tmp_name;
     private string characterNameKey = "characterName_";
 
-    public ECharacterType CharacterType { get; private set; }
+    public CharacterData CharacterData { get; private set; }
+    public string CharacterId => CharacterData.characterId;
+
     private CharacterInvenUI InvenUI;
 
-    public void SetData(CharacterInvenUI ui, ECharacterType inType) {
+    public void SetData(CharacterInvenUI ui, CharacterData data) {
         InvenUI = ui;
-        CharacterType = inType;
+        CharacterData = data;
 
-        bool isSelected = CharacterType == InvenUI.CurrentCharacterType;
+        bool isSelected = data == InvenUI.GetCurrentCharacterData();
         img_select.gameObject.SetActive(isSelected);
-        string characterName =
-            LocalizationManager.Instance.GetLocalizedText(characterNameKey + CharacterType);
+
+        string characterName = LocalizationManager.Instance.GetLocalizedText(characterNameKey + data.characterId);
         tmp_name.text = characterName;
-        string iconPath = $"Image/Icon/{CharacterType}";
-        img_character.sprite = ResourceManager.Instance.Load<Sprite>(iconPath);
+
+        // 썸네일 연결 (없을 경우 fallback 처리 가능)
+        if (data.thumbnail != null) {
+            img_character.sprite = data.thumbnail;
+        } else {
+            img_character.sprite = ResourceManager.Instance.Load<Sprite>($"Image/Icon/{data.characterId}");
+        }
+
         SetGrayScale();
         CheckMainCharacter();
     }
@@ -32,18 +38,18 @@ public class CharacterInvenItem : MonoBehaviour {
     public void SetGrayScale() {
         Material tempMat = Instantiate(img_character.material);
         img_character.material = tempMat;
-        img_character.GrayScale(!CharacterInventory.Instance.IsValid(CharacterType));
+        img_character.GrayScale(!CharacterInventory.Instance.IsValid(CharacterId));
     }
 
     public void CheckMainCharacter() {
-        bool isMain = CharacterInventory.Instance.MainCharacter == CharacterType;
+        bool isMain = CharacterInventory.Instance.MainCharacterId == CharacterId;
         img_checkmark.gameObject.SetActive(isMain);
     }
 
     public void OnClick_Select() {
         InvenUI.ResetSelectedItem();
         ActiveSelect(true);
-        InvenUI.SetCurrentCharacter(CharacterType);
+        InvenUI.SetCurrentCharacter(CharacterData);
     }
 
     public void ActiveSelect(bool isSelect) {
