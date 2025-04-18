@@ -14,7 +14,8 @@ public class CharacterInvenUI : UIBase {
     [SerializeField] private Transform viewerTr;
 
     private CharacterData CurrentCharacterData;
-    private GameObject currentModel; // ✅ 모델만 표시할 GameObject
+    private GameObject currentModel;
+    private Animator animator;
 
     private CharacterInventory Inven => CharacterInventory.Instance;
     private List<CharacterInvenItem> itemList = new List<CharacterInvenItem>();
@@ -58,13 +59,19 @@ public class CharacterInvenUI : UIBase {
     private void RefreshCharacterViewer() {
         if (currentModel != null)
             DestroyImmediate(currentModel);
-
+        
         if (CurrentCharacterData == null) return;
 
         currentModel = Instantiate(CurrentCharacterData.modelPrefab, viewerTr);
         currentModel.transform.localPosition = Vector3.zero;
-        currentModel.transform.localRotation = Quaternion.Euler(0, 180, 0);
-        currentModel.transform.localScale = Vector3.one * 150f;
+        currentModel.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        currentModel.transform.localScale = Vector3.one * 400f;
+        
+        animator = currentModel.GetComponent<Animator>();
+
+        if (animator != null && animator.runtimeAnimatorController != null) {
+            animator.Play("Idle_A");
+        }
     }
 
     public void SetCurrentCharacter(CharacterData data) {
@@ -111,7 +118,11 @@ public class CharacterInvenUI : UIBase {
                 RefreshButton();
                 itemList.Find(x => x.CharacterId == CurrentCharacterData.characterId)?.SetGrayScale();
             }, null);
-        }, ui => viewerTr.gameObject.SetActive(true));
+        }, ui =>
+        {
+            viewerTr.gameObject.SetActive(true);
+            animator.Play("Idle_A");
+        });
     }
 
     public override void OnButtonEvent(Button inButton) {

@@ -30,6 +30,8 @@ public class CharacterController : MonoBehaviour {
         GameObject instance = Instantiate(prefab, visualRoot);
         instance.transform.localPosition = Vector3.zero;
         instance.transform.localRotation = Quaternion.identity;
+        instance.transform.localScale = Vector3.one * 2f;
+        instance.GetComponent<Collider>().enabled = false;
         return instance;
     }
 }

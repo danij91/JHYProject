@@ -37,6 +37,10 @@ public class CharacterInventory {
             .Where(id => characterDatabase.GetCharacterDataById(id) != null)
             .Distinct()
             .ToList();
+        
+        if (!validCharacterIds.Contains(EConfig.Character.INITIAL_CHARACTER_ID)) {
+            validCharacterIds.Insert(0, EConfig.Character.INITIAL_CHARACTER_ID);
+        }
     }
 
     public void SelectCharacter(string characterId) {
@@ -46,6 +50,10 @@ public class CharacterInventory {
     }
 
     public bool IsValid(string characterId) {
+        if (characterId == EConfig.Character.INITIAL_CHARACTER_ID)
+        {
+            return true;
+        }
         return validCharacterIds.Contains(characterId);
     }
 
@@ -69,6 +77,7 @@ public class CharacterInventory {
     }
 
     private void SaveInventory() {
+        UserManager.Instance.CurrentUserData.characters = new List<string>(validCharacterIds);
         UserManager.Instance.UpdateUserData();
     }
 

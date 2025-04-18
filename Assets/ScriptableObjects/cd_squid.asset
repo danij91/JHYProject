@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81dd6aece1394dca9ebde67762c363c3, type: 3}
-  m_Name: cd_chick
+  m_Name: cd_squid
   m_EditorClassIdentifier: 
-  characterId: chick
-  characterName: characterName_Chick
-  modelPrefab: {fileID: 7465606655834807850, guid: f16c261dc49ab5a4a83b143ba9e46e5a, type: 3}
-  thumbnail: {fileID: 21300000, guid: 7bb7f8095be6fb444a82c68be4143e44, type: 3}
+  characterId: squid
+  characterName: characterName_Squid
+  modelPrefab: {fileID: 7038114840533862827, guid: 38844ef9b5b2c4740aa901572445add5, type: 3}
+  thumbnail: {fileID: 21300000, guid: dc5bf507266e2e545be84b071a39475f, type: 3}
   maxChargeTime: 2
   jumpDistance: 5
   jumpPower: 1.5

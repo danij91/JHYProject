@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81dd6aece1394dca9ebde67762c363c3, type: 3}
-  m_Name: cd_chick
+  m_Name: cd_crocodile
   m_EditorClassIdentifier: 
-  characterId: chick
-  characterName: characterName_Chick
-  modelPrefab: {fileID: 7465606655834807850, guid: f16c261dc49ab5a4a83b143ba9e46e5a, type: 3}
-  thumbnail: {fileID: 21300000, guid: 7bb7f8095be6fb444a82c68be4143e44, type: 3}
+  characterId: crocodile
+  characterName: characterName_Crocodile
+  modelPrefab: {fileID: 4530003105475362356, guid: d011fdcf78cddca4087eb3cbfcfe3ee4, type: 3}
+  thumbnail: {fileID: 21300000, guid: 98bcc0823fc6c0341b45b02be501e0b1, type: 3}
   maxChargeTime: 2
   jumpDistance: 5
   jumpPower: 1.5
