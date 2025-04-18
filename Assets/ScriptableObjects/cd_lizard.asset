@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81dd6aece1394dca9ebde67762c363c3, type: 3}
-  m_Name: cd_croco
+  m_Name: cd_lizard
   m_EditorClassIdentifier: 
-  characterId: dog
-  characterName: dog
-  modelPrefab: {fileID: 1693816920450361209, guid: 8d863aa0b58a54345a3b739c9e0954cf, type: 3}
-  thumbnail: {fileID: 21300000, guid: d8401d27654a3464f8987eb92e6be56d, type: 3}
+  characterId: lizard
+  characterName: characterName_Lizard
+  modelPrefab: {fileID: 6652941206702845065, guid: 1e43657c6d17364409d6d33032ab4ee2, type: 3}
+  thumbnail: {fileID: 21300000, guid: 585f21de2c7e86b49adecbaf4e8bd830, type: 3}
   maxChargeTime: 2
-  jumpDistance: 10
+  jumpDistance: 5
   jumpPower: 1.5
   jumpDuration: 0.3
   jumpAnimation: JUMP
