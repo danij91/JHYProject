@@ -60,7 +60,6 @@ public class InGameUI : UIBase {
     }
 
     public override void OnButtonEvent(Button inButton) {
-        Debug.Log($"{inButton.name} clicked!");
         switch (inButton.name) {
             case nameof(btn_back):
                 ExitGame();

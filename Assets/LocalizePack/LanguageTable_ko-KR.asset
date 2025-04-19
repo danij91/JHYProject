@@ -184,5 +184,14 @@ MonoBehaviour:
     m_Localized: English
     m_Metadata:
       m_Items: []
+  - m_Id: 372510313535758336
+    m_Localized: "\uC82C"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 372510436189790208
+    m_Localized: "\uCF54\uC778"
+    m_Metadata:
+      m_Items: []
   references:
-    version: 1
+    version: 2
+    RefIds: []
