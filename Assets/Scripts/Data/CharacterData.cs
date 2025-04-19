@@ -18,6 +18,10 @@ public class CharacterData : ScriptableObject {
     [Header("애니메이션")]
     public string jumpAnimation = "JUMP";      // 점프 시 재생할 애니메이션 이름
 
+    [Header("구매관련")] 
+    public int gemPrice = -1;
+    public int coinPrice = -1;
+    
     // 향후 확장 가능:
     // public string fallAnimation = "FALL";
     // public AudioClip jumpSfx;

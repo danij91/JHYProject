@@ -21,3 +21,5 @@ MonoBehaviour:
   jumpPower: 1.5
   jumpDuration: 0.3
   jumpAnimation: JUMP
+  gemPrice: 10
+  coinPrice: -1

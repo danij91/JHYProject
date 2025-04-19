@@ -310,6 +310,14 @@ public class UserManager : Singleton<UserManager> {
 [FirestoreData]
 public class UserData
 {
+    //무료화폐
+    [FirestoreProperty]
+    public int coin { get; set; }
+
+    //유료화폐
+    [FirestoreProperty]
+    public int gem { get; set; }
+    
     [FirestoreProperty]
     public string nickname { get; set; }
 

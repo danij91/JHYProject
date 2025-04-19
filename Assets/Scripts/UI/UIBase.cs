@@ -34,6 +34,10 @@ public class UIBase : MonoBehaviour
 
     protected void SetBGResolution()
     {
+        if (!_bgImg.preserveAspect)
+        {
+            return;
+        }
         RectTransform rectTr = GetComponent<RectTransform>();
         float screenAspectRatio = (float)Screen.height / (float)Screen.width;
         float defaultAspectRatio = EConfig.System.DEFAULT_CANVAS_HEIGHT / EConfig.System.DEFAULT_CANVAS_WIDTH;
