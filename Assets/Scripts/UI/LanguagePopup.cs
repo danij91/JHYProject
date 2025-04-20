@@ -13,6 +13,7 @@ public class LanguagePopup : UIBase {
     private bool isLanguageItemInitialized;
 
     protected override void PrevOpen(params object[] args) {
+        btn_back.AddOnClickListener(()=>Close());
         langCount = LocalizationManager.Instance.GetLanguageCount();
         CreateLanguageItems();
     }
@@ -55,13 +56,5 @@ public class LanguagePopup : UIBase {
     private void OnClickLanguageButton(int index) {
         LocalizationManager.Instance.ChangeLanguage(index);
         RefreshLanguages();
-    }
-
-    public override void OnButtonEvent(Button inButton) {
-        switch (inButton.name) {
-            case nameof(btn_back):
-                Close();
-                break;
-        }
     }
 }

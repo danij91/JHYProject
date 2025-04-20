@@ -16,6 +16,10 @@ public class JumpGauge : MonoBehaviour
         {
             if(coroutine == null)
             {
+                if (!gameObject.activeSelf)
+                {
+                    return;
+                }
                 coroutine = StartCoroutine(Co_GaugeMove());
             }
         }

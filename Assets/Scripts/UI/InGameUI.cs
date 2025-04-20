@@ -32,6 +32,9 @@ public class InGameUI : UIBase {
 
     protected override void PrevOpen(params object[] args) {
         SetView();
+        btn_back.AddOnClickListener(ExitGame);
+        btn_screen.AddOnClickListener(OnClickScreen);
+        btn_restart.AddOnClickListener(OnClickRestart);
         score = LocalizationManager.Instance.GetLocalizedText("inGame_score");
         exitTitle = LocalizationManager.Instance.GetLocalizedText("inGame_exitTitle");
         exitMessage = LocalizationManager.Instance.GetLocalizedText("inGame_exitMessage");
@@ -56,27 +59,6 @@ public class InGameUI : UIBase {
         if (IsScreenBtnDown) {
             elapsedTime += Time.deltaTime;
             GameManager.Instance.PlayerController.UpdateGauge(elapsedTime);
-        }
-    }
-
-    public override void OnButtonEvent(Button inButton) {
-        switch (inButton.name) {
-            case nameof(btn_back):
-                ExitGame();
-                break;
-            case nameof(btn_screen):
-                IsScreenBtnDown = false;
-                
-                if (!CheckJumpable()) return;
-                GameManager.Instance.PlayerController.Jump(elapsedTime);
-                elapsedTime = 0;
-                break;
-            case nameof(btn_restart):
-                CloseFailPopup();
-                elapsedTime = 0;
-                GameManager.Instance.GameStart();
-                SetView();
-                break;
         }
     }
 
@@ -109,5 +91,22 @@ public class InGameUI : UIBase {
         if (!CheckJumpable()) return;
         IsScreenBtnDown = true;
         GameManager.Instance.PlayerController.ChangeState(PlayerController.PLAYER_STATE.CROUCH);
+    }
+
+    private void OnClickScreen()
+    {
+        IsScreenBtnDown = false;
+                
+        if (!CheckJumpable()) return;
+        GameManager.Instance.PlayerController.Jump(elapsedTime);
+        elapsedTime = 0;
+    }
+    
+    private void OnClickRestart()
+    {
+        CloseFailPopup();
+        elapsedTime = 0;
+        GameManager.Instance.GameStart();
+        SetView();
     }
 }

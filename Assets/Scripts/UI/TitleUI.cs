@@ -13,23 +13,10 @@ public class TitleUI : UIBase {
 
     protected override void PrevOpen(params object[] args) {
         elapsedTime = 0f;
+        btn_touch.AddOnClickListener(OnClickTouch);
     }
 
     protected override void PrevClose() { }
-
-    public override void OnButtonEvent(Button inButton) {
-        switch (inButton.name) {
-            case nameof(btn_touch):
-                if (UserManager.Instance.IsSignedIn()) {
-                    UserManager.Instance.LoadUserData().Forget();
-                    SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY).Forget();
-                    return;
-                }
-                
-                UIManager.Instance.Show<SignInUI>();
-                return;
-        }
-    }
 
     private void Update() {
         elapsedTime += Time.deltaTime;
@@ -38,5 +25,18 @@ public class TitleUI : UIBase {
             tmp_touch.SetActive(true);
         else
             tmp_touch.SetActive(false);
+    }
+
+    private async void OnClickTouch()
+    {
+        if (UserManager.Instance.IsSignedIn())
+        {
+            await UserManager.Instance.LoadUserData();
+            SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY).Forget();
+            return;
+        }
+                
+        UIManager.Instance.Show<SignInUI>();
+        return;
     }
 }

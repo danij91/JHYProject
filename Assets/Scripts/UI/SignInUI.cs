@@ -14,6 +14,12 @@ public class SignInUI : UIBase {
     [SerializeField] private Image img_guestEn;
 
     protected override void PrevOpen(params object[] args) {
+        btn_signInGoogle.AddOnClickListener(OnClickSignInGoogle);
+        btn_signInApple.AddOnClickListener(OnClickSignInApple);
+        btn_signInEmail.AddOnClickListener(OnClickSignInEmail);
+        btn_signInGuest.AddOnClickListener(OnClickSignInGuest);
+        btn_skip.AddOnClickListener(OnClickSkip);
+        
         bool isKorean = LocalizationManager.Instance.GetCurrentLanguage() == 1;
         img_guestKr.gameObject.SetActive(isKorean);
         img_guestEn.gameObject.SetActive(!isKorean);
@@ -26,24 +32,29 @@ public class SignInUI : UIBase {
 
     protected override void PrevClose() { }
 
-    public override void OnButtonEvent(Button inButton) {
-        switch (inButton.name) {
-            case nameof(btn_signInGoogle):
-                UserManager.Instance.SignInWithGoogle(() => { UIManager.Instance.Show<NicknamePopup>(); },
-                    () => { SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY).Forget(); });
-                break;
-            case nameof(btn_signInApple):
-                UserManager.Instance.SignInWithApple(() => { UIManager.Instance.Show<NicknamePopup>(); });
-                break;
-            case nameof(btn_signInEmail):
-                UserManager.Instance.SignInWithEmail(() => { UIManager.Instance.Show<NicknamePopup>(); });
-                break;
-            case nameof(btn_signInGuest):
-                UserManager.Instance.SignInAnonymously(() => { UIManager.Instance.Show<NicknamePopup>(); });
-                break;
-            case nameof(btn_skip):
-                SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY).Forget();
-                break;
-        }
+    private void OnClickSignInGoogle()
+    {
+        UserManager.Instance.SignInWithGoogle(() => { UIManager.Instance.Show<NicknamePopup>(); },
+            () => { SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY).Forget(); });
+    }
+    
+    private void OnClickSignInApple()
+    {
+        UserManager.Instance.SignInWithApple(() => { UIManager.Instance.Show<NicknamePopup>(); });
+    }
+    
+    private void OnClickSignInEmail()
+    {
+        UserManager.Instance.SignInWithEmail(() => { UIManager.Instance.Show<NicknamePopup>(); });
+    }
+    
+    private void OnClickSignInGuest()
+    {
+        UserManager.Instance.SignInAnonymously(() => { UIManager.Instance.Show<NicknamePopup>(); });
+    }
+    
+    private void OnClickSkip()
+    {
+        SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY).Forget();
     }
 }

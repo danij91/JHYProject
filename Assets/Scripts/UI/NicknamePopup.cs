@@ -10,20 +10,25 @@ public class NicknamePopup : UIBase {
     [SerializeField] private Button btn_ok;
     [SerializeField] private Button btn_skip;
 
-    public override void OnButtonEvent(Button inButton) {
-        switch (inButton.name) {
-            case nameof(btn_ok):
-                var nickname = inputField_nickname.text;
-                SaveUserData(nickname);
-                break;
-            case nameof(btn_skip):
-                SaveUserData("unknown");
-                break;
-        }
+    protected override void PrevOpen(params object[] args)
+    {
+        btn_ok.AddOnClickListener(OnClickOk);
+        btn_skip.AddOnClickListener(OnClickSkip);
     }
 
     private void SaveUserData(string nickname) {
         UserManager.Instance.SetUserNickname(nickname);
         SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY).Forget();
+    }
+
+    private void OnClickOk()
+    {
+        var nickname = inputField_nickname.text;
+        SaveUserData(nickname);
+    }
+
+    private void OnClickSkip()
+    {
+        SaveUserData("unknown");
     }
 }

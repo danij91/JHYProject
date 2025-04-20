@@ -9,29 +9,44 @@ public class LobbyUI : UIBase {
     [SerializeField] private Button btn_inventory;
     [SerializeField] private Button btn_setting;
     [SerializeField] private Button btn_ranking;
+    [SerializeField] private Button btn_mission;
     [SerializeField] private Button btn_language;
+    [SerializeField] private TMP_Text txt_unclaimedMission;
+    [SerializeField] private GameObject go_unclaimedMission;
 
-    protected override void PrevOpen(params object[] args) { }
+    protected override void PrevOpen(params object[] args)
+    {
+        btn_gameStart.AddOnClickListener(()=>SceneLoader.Instance.ChangeSceneAsync(EScene.INGAME, true).Forget());
+        btn_setting.AddOnClickListener(()=>UIManager.Instance.Show<SettingPopup>());
+        btn_inventory.AddOnClickListener(()=>UIManager.Instance.Show<CharacterInvenUI>());
+        btn_ranking.AddOnClickListener(()=>UIManager.Instance.Show<RankingUI>());
+        btn_mission.AddOnClickListener(()=>UIManager.Instance.Show<MissionUI>());
+        btn_language.AddOnClickListener(()=>UIManager.Instance.Show<LanguagePopup>());
+        
+        RefreshMissionBtn();
+    }
 
-    protected override void PrevClose() { }
+    private void RefreshMissionBtn()
+    {
+        int count = MissionManager.Instance.GetUnclaimedMissionCount();
 
-    public override void OnButtonEvent(Button inButton) {
-        switch (inButton.name) {
-            case nameof(btn_gameStart):
-                SceneLoader.Instance.ChangeSceneAsync(EScene.INGAME, true).Forget();
-                break;
-            case nameof(btn_setting):
-                UIManager.Instance.Show<SettingPopup>();
-                break;
-            case nameof(btn_inventory):
-                UIManager.Instance.Show<CharacterInvenUI>();
-                break;
-            case nameof(btn_ranking):
-                UIManager.Instance.Show<RankingUI>();
-                break;
-            case nameof(btn_language):
-                UIManager.Instance.Show<LanguagePopup>();
-                break;
+        if (count != 0)
+        {
+            txt_unclaimedMission.text = count.ToString();
+            go_unclaimedMission.SetActive(true);
+        }
+        else
+        {
+            go_unclaimedMission.SetActive(false);
         }
     }
+
+
+    public override void OnResume()
+    {
+        Debug.Log("debug");
+        RefreshMissionBtn();
+    }
+    
+    protected override void PrevClose() { }
 }

@@ -17,7 +17,8 @@ public class GameManager : Singleton<GameManager>
     public GAME_STATE CurrentState { get; private set; }
     public GameCamera GameCamera => camera;
     public PlayerController PlayerController { get; private set; }
-    public int JumpCount { get; private set; }
+    public int JumpCount { get; private set; }         // 점프한 횟수
+    public int Score { get; private set; }    
     public int ComboCount { get; private set; }
     public bool IsPerfectJump { get; private set; }
     public bool IsPlaying => CurrentState == GAME_STATE.PLAY;
@@ -63,16 +64,37 @@ public class GameManager : Singleton<GameManager>
         AudioManager.Instance.AllSFXStop();
 
         playCount++;
+        
+        var currentUser = UserManager.Instance.CurrentUserData;
+        currentUser.totalPlayCount++;
+        currentUser.totalJump += JumpCount;
+        currentUser.totalCombo += ComboCount;
+        currentUser.totalScore += Score;
+        currentUser.maxJump = Mathf.Max(currentUser.maxJump, JumpCount);
+        currentUser.maxCombo = Mathf.Max(currentUser.maxCombo, ComboCount);
+        currentUser.maxScore = Mathf.Max(currentUser.maxScore, Score);
+        
+        ReportRecord();
+        
         if (playCount >= AD_PLAY_COUNT) {
             AdManager.Instance.LoadPlayAds();
             playCount = 0;
         }
     }
 
+
+    private void ReportRecord()
+    {
+        var currentUser = UserManager.Instance.CurrentUserData;
+        MissionManager.Instance.ReportProgress(MissionConditionType.JumpCount,currentUser.totalJump);
+        MissionManager.Instance.ReportProgress(MissionConditionType.ComboCount,currentUser.totalCombo);
+        MissionManager.Instance.ReportProgress(MissionConditionType.ScoreReach,currentUser.totalScore);
+    }
+
     public void SaveBestScore() {
-        int prevCount = UserManager.Instance.CurrentUserRecord?.score ?? 0;
-        if (JumpCount > prevCount) {
-            UserManager.Instance.UpdateScore(JumpCount);
+        int prevScore = UserManager.Instance.CurrentUserRecord?.score ?? 0;
+        if (Score > prevScore) {
+            UserManager.Instance.UpdateScore(Score);
         }
     }
 
@@ -84,11 +106,11 @@ public class GameManager : Singleton<GameManager>
 
     public void OnSuccess() {
         JumpCount++;
-        JumpCount += ComboCount;
+        Score += 1 + ComboCount;
         inGameUI.RefreshCount();
         MapManager.Instance.CreateMap();
         MapManager.Instance.RemoveMap();
-        PlayerController.SetRotation(); // 🔄 바뀐 부분
+        PlayerController.SetRotation();
     }
 
     public void SuccessCombo() {

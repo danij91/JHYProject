@@ -21,6 +21,11 @@ public class SettingPopup : UIBase {
     protected override void PrevOpen(params object[] args) {
         img_bgm_check.gameObject.SetActive(!AudioManager.Instance.IsBgmMute);
         img_sfx_check.gameObject.SetActive(!AudioManager.Instance.IsSfxMute);
+        
+        btn_back.AddOnClickListener(()=>Close());
+        btn_bgm.AddOnClickListener(OnToggleBGMSettings);
+        btn_sfx.AddOnClickListener(OnToggleSFXSettings);
+        btn_signOut.AddOnClickListener(OnClickSignOut);
 
         signOutTitle = LocalizationManager.Instance.GetLocalizedText("setting_signOutTitle");
         signOutMessage = LocalizationManager.Instance.GetLocalizedText("setting_signOutMessage");
@@ -41,39 +46,7 @@ public class SettingPopup : UIBase {
     }
 
     protected override void PrevClose() { }
-
-    public override void OnButtonEvent(Button inButton) {
-        switch (inButton.name) {
-            case nameof(btn_back):
-                Close();
-                break;
-            case nameof(btn_bgm):
-                OnToggleBGMSettings();
-                break;
-            case nameof(btn_sfx):
-                OnToggleSFXSettings();
-                break;
-            case nameof(btn_signOut):
-                if (UserManager.Instance.IsAnonymous()) {
-                    UIManager.Instance.Show<MessageBoxUI>(ui => {
-                        ui.SetMessage(
-                            signOutMessage
-                            , signOutTitle
-                            , () => {
-                                UserManager.Instance.SignOut();
-                                SceneLoader.Instance.ChangeSceneAsync(EScene.TITLE).Forget();
-                            }, null);
-                    });
-                    return;
-                }
-
-                UserManager.Instance.SignOutFromGoogle();
-                SceneLoader.Instance.ChangeSceneAsync(EScene.TITLE).Forget();
-
-                break;
-        }
-    }
-
+    
     private void OnToggleBGMSettings() {
         bool value = !AudioManager.Instance.IsBgmMute;
         img_bgm_check.gameObject.SetActive(!value);
@@ -84,6 +57,25 @@ public class SettingPopup : UIBase {
         bool value = !AudioManager.Instance.IsSfxMute;
         img_sfx_check.gameObject.SetActive(!value);
         AudioManager.Instance.SetSFXSettings(GetAudioSettings(value));
+    }
+
+    private void OnClickSignOut()
+    {
+        if (UserManager.Instance.IsAnonymous()) {
+            UIManager.Instance.Show<MessageBoxUI>(ui => {
+                ui.SetMessage(
+                    signOutMessage
+                    , signOutTitle
+                    , () => {
+                        UserManager.Instance.SignOut();
+                        SceneLoader.Instance.ChangeSceneAsync(EScene.TITLE).Forget();
+                    }, null);
+            });
+            return;
+        }
+
+        UserManager.Instance.SignOutFromGoogle();
+        SceneLoader.Instance.ChangeSceneAsync(EScene.TITLE).Forget();
     }
 
     private Preferences.EAudioSettings GetAudioSettings(bool isMute) {
