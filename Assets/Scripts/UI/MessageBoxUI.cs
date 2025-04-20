@@ -19,6 +19,8 @@ public class MessageBoxUI : UIBase
 
     protected override void PrevOpen(params object[] args)
     {
+        btn_confirm.AddOnClickListener(OnClickConfirm);
+        btn_cancel.AddOnClickListener(OnClickCancel);
         SetCanvasOrderInLayer(1000, true);
     }
 
@@ -36,19 +38,16 @@ public class MessageBoxUI : UIBase
         btn_cancel.gameObject.SetActive(!isOneButton);
     }
 
-    public override void OnButtonEvent(Button inButton)
+    private void OnClickConfirm()
     {
-        switch (inButton.name)
-        {
-            case nameof(btn_confirm):
-                ConfirmFunc?.Invoke();
-                Close();
-                break;
-            case nameof(btn_cancel):
-                CancelFunc?.Invoke();
-                Close();
-                break;
-        }
+        ConfirmFunc?.Invoke();
+        Close();
+    }
+
+    private void OnClickCancel()
+    {
+        CancelFunc?.Invoke();
+        Close();
     }
 
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿// ✅ UIBase.cs
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,30 +21,26 @@ public class UIBase : MonoBehaviour
     protected bool _isClosed = false;
     protected bool _isInit = false;
 
-
+    public virtual bool IsBlocking => false; // 🔄 팝업 등에서 true로 override 가능
     public Camera ViewCamera { set => _canvas.worldCamera = value; }
     public UIManager Manager { get; set; }
     public bool IsFixedOrderInLayer { get; private set; }
 
-
     public bool IsReady
     {
-        get { return _canvasGroup.interactable; }
-        set { _canvasGroup.interactable = value; }
+        get => _canvasGroup.interactable;
+        set => _canvasGroup.interactable = value;
     }
 
     protected void SetBGResolution()
     {
-        if (!_bgImg.preserveAspect)
-        {
-            return;
-        }
+        if (!_bgImg.preserveAspect) return;
+
         RectTransform rectTr = GetComponent<RectTransform>();
-        float screenAspectRatio = (float)Screen.height / (float)Screen.width;
+        float screenAspectRatio = (float)Screen.height / Screen.width;
         float defaultAspectRatio = EConfig.System.DEFAULT_CANVAS_HEIGHT / EConfig.System.DEFAULT_CANVAS_WIDTH;
         float bgRatio = screenAspectRatio < defaultAspectRatio ? rectTr.sizeDelta.x / _bgImg.rectTransform.sizeDelta.x
                                                                 : rectTr.sizeDelta.y / _bgImg.rectTransform.sizeDelta.y;
-
         _bgImg.rectTransform.sizeDelta *= bgRatio;
     }
 
@@ -76,7 +73,6 @@ public class UIBase : MonoBehaviour
             IsReady = false;
 
             _callback = callback;
-
             PrevOpen(args);
             IsReady = true;
         }
@@ -88,14 +84,8 @@ public class UIBase : MonoBehaviour
         {
             IsReady = false;
 
-            if (!isCallbackEnabled)
-            {
-                _callback = null;
-            }
-            else if (forceCloseCallback != null)
-            {
-                _callback = forceCloseCallback;
-            }
+            if (!isCallbackEnabled) _callback = null;
+            else if (forceCloseCallback != null) _callback = forceCloseCallback;
 
             _isOpend = false;
             _isClosed = true;
@@ -115,6 +105,7 @@ public class UIBase : MonoBehaviour
     {
         PrevClose();
         gameObject.SetActive(false);
+        Manager?.TryResumeIfNeeded(this); // ✅ 닫힌 후 UI 복귀 처리
     }
 
     public void SetCanvasOrderInLayer(int inOrder, bool isFixed = false)
@@ -123,15 +114,9 @@ public class UIBase : MonoBehaviour
         IsFixedOrderInLayer = isFixed;
     }
 
-    protected virtual void PrevOpen(params object[] args)
-    {
-    }
+    protected virtual void PrevOpen(params object[] args) { }
+    protected virtual void PrevClose() { }
 
-    protected virtual void PrevClose()
-    {
-    }
-
-    public virtual void OnButtonEvent(Button inButton)
-    {
-    }
+    public virtual void OnPause() { }  // ✅ 가려질 때
+    public virtual void OnResume() { } // ✅ 다시 드러날 때
 }

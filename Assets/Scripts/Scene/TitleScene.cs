@@ -13,6 +13,7 @@ public class TitleScene : SceneBase {
         AudioManager.Instance.Initialize();
         UserManager.Instance.Initialize();
         LocalizationManager.Instance.Initialize();
+        MissionManager.Instance.Initialize();
         UIManager.Instance.Show<TitleUI>();
         IS_TITLESCENE_LOADED = true;
     }

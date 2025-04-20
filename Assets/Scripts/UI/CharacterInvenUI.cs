@@ -44,11 +44,16 @@ public class CharacterInvenUI : UIBase
         RefreshCharacterViewer();
         RefreshButton();
 
+        btn_back.AddOnClickListener(()=>Close());
+        btn_select.AddOnClickListener(SelectCharacter);
+        btn_purchase.AddOnClickListener(PurchaseCharacter);
+        
         select = LocalizationManager.Instance.GetLocalizedText("characterInven_select");
         selected = LocalizationManager.Instance.GetLocalizedText("characterInven_selected");
         purchaseTitle = LocalizationManager.Instance.GetLocalizedText("characterInven_purchaseTitle");
         purchaseMessage = LocalizationManager.Instance.GetLocalizedText("characterInven_purchaseMessage");
         tmp_select.text = selected;
+        
         purchaseBtnBg = btn_purchase.GetComponent<ProceduralImage>();
         purchaseBtnBg.color = currentPurchaseBtnBgColor;
         ResetUserCurrency();
@@ -216,21 +221,5 @@ public class CharacterInvenUI : UIBase
             viewerTr.gameObject.SetActive(true);
             animator.Play("Idle_A");
         });
-    }
-
-    public override void OnButtonEvent(Button inButton)
-    {
-        switch (inButton.name)
-        {
-            case nameof(btn_back):
-                Close();
-                break;
-            case nameof(btn_select):
-                SelectCharacter();
-                break;
-            case nameof(btn_purchase):
-                PurchaseCharacter();
-                break;
-        }
     }
 }

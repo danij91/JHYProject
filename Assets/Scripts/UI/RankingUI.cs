@@ -14,7 +14,7 @@ public class RankingUI : UIBase {
 
     protected override void PrevOpen(params object[] args) {
         UserManager.Instance.LoadUserRecords().Forget();
-
+        btn_back.AddOnClickListener(()=>Close());
         CreateRankingRecords().Forget();
         SetMyRecord().Forget();
     }
@@ -51,14 +51,5 @@ public class RankingUI : UIBase {
         myRecordItem.SetRank(UserManager.Instance.myRecordIndex + 1);
         myRecordItem.SetNickname(myRecord.nickname);
         myRecordItem.SetScore(myRecord.score);
-    }
-
-
-    public override void OnButtonEvent(Button inButton) {
-        switch (inButton.name) {
-            case nameof(btn_back):
-                Close();
-                break;
-        }
     }
 }

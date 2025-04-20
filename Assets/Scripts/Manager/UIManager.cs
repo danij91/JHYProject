@@ -84,6 +84,25 @@ public class UIManager : Singleton<UIManager>
         _uiList.Add(ui);
         return ui;
     }
+    
+    private void PauseAllExcept(Type exceptType)
+    {
+        UIBase newUI = _uiList.Find(x => x.name.Equals(exceptType.Name));
+        if (newUI != null && newUI.IsBlocking)
+        {
+            foreach (var ui in _uiList)
+            {
+                if (ui.GetType() != exceptType && ui.isActiveAndEnabled)
+                    ui.OnPause();
+            }
+        }
+    }
+    
+    public void TryResumeIfNeeded(UIBase closedUI)
+    {
+        var top = _uiList.LastOrDefault(x => x != closedUI && x != null && x.isActiveAndEnabled);
+        top?.OnResume();
+    }
 
     public T GetUI<T>() where T : UIBase
     {
@@ -117,6 +136,7 @@ public class UIManager : Singleton<UIManager>
 
     public void Show(Type uiType, Action<UIBase> inCreationCallback = null, Action<UIBase> inClosedCallback = null, params object[] args)
     {
+        PauseAllExcept(uiType); 
         CreateUI(uiType, (ui) => { inCreationCallback?.Invoke(ui); ui.Open(inClosedCallback, args); });
     }
 
@@ -136,10 +156,20 @@ public class UIManager : Singleton<UIManager>
                 closeCallback = ui => inClosedCallback(ui as T);
             }
 
-            ui.Close(true, closeCallback);
+            ui.Close(true, closedUI =>
+            {
+                closeCallback?.Invoke(closedUI);
+                ResumeTopUI(); // ✅ 여기 추가!
+            });
         }
     }
 
+    private void ResumeTopUI()
+    {
+        var top = _uiList.LastOrDefault(x => x != null && x.isActiveAndEnabled);
+        top?.OnResume();
+    }
+    
     public void Clear()
     {
         _uiList.Clear();
