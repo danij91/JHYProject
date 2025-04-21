@@ -18,7 +18,7 @@ public class MissionManager : Singleton<MissionManager>
         Debug.Log($"[MissionManager] 미션 {allMissions.Count}개 로드 완료");
     }
 
-    public void ReportProgress(MissionConditionType type, int amount)
+    public void ReportProgressAccumulate(MissionConditionType type, int amount)
     {
         var userData = UserManager.Instance.CurrentUserData;
 
@@ -43,6 +43,53 @@ public class MissionManager : Singleton<MissionManager>
 
         UserManager.Instance.UpdateUserData(); // 저장은 한 번만
     }
+    
+    public void ReportProgress(MissionConditionType type, int newValue)
+    {
+        var userData = UserManager.Instance.CurrentUserData;
+
+        foreach (var mission in allMissions.Where(m => m.conditionType == type && m.complexityType == MissionComplexityType.Complex))
+        {
+            if (userData.claimedMissions.Contains(mission.id)) continue;
+
+            int updated = Mathf.Min(newValue, mission.requiredValue);
+            int prev = userData.missionProgress.GetValueOrDefault(mission.id, 0);
+
+            userData.missionProgress[mission.id] = updated;
+
+            if (prev < mission.requiredValue && updated >= mission.requiredValue)
+            {
+                Debug.Log($"[MissionManager] 미션 달성: {mission.title}");
+                // TODO: UI 알림 등
+            }
+        }
+
+        UserManager.Instance.UpdateUserData();
+    }
+    
+    public void ResetDailyMissions()
+    {
+        var user = UserManager.Instance.CurrentUserData;
+
+        foreach (var mission in allMissions)
+        {
+            if (mission.missionType == MissionType.Daily)
+            {
+                // 진행도 초기화
+                user.missionProgress[mission.id] = 0;
+
+                // 클레임한 경우엔 제거
+                if (user.claimedMissions.Contains(mission.id))
+                {
+                    user.claimedMissions.Remove(mission.id);
+                }
+            }
+        }
+
+        Debug.Log("🔄 Daily mission progress & claims reset.");
+        UserManager.Instance.UpdateUserData();
+    }
+
 
     
     public bool IsMissionCompleted(MissionData mission)

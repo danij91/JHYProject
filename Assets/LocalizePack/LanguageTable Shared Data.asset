@@ -187,6 +187,202 @@ MonoBehaviour:
     m_Key: currency_coin
     m_Metadata:
       m_Items: []
+  - m_Id: 373356509691109376
+    m_Key: mission_daily
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509699497984
+    m_Key: mission_ achievement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509707886592
+    m_Key: language_JAPANESE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509707886593
+    m_Key: tutorial_clear_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509707886594
+    m_Key: jump_total_100_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509707886595
+    m_Key: jump_total_300_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509707886596
+    m_Key: jump_total_1000_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509707886597
+    m_Key: jump_total_5000_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509707886598
+    m_Key: jump_max_20_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509707886599
+    m_Key: jump_max_50_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509707886600
+    m_Key: combo_total_30_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509707886601
+    m_Key: combo_total_100_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509707886602
+    m_Key: combo_total_300_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509712080896
+    m_Key: combo_max_5_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509712080897
+    m_Key: combo_max_10_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509712080898
+    m_Key: score_total_1000_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509712080899
+    m_Key: score_total_3000_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509712080900
+    m_Key: score_max_150_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509712080901
+    m_Key: score_max_300_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509712080902
+    m_Key: play_total_3_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509712080903
+    m_Key: play_total_10_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509712080904
+    m_Key: play_total_50_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509712080905
+    m_Key: ad_watch_3_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275200
+    m_Key: ad_watch_10_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275201
+    m_Key: char_unlock_2_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275202
+    m_Key: char_unlock_4_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275203
+    m_Key: tutorial_clear_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275204
+    m_Key: jump_total_100_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275205
+    m_Key: jump_total_300_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275206
+    m_Key: jump_total_1000_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275207
+    m_Key: jump_total_5000_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275208
+    m_Key: jump_max_20_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275209
+    m_Key: jump_max_50_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275210
+    m_Key: combo_total_30_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275211
+    m_Key: combo_total_100_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275212
+    m_Key: combo_total_300_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275213
+    m_Key: combo_max_5_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275214
+    m_Key: combo_max_10_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275215
+    m_Key: score_total_1000_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275216
+    m_Key: score_total_3000_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275217
+    m_Key: score_max_150_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275218
+    m_Key: score_max_300_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275219
+    m_Key: play_total_3_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275220
+    m_Key: play_total_10_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275221
+    m_Key: play_total_50_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275222
+    m_Key: ad_watch_3_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275223
+    m_Key: ad_watch_10_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275224
+    m_Key: char_unlock_2_desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275225
+    m_Key: char_unlock_4_desc
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
