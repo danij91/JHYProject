@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using Firebase.Auth;
@@ -29,14 +30,20 @@ public class TitleUI : UIBase {
 
     private async void OnClickTouch()
     {
-        if (UserManager.Instance.IsSignedIn())
+        try
         {
-            await UserManager.Instance.LoadUserData();
-            SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY).Forget();
-            return;
-        }
+            if (UserManager.Instance.IsSignedIn())
+            {
+                await UserManager.Instance.LoadUserData();
+                SceneLoader.Instance.ChangeSceneAsync(EScene.LOBBY).Forget();
+                return;
+            }
                 
-        UIManager.Instance.Show<SignInUI>();
-        return;
+            UIManager.Instance.Show<SignInUI>();
+        }
+        catch (Exception e)
+        {
+            throw; // TODO handle exception
+        }
     }
 }

@@ -96,7 +96,9 @@ public static class GoogleSheetMissionImporter
             if (!Directory.Exists(savePath))
                 Directory.CreateDirectory(savePath);
 
-            string path = $"{savePath}Mission_{asset.id}.asset";
+            string prefix = type.ToString();
+            string path = $"{savePath}{prefix}_{asset.id}.asset";
+
             if (File.Exists(path))
             {
                 var oldAsset = AssetDatabase.LoadAssetAtPath<MissionData>(path);

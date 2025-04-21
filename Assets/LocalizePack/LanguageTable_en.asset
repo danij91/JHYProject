@@ -378,6 +378,266 @@ MonoBehaviour:
     m_Localized: Unlock 5 characters
     m_Metadata:
       m_Items: []
+  - m_Id: 373356509691109376
+    m_Localized: Daily Quests
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509699497984
+    m_Localized: Achievement
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509707886592
+    m_Localized: "\u65E5\u672C\u8A9E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509707886593
+    m_Localized: Tutorial Completed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509707886594
+    m_Localized: 'Total Jumps: 100'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509707886595
+    m_Localized: 'Total Jumps: 300'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509707886596
+    m_Localized: 'Total Jumps: 1000'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509707886597
+    m_Localized: 'Total Jumps: 5000'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509707886598
+    m_Localized: 'Jumps in One Run: 20+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509707886599
+    m_Localized: 'Jumps in One Run: 50+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509707886600
+    m_Localized: 'Total Combos: 30'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509707886601
+    m_Localized: 'Total Combos: 100'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509707886602
+    m_Localized: 'Total Combos: 300'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509712080896
+    m_Localized: 'Combos in One Run: 5+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509712080897
+    m_Localized: 'Combos in One Run: 10+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509712080898
+    m_Localized: 'Total Score: 1000'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509712080899
+    m_Localized: 'Total Score: 3000'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509712080900
+    m_Localized: 'Score in One Run: 150+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509712080901
+    m_Localized: 'Score in One Run: 300+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509712080902
+    m_Localized: 'Total Plays: 3'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509712080903
+    m_Localized: 'Total Plays: 10'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509712080904
+    m_Localized: 'Total Plays: 50'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509712080905
+    m_Localized: 'Ads Watched: 3'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275200
+    m_Localized: 'Ads Watched: 10'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275201
+    m_Localized: 'Characters Unlocked: 2'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275202
+    m_Localized: 'Characters Unlocked: 5'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275203
+    m_Localized: Complete the tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275204
+    m_Localized: Reach 100 total jumps
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275205
+    m_Localized: Reach 300 total jumps
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275206
+    m_Localized: Reach 1,000 total jumps
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275207
+    m_Localized: Reach 5,000 total jumps
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275208
+    m_Localized: Jump 20 times in a single run
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275209
+    m_Localized: Jump 50 times in a single run
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275210
+    m_Localized: Achieve 30 total combos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275211
+    m_Localized: Achieve 100 total combos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275212
+    m_Localized: Achieve 300 total combos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275213
+    m_Localized: Get 5 combos in a single run
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275214
+    m_Localized: Get 10 combos in a single run
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275215
+    m_Localized: Reach a total score of 1,000
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275216
+    m_Localized: Reach a total score of 3,000
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275217
+    m_Localized: Score 150 points in a single run
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275218
+    m_Localized: Score 300 points in a single run
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275219
+    m_Localized: Play the game 3 times
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275220
+    m_Localized: Play the game 10 times
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275221
+    m_Localized: Play the game 50 times
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275222
+    m_Localized: Watch 3 reward ads
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275223
+    m_Localized: Watch 10 reward ads
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275224
+    m_Localized: Unlock 2 characters
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373356509716275225
+    m_Localized: Unlock 5 characters
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373364242792308736
+    m_Localized: Daily Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373364242892972032
+    m_Localized: Jump Master
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373364242892972033
+    m_Localized: Combo Starter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373364242892972034
+    m_Localized: Daily Highlight
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373364242892972035
+    m_Localized: Play 3 games today
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373364242892972036
+    m_Localized: Jump 50 times
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373364242892972037
+    m_Localized: Achieve 10 combos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373364242892972038
+    m_Localized: Score 300 points in a game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373365983898230784
+    m_Localized: Daily Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373365983994699776
+    m_Localized: Jump Master
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373365983994699777
+    m_Localized: Combo Starter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373365983994699778
+    m_Localized: Daily Highlight
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373365983994699779
+    m_Localized: Play 3 games today
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373365983994699780
+    m_Localized: Jump 50 times
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373365983994699781
+    m_Localized: Achieve 10 combos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373365983994699782
+    m_Localized: Score 300 points in a game
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

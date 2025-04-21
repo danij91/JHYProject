@@ -20,6 +20,9 @@ public class GameManager : Singleton<GameManager>
     public int JumpCount { get; private set; }         // 점프한 횟수
     public int Score { get; private set; }    
     public int ComboCount { get; private set; }
+    public int TotalComboCount { get; private set; }
+    public int MaxComboCount { get; private set; }
+
     public bool IsPerfectJump { get; private set; }
     public bool IsPlaying => CurrentState == GAME_STATE.PLAY;
     public int playCount;
@@ -64,14 +67,21 @@ public class GameManager : Singleton<GameManager>
         AudioManager.Instance.AllSFXStop();
 
         playCount++;
+
+        if (ComboCount != 0)
+        {
+            TotalComboCount += ComboCount;
+            MaxComboCount = Mathf.Max(MaxComboCount, ComboCount);
+            ComboCount = 0;
+        }
         
         var currentUser = UserManager.Instance.CurrentUserData;
         currentUser.totalPlayCount++;
         currentUser.totalJump += JumpCount;
-        currentUser.totalCombo += ComboCount;
+        currentUser.totalCombo += TotalComboCount;
         currentUser.totalScore += Score;
         currentUser.maxJump = Mathf.Max(currentUser.maxJump, JumpCount);
-        currentUser.maxCombo = Mathf.Max(currentUser.maxCombo, ComboCount);
+        currentUser.maxCombo = Mathf.Max(currentUser.maxCombo, MaxComboCount);
         currentUser.maxScore = Mathf.Max(currentUser.maxScore, Score);
         
         ReportRecord();
@@ -85,10 +95,10 @@ public class GameManager : Singleton<GameManager>
 
     private void ReportRecord()
     {
-        var currentUser = UserManager.Instance.CurrentUserData;
-        MissionManager.Instance.ReportProgress(MissionConditionType.JumpCount,currentUser.totalJump);
-        MissionManager.Instance.ReportProgress(MissionConditionType.ComboCount,currentUser.totalCombo);
-        MissionManager.Instance.ReportProgress(MissionConditionType.ScoreReach,currentUser.totalScore);
+        MissionManager.Instance.ReportProgressAccumulate(MissionConditionType.JumpCount,JumpCount);
+        MissionManager.Instance.ReportProgressAccumulate(MissionConditionType.ComboCount,TotalComboCount);
+        MissionManager.Instance.ReportProgressAccumulate(MissionConditionType.ScoreReach,Score);
+        MissionManager.Instance.ReportProgressAccumulate(MissionConditionType.PlayCount,1);
     }
 
     public void SaveBestScore() {
@@ -120,6 +130,9 @@ public class GameManager : Singleton<GameManager>
 
     public void FailCombo() {
         IsPerfectJump = false;
+        TotalComboCount += ComboCount;
+        MaxComboCount = Mathf.Max(MaxComboCount, ComboCount);
         ComboCount = 0;
+        
     }
 }

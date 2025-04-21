@@ -277,6 +277,8 @@ public class UserManager : Singleton<UserManager>
         {
             CurrentUserRecord = new UserRecord { nickname = CurrentUserData.nickname, score = 0 };
         }
+
+        CheckAndResetDailyMissions();
     }
 
 
@@ -367,6 +369,19 @@ public class UserManager : Singleton<UserManager>
             .Document(GetCurrentUserId())
             .SetAsync(CurrentUserData);
     }
+    
+    private void CheckAndResetDailyMissions()
+    {
+        string today = DateTime.UtcNow.ToString("yyyy-MM-dd");
+
+        if (CurrentUserData.lastDailyResetDate != today)
+        {
+            Debug.Log($"🗓 Daily reset triggered (prev: {CurrentUserData.lastDailyResetDate}, now: {today})");
+            MissionManager.Instance.ResetDailyMissions();
+            CurrentUserData.lastDailyResetDate = today;
+            UpdateUserData();
+        }
+    }
 }
 
 
@@ -389,6 +404,7 @@ public class UserData
     [FirestoreProperty] public int totalCombo { get; set; }
     [FirestoreProperty] public int totalScore { get; set; }
     [FirestoreProperty] public int adWatchedCount { get; set; }
+    [FirestoreProperty] public string lastDailyResetDate { get; set; }
 }
 
 [FirestoreData]
