@@ -30,6 +30,7 @@ public static class EConfig {
 
     public enum ELanguage {
         ENGLISH,
-        KOREAN
+        JAPANESE,
+        KOREAN,
     }
 }

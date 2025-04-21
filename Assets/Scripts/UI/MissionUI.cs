@@ -20,7 +20,8 @@ public class MissionUI : UIBase
             Destroy(child.gameObject);
         var userData = UserManager.Instance.CurrentUserData;
         var missions = MissionManager.Instance.GetAllMissions()
-            .OrderBy(m => userData.claimedMissions.Contains(m.id)) // false 먼저
+            .OrderBy(m => userData.claimedMissions.Contains(m.id))         // 미클레임 먼저
+            .ThenByDescending(m => MissionManager.Instance.IsMissionCompleted(m)) // 완료된 것 먼저
             .ThenBy(m => m.missionType) // 업적/일일/이벤트 순
             .ToList();
 
@@ -29,7 +30,7 @@ public class MissionUI : UIBase
             GameObject go = Instantiate(missionItemPrefab, contentParent);
             var itemUI = go.GetComponent<MissionItem>();
 
-            int progress = userData.missionProgress.GetValueOrDefault(mission.id, 0);
+            int progress = MissionManager.Instance.GetCurrentProgress(mission);
             bool claimed = userData.claimedMissions.Contains(mission.id);
 
             itemUI.Set(mission, progress, claimed);

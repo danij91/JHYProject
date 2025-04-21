@@ -23,25 +23,23 @@ public class MissionItem : MonoBehaviour
     {
         missionId = data.id;
 
-        titleText.text = data.title;
-        descText.text = data.description;
+        titleText.text = LocalizationManager.Instance.GetLocalizedText(data.title);
+        descText.text = LocalizationManager.Instance.GetLocalizedText(data.description);
         progressText.text = $"{currentProgress} / {data.requiredValue}";
         rewardText.text =
             $"{(data.rewardType == CurrencyType.Soft ? LocalizationManager.Instance.GetLocalizedText("currency_coin") : LocalizationManager.Instance.GetLocalizedText("currency_gem"))} x{data.rewardAmount}";
 
-        bool isCompleted = currentProgress >= data.requiredValue;
+        bool isCompleted = MissionManager.Instance.IsMissionCompleted(data);
 
         claimButton.interactable = isCompleted && !claimed;
-        if (isCompleted && !claimed)
-            claimButton.GetComponent<Image>().color = Color.yellow;
+        claimButton.GetComponent<Image>().color = isCompleted && !claimed ? Color.yellow : Color.gray;
+
         claimButton.onClick.RemoveAllListeners();
         claimButton.onClick.AddListener(() =>
         {
             MissionManager.Instance.ClaimReward(missionId);
             missionCallback?.Invoke();
-            // 이후 UI 갱신 필요
-            claimButton.GetComponent<Image>().color = Color.gray;
-            claimButton.interactable = false;
+            Set(data, MissionManager.Instance.GetCurrentProgress(data), true); // 상태 갱신
         });
     }
 }

@@ -111,7 +111,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 70633580388352
-    m_Localized: ' Now'
+    m_Localized: Now
     m_Metadata:
       m_Items: []
   - m_Id: 69874147123200
@@ -188,6 +188,194 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 372510436189790208
     m_Localized: Coin
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319470194688
+    m_Localized: "\u65E5\u672C\u8A9E"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319558275072
+    m_Localized: Tutorial Completed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319558275073
+    m_Localized: 'Total Jumps: 100'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319558275074
+    m_Localized: 'Total Jumps: 300'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319558275075
+    m_Localized: 'Total Jumps: 1000'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319558275076
+    m_Localized: 'Total Jumps: 5000'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319558275077
+    m_Localized: 'Jumps in One Run: 20+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319558275078
+    m_Localized: 'Jumps in One Run: 50+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319558275079
+    m_Localized: 'Total Combos: 30'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319562469376
+    m_Localized: 'Total Combos: 100'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319562469377
+    m_Localized: 'Total Combos: 300'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319562469378
+    m_Localized: 'Combos in One Run: 5+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319562469379
+    m_Localized: 'Combos in One Run: 10+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319562469380
+    m_Localized: 'Total Score: 1000'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319562469381
+    m_Localized: 'Total Score: 3000'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319562469382
+    m_Localized: 'Score in One Run: 150+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319562469383
+    m_Localized: 'Score in One Run: 300+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319562469384
+    m_Localized: 'Total Plays: 3'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319566663680
+    m_Localized: 'Total Plays: 10'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319566663681
+    m_Localized: 'Total Plays: 50'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319566663682
+    m_Localized: 'Ads Watched: 3'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319566663683
+    m_Localized: 'Ads Watched: 10'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319566663684
+    m_Localized: 'Characters Unlocked: 2'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319566663685
+    m_Localized: 'Characters Unlocked: 5'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319566663686
+    m_Localized: Complete the tutorial
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319566663687
+    m_Localized: Reach 100 total jumps
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319566663688
+    m_Localized: Reach 300 total jumps
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319566663689
+    m_Localized: Reach 1,000 total jumps
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319566663690
+    m_Localized: Reach 5,000 total jumps
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319566663691
+    m_Localized: Jump 20 times in a single run
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319566663692
+    m_Localized: Jump 50 times in a single run
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319566663693
+    m_Localized: Achieve 30 total combos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319566663694
+    m_Localized: Achieve 100 total combos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319566663695
+    m_Localized: Achieve 300 total combos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319566663696
+    m_Localized: Get 5 combos in a single run
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319566663697
+    m_Localized: Get 10 combos in a single run
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319570857984
+    m_Localized: Reach a total score of 1,000
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319570857985
+    m_Localized: Reach a total score of 3,000
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319570857986
+    m_Localized: Score 150 points in a single run
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319570857987
+    m_Localized: Score 300 points in a single run
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319570857988
+    m_Localized: Play the game 3 times
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319570857989
+    m_Localized: Play the game 10 times
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319570857990
+    m_Localized: Play the game 50 times
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319570857991
+    m_Localized: Watch 3 reward ads
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319570857992
+    m_Localized: Watch 10 reward ads
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319575052288
+    m_Localized: Unlock 2 characters
+    m_Metadata:
+      m_Items: []
+  - m_Id: 373289319575052289
+    m_Localized: Unlock 5 characters
     m_Metadata:
       m_Items: []
   references:
