@@ -20,47 +20,86 @@ public class MissionManager : Singleton<MissionManager>
 
     public void ReportProgress(MissionConditionType type, int amount)
     {
-        foreach (var mission in allMissions.Where(m => m.conditionType == type))
+        var userData = UserManager.Instance.CurrentUserData;
+
+        foreach (var mission in allMissions.Where(m => m.conditionType == type && m.complexityType == MissionComplexityType.Complex))
         {
-            string id = mission.id;
-            var userData = UserManager.Instance.CurrentUserData;
+            if (userData.claimedMissions.Contains(mission.id)) continue;
 
-            if (userData.claimedMissions.Contains(id)) continue;
+            int current = userData.missionProgress.GetValueOrDefault(mission.id, 0);
+            int updated = current + amount;
 
-            int current = userData.missionProgress.GetValueOrDefault(id, 0);
-            int updated = Mathf.Min(current + amount, mission.requiredValue);
-
-            userData.missionProgress[id] = updated;
-
-            if (updated >= mission.requiredValue)
+            if (updated > current)
             {
-                Debug.Log($"[MissionManager] 미션 달성: {mission.title}");
-                // UI 팝업 연동 가능
+                userData.missionProgress[mission.id] = Mathf.Min(updated, mission.requiredValue);
+
+                if (updated >= mission.requiredValue)
+                {
+                    Debug.Log($"[MissionManager] 미션 달성: {mission.title}");
+                    // TODO: UI 팝업 표시
+                }
             }
         }
 
-        UserManager.Instance.UpdateUserData();
+        UserManager.Instance.UpdateUserData(); // 저장은 한 번만
+    }
+
+    
+    public bool IsMissionCompleted(MissionData mission)
+    {
+        var user = UserManager.Instance.CurrentUserData;
+
+        if (mission.complexityType == MissionComplexityType.Simple)
+        {
+            int value = mission.conditionType switch
+            {
+                MissionConditionType.JumpCount => mission.evaluateType == MissionEvaluateType.Total ? user.totalJump : user.maxJump,
+                MissionConditionType.ComboCount => mission.evaluateType == MissionEvaluateType.Total ? user.totalCombo : user.maxCombo,
+                MissionConditionType.ScoreReach => user.maxScore,
+                MissionConditionType.PlayCount => user.totalPlayCount,
+                MissionConditionType.AdWatchedCount => user.adWatchedCount,
+                MissionConditionType.CharacterUnlockedCount => user.characters.Count,
+            };
+
+            return value >= mission.requiredValue;
+        }
+        else
+        {
+            return user.missionProgress.TryGetValue(mission.id, out int progress) && progress >= mission.requiredValue;
+        }
+    }
+    
+    public int GetCurrentProgress(MissionData mission)
+    {
+        var user = UserManager.Instance.CurrentUserData;
+
+        return mission.complexityType == MissionComplexityType.Simple
+            ? mission.conditionType switch
+            {
+                MissionConditionType.JumpCount => mission.evaluateType == MissionEvaluateType.Total ? user.totalJump : user.maxJump,
+                MissionConditionType.ComboCount => mission.evaluateType == MissionEvaluateType.Total ? user.totalCombo : user.maxCombo,
+                MissionConditionType.ScoreReach => user.maxScore,
+                MissionConditionType.PlayCount => user.totalPlayCount,
+                MissionConditionType.AdWatchedCount => user.adWatchedCount,
+                MissionConditionType.CharacterUnlockedCount => user.characters.Count,
+                _ => 0
+            }
+            : user.missionProgress.GetValueOrDefault(mission.id, 0);
     }
     
     public int GetUnclaimedMissionCount()
     {
-        var missions = MissionManager.Instance.GetAllMissions();
-        var userData = UserManager.Instance.CurrentUserData;
+        var missions = GetAllMissions();
+        var user = UserManager.Instance.CurrentUserData;
 
         int count = 0;
-
         foreach (var mission in missions)
         {
-            if (userData.claimedMissions.Contains(mission.id))
+            if (user.claimedMissions.Contains(mission.id))
                 continue;
 
-            if (userData.missionProgress.TryGetValue(mission.id, out int progress) &&
-                progress >= mission.requiredValue)
-            {
+            if (IsMissionCompleted(mission))
                 count++;
-            }
-            
-            Debug.Log($"[MISSION DATA] id: {mission.id}, required: {mission.requiredValue}, current: {progress}");
         }
 
         return count;
@@ -77,8 +116,7 @@ public class MissionManager : Singleton<MissionManager>
         if (userData.claimedMissions.Contains(missionId)) return;
 
         // 미션 조건 만족 여부 확인
-        if (!userData.missionProgress.TryGetValue(missionId, out int progress) ||
-            progress < mission.requiredValue)
+        if (!IsMissionCompleted(mission))
             return;
 
         // 보상 적용

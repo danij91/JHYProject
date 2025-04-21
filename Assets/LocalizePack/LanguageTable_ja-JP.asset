@@ -299,11 +299,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 373289319566663689
-    m_Localized: 000 total jumps"
+    m_Localized: "\u30B8\u30E3\u30F3\u30D7\u3092\u5408\u8A081000\u56DE\u9054\u6210\u3057\u307E\u3057\u3087\u3046\u3002"
     m_Metadata:
       m_Items: []
   - m_Id: 373289319566663690
-    m_Localized: 000 total jumps"
+    m_Localized: "\u30B8\u30E3\u30F3\u30D7\u3092\u5408\u8A085000\u56DE\u9054\u6210\u3057\u307E\u3057\u3087\u3046\u3002"
     m_Metadata:
       m_Items: []
   - m_Id: 373289319566663691
@@ -335,11 +335,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 373289319570857984
-    m_Localized: 000"
+    m_Localized: "\u5408\u8A08\u30B9\u30B3\u30A21000\u70B9\u3092\u7372\u5F97\u3057\u307E\u3057\u3087\u3046\u3002"
     m_Metadata:
       m_Items: []
   - m_Id: 373289319570857985
-    m_Localized: 000"
+    m_Localized: "\u5408\u8A08\u30B9\u30B3\u30A23000\u70B9\u3092\u7372\u5F97\u3057\u307E\u3057\u3087\u3046\u3002"
     m_Metadata:
       m_Items: []
   - m_Id: 373289319570857986

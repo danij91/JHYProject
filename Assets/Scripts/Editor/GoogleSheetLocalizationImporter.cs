@@ -43,14 +43,15 @@ public class GoogleSheetLocalizationImporter : EditorWindow
             return;
         }
 
-        var lines = csvData.Split('\n');
-        if (lines.Length < 2)
+        var parsedCsv = ParseCsv(csvData);
+        if (parsedCsv.Count < 2)
         {
             Debug.LogError("❌ CSV contains no data.");
             return;
         }
 
-        var headers = lines[0].Trim().Split(',');
+        var headers = parsedCsv[0];
+
 
         // CSV 헤더에서 언어 인덱스 추출
         Dictionary<string, int> langIndex = new();
@@ -75,9 +76,9 @@ public class GoogleSheetLocalizationImporter : EditorWindow
         HashSet<StringTable> modifiedTables = new();
 
         // CSV 데이터 처리
-        for (int row = 1; row < lines.Length; row++)
+        for (int row = 1; row < parsedCsv.Count; row++)
         {
-            var cols = lines[row].Trim().Split(',');
+            var cols = parsedCsv[row];
             if (cols.Length < 2) continue;
 
             string key = cols[0].Trim();
@@ -122,4 +123,50 @@ public class GoogleSheetLocalizationImporter : EditorWindow
         AssetDatabase.SaveAssets();
         Debug.Log($"✅ Localization import complete. Updated: {updated}, Added: {added}");
     }
+    
+    private static List<string[]> ParseCsv(string csv)
+    {
+        var lines = csv.Split('\n');
+        var result = new List<string[]>();
+
+        foreach (var line in lines)
+        {
+            var fields = new List<string>();
+            bool inQuotes = false;
+            var current = new StringBuilder();
+
+            for (int i = 0; i < line.Length; i++)
+            {
+                char c = line[i];
+
+                if (c == '"')
+                {
+                    if (inQuotes && i + 1 < line.Length && line[i + 1] == '"')
+                    {
+                        current.Append('"'); // 이스케이프된 따옴표
+                        i++;
+                    }
+                    else
+                    {
+                        inQuotes = !inQuotes;
+                    }
+                }
+                else if (c == ',' && !inQuotes)
+                {
+                    fields.Add(current.ToString());
+                    current.Clear();
+                }
+                else
+                {
+                    current.Append(c);
+                }
+            }
+
+            fields.Add(current.ToString());
+            result.Add(fields.ToArray());
+        }
+
+        return result;
+    }
+
 }

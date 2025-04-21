@@ -10,14 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae37b9c582c8465caffa9d16cf6c0719, type: 3}
-  m_Name: MissionData
+  m_Name: 
   m_EditorClassIdentifier: 
-  id: a01
+  id: combo_total_100
   missionType: 0
-  title: FirstJump
-  description: first Jump
-  conditionType: 1
-  requiredValue: 1
-  rewardType: 0
+  title: combo_total_100_title
+  description: combo_total_100_desc
+  conditionType: 0
+  evaluateType: 0
+  complexityType: 0
+  requiredValue: 100
+  rewardType: 1
   rewardAmount: 10
   isTimeLimited: 0

@@ -299,11 +299,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 373289319566663689
-    m_Localized: '"Reach 1'
+    m_Localized: Reach 1,000 total jumps
     m_Metadata:
       m_Items: []
   - m_Id: 373289319566663690
-    m_Localized: '"Reach 5'
+    m_Localized: Reach 5,000 total jumps
     m_Metadata:
       m_Items: []
   - m_Id: 373289319566663691
@@ -335,11 +335,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 373289319570857984
-    m_Localized: '"Reach a total score of 1'
+    m_Localized: Reach a total score of 1,000
     m_Metadata:
       m_Items: []
   - m_Id: 373289319570857985
-    m_Localized: '"Reach a total score of 3'
+    m_Localized: Reach a total score of 3,000
     m_Metadata:
       m_Items: []
   - m_Id: 373289319570857986

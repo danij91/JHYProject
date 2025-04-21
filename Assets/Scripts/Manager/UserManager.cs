@@ -388,6 +388,7 @@ public class UserData
     [FirestoreProperty] public int totalJump { get; set; }
     [FirestoreProperty] public int totalCombo { get; set; }
     [FirestoreProperty] public int totalScore { get; set; }
+    [FirestoreProperty] public int adWatchedCount { get; set; }
 }
 
 [FirestoreData]
