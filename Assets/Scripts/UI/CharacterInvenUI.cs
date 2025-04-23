@@ -11,15 +11,20 @@ public class CharacterInvenUI : UIBase
     [SerializeField] private Button btn_select;
     [SerializeField] private Button btn_purchase;
     [SerializeField] private Button btn_back;
+    [SerializeField] private Button btn_getCoin;
+    [SerializeField] private Button btn_getGem;
+    
     [SerializeField] private TMP_Text txt_gem;
     [SerializeField] private TMP_Text txt_coin;
-    [SerializeField] private TMP_Text txt_currency;
     [SerializeField] private TMP_Text txt_price;
     [SerializeField] private TextMeshProUGUI tmp_select;
     [SerializeField] private Transform contentTr;
     [SerializeField] private CharacterInvenItem itemTemplate;
     [SerializeField] private Transform viewerTr;
-
+    [SerializeField] private Image img_currency;
+    [SerializeField] private Sprite sprite_coin;
+    [SerializeField] private Sprite sprite_gem;
+    
     private CharacterData CurrentCharacterData;
     private GameObject currentModel;
     private Animator animator;
@@ -29,7 +34,7 @@ public class CharacterInvenUI : UIBase
     private List<CharacterInvenItem> itemList = new List<CharacterInvenItem>();
     private List<CharacterData> allCharacters => Inven.GetAllCharacters();
 
-    private Color currentPurchaseBtnBgColor;
+    private Color currentPurchaseBtnBgColor = new Color32(244, 209, 155, 255);
     private Color inactivePurchaseBtnBgColor = Color.gray;
 
     private string select;
@@ -47,6 +52,8 @@ public class CharacterInvenUI : UIBase
         btn_back.AddOnClickListener(()=>Close());
         btn_select.AddOnClickListener(SelectCharacter);
         btn_purchase.AddOnClickListener(PurchaseCharacter);
+        btn_getCoin.AddOnClickListener(()=>Debug.Log("getCoin called"));
+        btn_getGem.AddOnClickListener(()=>Debug.Log("getGem called"));
         
         select = LocalizationManager.Instance.GetLocalizedText("characterInven_select");
         selected = LocalizationManager.Instance.GetLocalizedText("characterInven_selected");
@@ -115,13 +122,15 @@ public class CharacterInvenUI : UIBase
 
         if (CurrentCharacterData.coinPrice != -1)
         {
-            txt_currency.text = LocalizationManager.Instance.GetLocalizedText("currency_coin");
+            img_currency.sprite = sprite_coin;
             txt_price.text = CurrentCharacterData.coinPrice.ToString();
+            txt_price.color = UIColors.TEXT_COIN;
         }
         else
         {
-            txt_currency.text = LocalizationManager.Instance.GetLocalizedText("currency_gem");
+            img_currency.sprite = sprite_gem;
             txt_price.text = CurrentCharacterData.gemPrice.ToString();
+            txt_price.color = UIColors.TEXT_GEM;
         }
     }
 

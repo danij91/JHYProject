@@ -1,7 +1,14 @@
 fileFormatVersion: 2
-guid: 6fde55426cb4146e88aefd95f1efbf56
+guid: a86357155cda34448a9882daf718afe9
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 203399
+  packageName: GUI Pro - Simple Casual
+  packageVersion: 1.0.7
+  assetPath: Assets/Plugins/GUI PRO Kit - Simple Casual/Prefabs/Prefabs_DemoScene_Panels/Light/Play_Type_03.prefab
+  uploadId: 714426
