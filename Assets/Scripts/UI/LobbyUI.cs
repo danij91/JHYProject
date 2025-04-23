@@ -11,8 +11,15 @@ public class LobbyUI : UIBase {
     [SerializeField] private Button btn_ranking;
     [SerializeField] private Button btn_mission;
     [SerializeField] private Button btn_language;
-    [SerializeField] private TMP_Text txt_unclaimedMission;
-    [SerializeField] private GameObject go_unclaimedMission;
+    [SerializeField] private Button btn_getHeart;
+    [SerializeField] private Button btn_getCoin;
+    [SerializeField] private Button btn_getGem;
+    [SerializeField] private Image image_missionIcon;
+    [SerializeField] private TMP_Text txt_coin;
+    [SerializeField] private TMP_Text txt_gem;
+    [SerializeField] private TMP_Text txt_heart;
+    [SerializeField] private Sprite sprite_missionIdle;
+    [SerializeField] private Sprite sprite_missionWait;
 
     protected override void PrevOpen(params object[] args)
     {
@@ -22,7 +29,12 @@ public class LobbyUI : UIBase {
         btn_ranking.AddOnClickListener(()=>UIManager.Instance.Show<RankingUI>());
         btn_mission.AddOnClickListener(()=>UIManager.Instance.Show<MissionUI>());
         btn_language.AddOnClickListener(()=>UIManager.Instance.Show<LanguagePopup>());
-        
+        btn_getHeart.AddOnClickListener(()=>Debug.Log("getHeart called"));
+        btn_getCoin.AddOnClickListener(()=>Debug.Log("getCoin called"));
+        btn_getGem.AddOnClickListener(()=>Debug.Log("getGem called"));
+        txt_coin.text = UserManager.Instance.CurrentUserData.coin.ToString();
+        txt_gem.text = UserManager.Instance.CurrentUserData.gem.ToString();
+        txt_heart.text = "1 / 5";
         RefreshMissionBtn();
     }
 
@@ -32,12 +44,11 @@ public class LobbyUI : UIBase {
 
         if (count != 0)
         {
-            txt_unclaimedMission.text = count.ToString();
-            go_unclaimedMission.SetActive(true);
+            image_missionIcon.sprite = sprite_missionWait;
         }
         else
         {
-            go_unclaimedMission.SetActive(false);
+            image_missionIcon.sprite = sprite_missionIdle;
         }
     }
 

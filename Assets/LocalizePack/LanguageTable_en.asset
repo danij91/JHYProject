@@ -638,6 +638,42 @@ MonoBehaviour:
     m_Localized: Score 300 points in a game
     m_Metadata:
       m_Items: []
+  - m_Id: 374061296199917568
+    m_Localized: Quest
+    m_Metadata:
+      m_Items: []
+  - m_Id: 374061296434798592
+    m_Localized: Daily Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 374061296434798593
+    m_Localized: Jump Master
+    m_Metadata:
+      m_Items: []
+  - m_Id: 374061296434798594
+    m_Localized: Combo Starter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 374061296434798595
+    m_Localized: Daily Highlight
+    m_Metadata:
+      m_Items: []
+  - m_Id: 374061296434798596
+    m_Localized: Play 3 games today
+    m_Metadata:
+      m_Items: []
+  - m_Id: 374061296434798597
+    m_Localized: Jump 50 times
+    m_Metadata:
+      m_Items: []
+  - m_Id: 374061296434798598
+    m_Localized: Achieve 10 combos
+    m_Metadata:
+      m_Items: []
+  - m_Id: 374061296434798599
+    m_Localized: Score 300 points in a game
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

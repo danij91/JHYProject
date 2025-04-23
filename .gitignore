@@ -54,8 +54,14 @@ ExportedObj/
 .idea/**/tasks.xml
 .idea/.name
 
+# 다운받은 에셋들 무시
 [Aa]ssets/Models/
 [Aa]ssets/Quirky Series Ultimate/
+[Aa]ssets/Layer Lab/
+[Aa]ssets/Layer Lab.meta
+[Aa]ssets/Plugins/GUI PRO Kit - Simple Casual/
+[Aa]ssets/Plugins/GUI PRO Kit - Simple Casual.meta
+
 
 # JetBrains Rider Plugin
 [Aa]ssets/Plugins/Editor/JetBrains*

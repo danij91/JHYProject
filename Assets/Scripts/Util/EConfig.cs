@@ -33,4 +33,6 @@ public static class EConfig {
         JAPANESE,
         KOREAN,
     }
+    
+    
 }

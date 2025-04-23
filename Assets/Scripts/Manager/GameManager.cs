@@ -39,7 +39,9 @@ public class GameManager : Singleton<GameManager>
 
     public void GameStart() {
         JumpCount = 0;
+        TotalComboCount = 0;
         ComboCount = 0;
+        Score = 0;
         PoolingManager.Instance.RestoreAll();
         MapManager.Instance.Initialize();
         CreatePlayer();
@@ -124,11 +126,13 @@ public class GameManager : Singleton<GameManager>
     }
 
     public void SuccessCombo() {
+        Debug.Log("success");
         IsPerfectJump = true;
         ComboCount++;
     }
 
     public void FailCombo() {
+        Debug.Log("fail");
         IsPerfectJump = false;
         TotalComboCount += ComboCount;
         MaxComboCount = Mathf.Max(MaxComboCount, ComboCount);

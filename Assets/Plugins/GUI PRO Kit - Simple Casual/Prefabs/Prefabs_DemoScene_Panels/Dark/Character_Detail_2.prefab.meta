@@ -1,7 +1,14 @@
 fileFormatVersion: 2
-guid: a41cf6165d03c41c69232ab66a3b60b1
+guid: c4a51d7cc1fef4d1aafcabdcef9aa5ec
 PrefabImporter:
   externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 203399
+  packageName: GUI Pro - Simple Casual
+  packageVersion: 1.0.7
+  assetPath: Assets/Plugins/GUI PRO Kit - Simple Casual/Prefabs/Prefabs_DemoScene_Panels/Dark/Character_Detail_2.prefab
+  uploadId: 714426

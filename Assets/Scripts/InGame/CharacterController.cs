@@ -13,6 +13,7 @@ public class CharacterController : MonoBehaviour {
     /// </summary>
     public void PerformJump(Vector3 targetPosition, float jumpPower, float jumpDuration, PlayerController player) {
         transform.DOMove(targetPosition, jumpDuration).SetEase(moveEase);
+        
         transform.DOJump(targetPosition, jumpPower, 1, jumpDuration)
             .SetEase(jumpEase)
             .OnComplete(() => player.OnJumpComplete());
