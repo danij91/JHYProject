@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerController : PoolingObject
 {
@@ -11,7 +12,7 @@ public class PlayerController : PoolingObject
         FALL
     }
 
-    [SerializeField] private CharacterController characterController;
+    [FormerlySerializedAs("characterController")] [SerializeField] private CharacterModelController characterModelController;
     [SerializeField] private CharacterVisual characterVisual;
     [SerializeField] private JumpGauge jumpGauge;
 
@@ -73,7 +74,7 @@ public class PlayerController : PoolingObject
     {
         characterData = data;
 
-        GameObject model = characterController.SpawnModel(data.modelPrefab);
+        GameObject model = characterModelController.SpawnModel(data.modelPrefab);
         characterVisual.BindModel(model);
         characterVisual.SetRotation(MapManager.Instance.GetLastDirection());
     }
@@ -117,7 +118,7 @@ public class PlayerController : PoolingObject
         AudioManager.Instance.SFXPlay(SFXType.Jump);
         characterVisual.PlayAnimation(animationKeyMap[PLAYER_STATE.JUMP]);
 
-        characterController.PerformJump(target, characterData.jumpPower, characterData.jumpDuration, this);
+        characterModelController.PerformJump(target, characterData.jumpPower, characterData.jumpDuration, this);
     }
 
     public void OnJumpComplete()
