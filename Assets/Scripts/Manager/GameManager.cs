@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] private GameCamera camera;
+    [SerializeField] private GameCamera gameCamera;
     [SerializeField] private PlayerController playerPrefab;
     [SerializeField] private CharacterDatabase characterDatabase;
 
@@ -15,7 +16,7 @@ public class GameManager : Singleton<GameManager>
     }
 
     public GAME_STATE CurrentState { get; private set; }
-    public GameCamera GameCamera => camera;
+    public GameCamera GameGameCamera => gameCamera;
     public PlayerController PlayerController { get; private set; }
     public int JumpCount { get; private set; }         // 점프한 횟수
     public int Score { get; private set; }    
@@ -45,7 +46,7 @@ public class GameManager : Singleton<GameManager>
         PoolingManager.Instance.RestoreAll();
         MapManager.Instance.Initialize();
         CreatePlayer();
-        GameCamera.Initialize();
+        GameGameCamera.Initialize();
         CurrentState = GAME_STATE.PLAY;
         IsPerfectJump = false;
     }
@@ -138,5 +139,13 @@ public class GameManager : Singleton<GameManager>
         MaxComboCount = Mathf.Max(MaxComboCount, ComboCount);
         ComboCount = 0;
         
+    }
+    
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        if (hasFocus)
+        {
+            UserManager.Instance.RefreshEnergy();
+        }
     }
 }

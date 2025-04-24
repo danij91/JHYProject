@@ -15,6 +15,8 @@ public static class EConfig {
         public static readonly float DEFAULT_CANVAS_HEIGHT = 1280f;
         public static readonly Vector3 DIRECTION_RIGHT = new Vector3(1, 0, 1);
         public static readonly Vector3 DIRECTION_LEFT = new Vector3(-1, 0, 1);
+        public static readonly int MAX_ENERGY_COUNT = 10;
+        public static readonly int ENERGY_RECOVER_INTERVAL_MINUTES = 5;
     }
 
     public static class Character {

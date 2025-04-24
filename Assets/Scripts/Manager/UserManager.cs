@@ -64,7 +64,7 @@ public class UserManager : Singleton<UserManager>
                 onOldUser?.Invoke();
             }
 
-            LoadUserData().Forget();
+            await LoadUserData();
         }
         catch (Exception e)
         {
@@ -246,6 +246,8 @@ public class UserManager : Singleton<UserManager>
 
         FirebaseUser newUser = signInAnonymouslyTask.Result.User;
         currentUser = newUser;
+        
+        await LoadUserData();
         Debug.LogFormat("User signed in successfully: {0} ({1})",
             newUser.DisplayName, newUser.UserId);
         onSuccess?.Invoke();
@@ -278,6 +280,7 @@ public class UserManager : Singleton<UserManager>
             CurrentUserRecord = new UserRecord { nickname = CurrentUserData.nickname, score = 0 };
         }
 
+        RefreshEnergy();
         CheckAndResetDailyMissions();
     }
 
@@ -308,8 +311,9 @@ public class UserManager : Singleton<UserManager>
     {
 #if UNITY_EDITOR
         return currentUser == null ? "editor_test" : currentUser.UserId;
-#endif
+#else
         return currentUser.UserId;
+#endif
     }
 
     public async UniTaskVoid LoadUserRecords()
@@ -382,6 +386,43 @@ public class UserManager : Singleton<UserManager>
             UpdateUserData();
         }
     }
+    
+    public void RefreshEnergy()
+    {
+        var user = CurrentUserData;
+
+        if (user.energy >= EConfig.System.MAX_ENERGY_COUNT)
+            return;
+
+        DateTime last = user.energyLastUpdated.ToDateTime();
+        TimeSpan passed = DateTime.UtcNow - last;
+
+        int recoverable = (int)(passed.TotalMinutes / EConfig.System.ENERGY_RECOVER_INTERVAL_MINUTES);
+        if (recoverable <= 0)
+            return;
+
+        int newEnergy = Mathf.Min(user.energy + recoverable, EConfig.System.MAX_ENERGY_COUNT);
+        int usedRecovery = newEnergy - user.energy;
+
+        if (usedRecovery > 0)
+        {
+            user.energy = newEnergy;
+            user.energyLastUpdated = Timestamp.FromDateTime(last.AddMinutes(usedRecovery * EConfig.System.ENERGY_RECOVER_INTERVAL_MINUTES));
+            UpdateUserData(); // 인스턴스 메서드 호출 가능
+        }
+    }
+    
+    public bool TryConsumeEnergy()
+    {
+        RefreshEnergy();
+
+        if (CurrentUserData.energy <= 0)
+            return false;
+
+        CurrentUserData.energy--;
+        UpdateUserData();
+        return true;
+    }
 }
 
 
@@ -405,6 +446,8 @@ public class UserData
     [FirestoreProperty] public int totalScore { get; set; }
     [FirestoreProperty] public int adWatchedCount { get; set; }
     [FirestoreProperty] public string lastDailyResetDate { get; set; }
+    [FirestoreProperty] public int energy { get; set; } = 10;
+    [FirestoreProperty] public Timestamp energyLastUpdated { get; set; } = Timestamp.GetCurrentTimestamp();
 }
 
 [FirestoreData]

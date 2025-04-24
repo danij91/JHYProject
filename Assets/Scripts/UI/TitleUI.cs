@@ -43,7 +43,7 @@ public class TitleUI : UIBase {
         }
         catch (Exception e)
         {
-            throw; // TODO handle exception
+            throw e; // TODO handle exception
         }
     }
 }
