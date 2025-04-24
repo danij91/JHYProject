@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using DG.Tweening;
 
-public class CharacterController : MonoBehaviour {
+public class CharacterModelController : MonoBehaviour {
     [SerializeField] private Transform visualRoot;
 
     [Header("DOTween Config")]

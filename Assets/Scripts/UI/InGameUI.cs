@@ -110,9 +110,19 @@ public class InGameUI : UIBase
 
     private void OnClickRestart()
     {
-        CloseFailPopup();
-        elapsedTime = 0;
-        GameManager.Instance.GameStart();
-        SetView();
+        UserManager.Instance.RefreshEnergy();
+        
+        if (UserManager.Instance.TryConsumeEnergy())
+        {
+            CloseFailPopup();
+            elapsedTime = 0;
+            GameManager.Instance.GameStart();
+            SetView();
+        }
+        else
+        {
+            Debug.Log("Out of energy");
+        }
+        
     }
 }

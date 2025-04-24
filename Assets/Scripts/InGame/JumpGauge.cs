@@ -54,7 +54,7 @@ public class JumpGauge : MonoBehaviour
 
     private void Update()
     {
-        transform.LookAt(GameManager.Instance.GameCamera.transform);
+        transform.LookAt(GameManager.Instance.GameGameCamera.transform);
     }
 
 }
