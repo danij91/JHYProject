@@ -390,10 +390,6 @@ public class UserManager : Singleton<UserManager>
     public void RefreshEnergy()
     {
         var user = CurrentUserData;
-
-        if (user.energy >= EConfig.System.MAX_ENERGY_COUNT)
-            return;
-
         DateTime last = user.energyLastUpdated.ToDateTime();
         TimeSpan passed = DateTime.UtcNow - last;
 
@@ -401,15 +397,22 @@ public class UserManager : Singleton<UserManager>
         if (recoverable <= 0)
             return;
 
+        int intervalSeconds = EConfig.System.ENERGY_RECOVER_INTERVAL_MINUTES * 60;
+        int totalRecoverSeconds = recoverable * intervalSeconds;
+
         int newEnergy = Mathf.Min(user.energy + recoverable, EConfig.System.MAX_ENERGY_COUNT);
         int usedRecovery = newEnergy - user.energy;
 
         if (usedRecovery > 0)
         {
             user.energy = newEnergy;
-            user.energyLastUpdated = Timestamp.FromDateTime(last.AddMinutes(usedRecovery * EConfig.System.ENERGY_RECOVER_INTERVAL_MINUTES));
-            UpdateUserData(); // 인스턴스 메서드 호출 가능
         }
+
+        // ✅ 남은 시간 기준으로 energyLastUpdated 갱신 (회복했든 안 했든)
+        DateTime newTimestamp = last.AddSeconds(totalRecoverSeconds);
+        user.energyLastUpdated = Timestamp.FromDateTime(newTimestamp);
+
+        UpdateUserData(); // 항상 저장 (최적화를 위해 usedRecovery > 0일 때만 할 수도 있음)
     }
     
     public bool TryConsumeEnergy()
