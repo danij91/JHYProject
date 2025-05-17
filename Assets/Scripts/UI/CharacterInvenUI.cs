@@ -120,6 +120,16 @@ public class CharacterInvenUI : UIBase
             animator.Play("Idle_A");
         }
 
+        bool isPurchased = Inven.IsValid(CurrentCharacterData.characterId);
+
+        txt_price.gameObject.SetActive(!isPurchased);
+        img_currency.gameObject.SetActive(!isPurchased);
+        
+        if (isPurchased)
+        {
+            return;
+        }
+
         if (CurrentCharacterData.coinPrice != -1)
         {
             img_currency.sprite = sprite_coin;
