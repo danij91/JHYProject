@@ -13,16 +13,22 @@ public class InGameUI : UIBase
     [SerializeField] private Button btn_restart;
     [SerializeField] private GameObject failPopup;
     [SerializeField] private TMP_Text txt_currentcount;
-    [SerializeField] private TMP_Text txt_bestcount;
     [SerializeField] private TMP_Text txt_combocount;
     [SerializeField] private TMP_Text txt_endscore;
-    
-    
+    [SerializeField] private TMP_Text txt_bestscore;
+    [SerializeField] private CanvasGroup canvasGroup_combo;
+
+    private Tween currentTween;
     private string score;
+    private string bestScore;
     private string exitTitle;
     private string exitMessage;
 
     private float elapsedTime;
+    private float tweenDuration = 2.5f;
+    private float scoreTweenScale = 1.5f;
+    private float comboTweenScale = 1.5f;
+
     public bool IsScreenBtnDown { get; set; }
 
     protected override void PrevOpen(params object[] args)
@@ -31,8 +37,9 @@ public class InGameUI : UIBase
         btn_back.AddOnClickListener(ExitGame);
         btn_screen.AddOnClickListener(OnClickScreen);
         btn_restart.AddOnClickListener(OnClickRestart);
-        
+
         score = LocalizationManager.Instance.GetLocalizedText("inGame_score");
+        bestScore = LocalizationManager.Instance.GetLocalizedText("inGame_bestScore");
         exitTitle = LocalizationManager.Instance.GetLocalizedText("inGame_exitTitle");
         exitMessage = LocalizationManager.Instance.GetLocalizedText("inGame_exitMessage");
     }
@@ -43,9 +50,6 @@ public class InGameUI : UIBase
 
     public void SetView()
     {
-        txt_bestcount.text = UserManager.Instance.CurrentUserRecord != null
-            ? UserManager.Instance.CurrentUserRecord.score.ToString()
-            : "0";
         RefreshCount();
         CloseFailPopup();
     }
@@ -53,9 +57,16 @@ public class InGameUI : UIBase
     public void RefreshCount()
     {
         txt_currentcount.text = GameManager.Instance.Score.ToString();
-        txt_currentcount.transform.DOPunchScale(Vector3.one * 2f, 0.5f).SetEase(Ease.OutFlash);
-        txt_combocount.text = GameManager.Instance.ComboCount.ToString();
-        txt_combocount.transform.DOPunchScale(Vector3.one * 2f, 0.5f).SetEase(Ease.OutFlash);
+        if (GameManager.Instance.Score != 0)
+        {
+            txt_currentcount.transform.DOPunchScale(Vector3.one * scoreTweenScale, 0.5f).SetEase(Ease.OutFlash);
+        }
+
+        txt_combocount.text = GameManager.Instance.ComboCount.ToString() + " Combos";
+        currentTween?.Kill();
+        canvasGroup_combo.alpha = 1f;
+        currentTween = canvasGroup_combo.DOFade(0, tweenDuration).SetEase(Ease.OutQuad);
+        // txt_combocount.transform.DOPunchScale(Vector3.one * tweenSize, 0.5f).SetEase(Ease.OutFlash);
     }
 
     private void Update()
@@ -78,13 +89,33 @@ public class InGameUI : UIBase
 
     public void OpenFailPopup()
     {
+        HidePlayScore();
         failPopup.SetActive(true);
         txt_endscore.text = $"{score} : {GameManager.Instance.JumpCount}";
+
+        string userScore = UserManager.Instance.CurrentUserRecord != null
+            ? UserManager.Instance.CurrentUserRecord.score.ToString()
+            : "0";
+
+        txt_bestscore.text = $"{bestScore} : {userScore}";
+    }
+
+    private void HidePlayScore()
+    {
+        txt_combocount.gameObject.SetActive(false);
+        txt_currentcount.gameObject.SetActive(false);
+    }
+
+    private void ShowPlayScore()
+    {
+        txt_combocount.gameObject.SetActive(true);
+        txt_currentcount.gameObject.SetActive(true);
     }
 
     private void CloseFailPopup()
     {
         failPopup.SetActive(false);
+        ShowPlayScore();
     }
 
     private bool CheckJumpable()
@@ -111,7 +142,7 @@ public class InGameUI : UIBase
     private void OnClickRestart()
     {
         UserManager.Instance.RefreshEnergy();
-        
+
         if (UserManager.Instance.TryConsumeEnergy())
         {
             CloseFailPopup();
@@ -123,6 +154,5 @@ public class InGameUI : UIBase
         {
             Debug.Log("Out of energy");
         }
-        
     }
 }
